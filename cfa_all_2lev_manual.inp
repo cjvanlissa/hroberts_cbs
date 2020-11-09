@@ -1,0 +1,130 @@
+DATA:
+FILE = "cfa_all_2lev_1e56bc11b1435036401fac42690cb0b5.dat";
+ 
+VARIABLE:
+NAMES = coh1 coh2 coh3 coh4 coh5 pss1 pss2 pss3 pss4 pss5 pss6 pss7 pss8 pss9 pss10
+     phq1 phq2 phq3 phq4 phq5 phq6 phq7 phq8 phq9 alpha1 alpha2 alpha3 alpha4 alpha6
+     alpha7 alpha8 alpha9 alpha10 alpha11 park play sport forest river lake beach
+     traffic noise inside outside clus; 
+ MISSING=.;
+ CATEGORICAL = 
+coh1 coh2 coh3 coh4 coh5 pss1 pss2 pss3 pss4 pss5 pss6 pss7 pss8 pss9
+pss10 phq1 phq2 phq3 phq4 phq5 phq6 phq7 phq8 phq9 alpha1 alpha2
+alpha3 alpha4 alpha6 alpha7 alpha8 alpha9 alpha10 alpha11 park play
+sport forest river lake beach traffic noise inside outside;
+
+CLUSTER = clus;
+ANALYSIS:
+TYPE = TWOLEVEL;
+INTEGRATION=MONTECARLO (500);
+
+MODEL:
+%WITHIN%
+cohw BY coh1;
+cohw BY  coh2 ;
+cohw BY  coh3 ;
+cohw BY  coh4 ;
+cohw BY  coh5 ;
+
+pssw BY pss1;
+pssw BY  pss2 ;
+pssw BY  pss3 ;
+pssw BY  pss4 ;
+pssw BY  pss5 ;
+pssw BY  pss6 ;
+pssw BY  pss7 ;
+pssw BY  pss8 ;
+pssw BY  pss9 ;
+pssw BY  pss10 ;
+
+phqw BY phq1;
+phqw BY  phq2 ;
+phqw BY  phq3 ;
+phqw BY  phq4 ;
+phqw BY  phq5 ;
+phqw BY  phq6 ;
+phqw BY  phq7 ;
+phqw BY  phq8 ;
+phqw BY  phq9 ;
+
+pleaw BY alpha1;
+pleaw BY  alpha2 ;
+pleaw BY  alpha3 ;
+pleaw BY  alpha4 ;
+
+safew BY alpha6;
+safew BY  alpha7 ;
+safew BY  alpha8 ;
+safew BY  alpha9 ;
+safew BY  alpha10 ;
+safew BY  alpha11 ;
+
+greenw BY park;
+greenw BY  play ;
+greenw BY  sport ;
+greenw BY  forest ;
+
+bluew BY river;
+bluew BY  lake ;
+bluew BY  beach ;
+
+noiw BY traffic;
+noiw BY  noise ;
+noiw BY  inside ;
+noiw BY  outside ;
+
+%BETWEEN%
+cohb BY coh1;
+cohb BY  coh2 ;
+cohb BY  coh3 ;
+cohb BY  coh4 ;
+cohb BY  coh5 ;
+
+pssb BY pss1;
+pssb BY  pss2 ;
+pssb BY  pss3 ;
+pssb BY  pss4 ;
+pssb BY  pss5 ;
+pssb BY  pss6 ;
+pssb BY  pss7 ;
+pssb BY  pss8 ;
+pssb BY  pss9 ;
+pssb BY  pss10 ;
+
+phqb BY phq1;
+phqb BY  phq2 ;
+phqb BY  phq3 ;
+phqb BY  phq4 ;
+phqb BY  phq5 ;
+phqb BY  phq6 ;
+phqb BY  phq7 ;
+phqb BY  phq8 ;
+phqb BY  phq9 ;
+
+pleab BY alpha1;
+pleab BY  alpha2 ;
+pleab BY  alpha3 ;
+pleab BY  alpha4 ;
+
+safeb BY alpha6;
+safeb BY  alpha7 ;
+safeb BY  alpha8 ;
+safeb BY  alpha9 ;
+safeb BY  alpha10 ;
+safeb BY  alpha11 ;
+
+greenb BY park;
+greenb BY  play ;
+greenb BY  sport ;
+greenb BY  forest ;
+
+blueb BY river;
+blueb BY  lake ;
+blueb BY  beach ;
+
+noib BY traffic;
+noib BY  noise ;
+noib BY  inside ;
+noib BY  outside ;
+OUTPUT:
+standardized tech4 modindices;

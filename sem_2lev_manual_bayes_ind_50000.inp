@@ -1,0 +1,249 @@
+TITLE: Your title goes here
+DATA: FILE = "try.dat";
+VARIABLE: 
+NAMES = we_id weighting clus municipality region province urbanity corop inpsecj
+     age age_categories sex education_level origin income_quintile household_type
+     emp_status marital_status phqsum phqlevel pss_sum pa_normal pa_7days
+     working_hours work_location length_home noise traffic traveltime green blue
+     coh_total alpha1 alpha2 alpha3 alpha4 alpha5 alpha6 alpha7 alpha8 alpha9
+     alpha10 alpha11 coh1 coh2 coh3 coh4 coh4_rev coh5 coh5_rev inside outside park
+     play sport forest river lake beach pss1 pss2 pss3 pss4 pss5 pss6 pss7 pss8 pss9
+     pss10 phq1 phq2 phq3 phq4 phq5 phq6 phq7 phq8 phq9 alpha1rev alpha3rev
+     pleasantness safety blue300 blue1000 green300 green1000 frag16 depri16 area_ha
+     adr_dec18 address_density trafficrev; 
+MISSING=.;
+
+USEVARIABLES = coh1 coh2 coh3 coh4 coh5 pss1 pss2 pss3 pss4 pss5 pss6 pss7 pss8 pss9 pss10
+     phq1 phq2 phq3 phq4 phq5 phq6 phq7 phq8 phq9 alpha1 alpha2 alpha3 alpha4 alpha6
+     alpha7 alpha8 alpha9 alpha10 alpha11 park play sport forest river lake beach
+     traffic noise inside outside clus; 
+
+CATEGORICAL = 
+coh1 coh2 coh3 coh4 coh5 pss1 pss2 pss3 pss4 pss5 pss6 pss7 pss8 pss9
+pss10 phq1 phq2 phq3 phq4 phq5 phq6 phq7 phq8 phq9 alpha1 alpha2
+alpha3 alpha4 alpha6 alpha7 alpha8 alpha9 alpha10 alpha11 park play
+sport forest river lake beach traffic noise inside outside;
+
+CLUSTER = clus;
+ANALYSIS:
+TYPE = TWOLEVEL RANDOM;
+ESTIMATOR = BAYES;
+PROCESSORS = 2; 
+
+MODEL:
+%WITHIN%
+coh BY coh1;
+coh BY  coh2 ;
+coh BY  coh3 ;
+coh BY  coh4 ;
+coh BY  coh5 ;
+
+pss BY pss1;
+pss BY  pss2 ;
+pss BY  pss3 ;
+pss BY  pss4 ;
+pss BY  pss5 ;
+pss BY  pss6 ;
+pss BY  pss7 ;
+pss BY  pss8 ;
+pss BY  pss9 ;
+pss BY  pss10 ;
+
+phq BY phq1;
+phq BY  phq2 ;
+phq BY  phq3 ;
+phq BY  phq4 ;
+phq BY  phq5 ;
+phq BY  phq6 ;
+phq BY  phq7 ;
+phq BY  phq8 ;
+phq BY  phq9 ;
+
+plea BY alpha1;
+plea BY  alpha2 ;
+plea BY  alpha3 ;
+plea BY  alpha4 ;
+
+safe BY alpha6;
+safe BY  alpha7 ;
+safe BY  alpha8 ;
+safe BY  alpha9 ;
+safe BY  alpha10 ;
+safe BY  alpha11 ;
+
+green BY park;
+green BY  play ;
+green BY  sport ;
+green BY  forest ;
+
+blue BY river;
+blue BY  lake ;
+blue BY  beach ;
+
+noi BY traffic;
+noi BY  noise ;
+noi BY  inside ;
+noi BY  outside ;
+
+sphqonpss | phq ON pss;
+
+sphqonnoi | phq ON noi;
+sphqonplea | phq ON plea;
+sphqonsafe | phq ON safe;
+sphqoncoh | phq ON coh;
+sphqongreen | phq ON green;
+sphqonblue | phq ON blue;
+
+spssonnoi | pss ON noi;
+spssonplea | pss ON plea;
+spssonsafe | pss ON safe;
+spssoncoh | pss ON coh;
+spssongreen | pss ON green;
+spssonblue | pss ON blue;
+
+!%BETWEEN%
+
+!%WITHIN% ! Model for Within effects follows
+!sa | m ON x; ! regress m on x, call the random slope "sa"
+!sb | y ON m; ! regress y on m, call the random slope "sb"
+!sc | y ON x; ! regress y on x, call the random slope "sc"
+
+%BETWEEN% ! Model for Between effects follows
+!sa sb sc m y; ! estimate Level-2 (residual) variances for sa, sb, sc, m, and y
+sphqonpss;
+
+sphqonnoi;
+sphqonplea;
+sphqonsafe;
+sphqoncoh;
+sphqongreen;
+sphqonblue;
+
+spssonnoi;
+spssonplea;
+spssonsafe;
+spssoncoh;
+spssongreen;
+spssonblue;
+
+! Estimate random slope means
+![sa](a); ! estimate the mean of sa, call it "a"
+![sb](b); ! estimate the mean of sb, call it "b"
+[sphqonpss] (isphqonpss);
+
+[sphqonnoi] (isphqonnoi);
+[sphqonplea] (isphqonplea);
+[sphqonsafe] (isphqonsafe);
+[sphqoncoh] (isphqoncoh);
+[sphqongreen] (isphqongreen);
+[sphqonblue] (isphqonblue);
+
+[spssonnoi] (ispssonnoi);
+[spssonplea] (ispssonplea);
+[spssonsafe] (ispssonsafe);
+[spssoncoh] (ispssoncoh);
+[spssongreen] (ispssongreen);
+[spssonblue] (ispssonblue);
+
+! Estimate level-2 covariances of random effects
+!sa WITH sc m y; ! estimate Level-2 covariances of sa with sc, m, and y
+!sb WITH sc m y; ! estimate Level-2 covariances of sb with sc, m, and y
+!sc WITH m y; ! estimate Level-2 covariances of sc with m and y
+!y WITH m; ! estimate Level-2 covariance of y and m
+!sa WITH sb(cab); ! estimate Level-2 covariance of sa and sb, call it "cab"
+
+sphqonpss WITH sphqonnoi (sphqonpssWsphqonnoi);
+sphqonpss WITH sphqonplea (sphqonpssWsphqonplea);
+sphqonpss WITH sphqonsafe (sphqonpssWsphqonsafe);
+sphqonpss WITH sphqoncoh (sphqonpssWsphqoncoh);
+sphqonpss WITH sphqongreen (sphqonpssWsphqongreen);
+sphqonpss WITH sphqonblue (sphqonpssWsphqonblue);
+sphqonpss WITH spssonnoi (sphqonpssWspssonnoi);
+sphqonpss WITH spssonplea (sphqonpssWspssonplea);
+sphqonpss WITH spssonsafe (sphqonpssWspssonsafe);
+sphqonpss WITH spssoncoh (sphqonpssWspssoncoh);
+sphqonpss WITH spssongreen (sphqonpssWspssongreen);
+sphqonpss WITH spssonblue (sphqonpssWspssonblue);
+sphqonnoi WITH sphqonplea (sphqonnoiWsphqonplea);
+sphqonnoi WITH sphqonsafe (sphqonnoiWsphqonsafe);
+sphqonnoi WITH sphqoncoh (sphqonnoiWsphqoncoh);
+sphqonnoi WITH sphqongreen (sphqonnoiWsphqongreen);
+sphqonnoi WITH sphqonblue (sphqonnoiWsphqonblue);
+sphqonnoi WITH spssonnoi (sphqonnoiWspssonnoi);
+sphqonnoi WITH spssonplea (sphqonnoiWspssonplea);
+sphqonnoi WITH spssonsafe (sphqonnoiWspssonsafe);
+sphqonnoi WITH spssoncoh (sphqonnoiWspssoncoh);
+sphqonnoi WITH spssongreen (sphqonnoiWspssongreen);
+sphqonnoi WITH spssonblue (sphqonnoiWspssonblue);
+sphqonplea WITH sphqonsafe (sphqonpleaWsphqonsafe);
+sphqonplea WITH sphqoncoh (sphqonpleaWsphqoncoh);
+sphqonplea WITH sphqongreen (sphqonpleaWsphqongreen);
+sphqonplea WITH sphqonblue (sphqonpleaWsphqonblue);
+sphqonplea WITH spssonnoi (sphqonpleaWspssonnoi);
+sphqonplea WITH spssonplea (sphqonpleaWspssonplea);
+sphqonplea WITH spssonsafe (sphqonpleaWspssonsafe);
+sphqonplea WITH spssoncoh (sphqonpleaWspssoncoh);
+sphqonplea WITH spssongreen (sphqonpleaWspssongreen);
+sphqonplea WITH spssonblue (sphqonpleaWspssonblue);
+sphqonsafe WITH sphqoncoh (sphqonsafeWsphqoncoh);
+sphqonsafe WITH sphqongreen (sphqonsafeWsphqongreen);
+sphqonsafe WITH sphqonblue (sphqonsafeWsphqonblue);
+sphqonsafe WITH spssonnoi (sphqonsafeWspssonnoi);
+sphqonsafe WITH spssonplea (sphqonsafeWspssonplea);
+sphqonsafe WITH spssonsafe (sphqonsafeWspssonsafe);
+sphqonsafe WITH spssoncoh (sphqonsafeWspssoncoh);
+sphqonsafe WITH spssongreen (sphqonsafeWspssongreen);
+sphqonsafe WITH spssonblue (sphqonsafeWspssonblue);
+sphqoncoh WITH sphqongreen (sphqoncohWsphqongreen);
+sphqoncoh WITH sphqonblue (sphqoncohWsphqonblue);
+sphqoncoh WITH spssonnoi (sphqoncohWspssonnoi);
+sphqoncoh WITH spssonplea (sphqoncohWspssonplea);
+sphqoncoh WITH spssonsafe (sphqoncohWspssonsafe);
+sphqoncoh WITH spssoncoh (sphqoncohWspssoncoh);
+sphqoncoh WITH spssongreen (sphqoncohWspssongreen);
+sphqoncoh WITH spssonblue (sphqoncohWspssonblue);
+sphqongreen WITH sphqonblue (sphqongreenWsphqonblue);
+sphqongreen WITH spssonnoi (sphqongreenWspssonnoi);
+sphqongreen WITH spssonplea (sphqongreenWspssonplea);
+sphqongreen WITH spssonsafe (sphqongreenWspssonsafe);
+sphqongreen WITH spssoncoh (sphqongreenWspssoncoh);
+sphqongreen WITH spssongreen (sphqongreenWspssongreen);
+sphqongreen WITH spssonblue (sphqongreenWspssonblue);
+sphqonblue WITH spssonnoi (sphqonblueWspssonnoi);
+sphqonblue WITH spssonplea (sphqonblueWspssonplea);
+sphqonblue WITH spssonsafe (sphqonblueWspssonsafe);
+sphqonblue WITH spssoncoh (sphqonblueWspssoncoh);
+sphqonblue WITH spssongreen (sphqonblueWspssongreen);
+sphqonblue WITH spssonblue (sphqonblueWspssonblue);
+spssonnoi WITH spssonplea (spssonnoiWspssonplea);
+spssonnoi WITH spssonsafe (spssonnoiWspssonsafe);
+spssonnoi WITH spssoncoh (spssonnoiWspssoncoh);
+spssonnoi WITH spssongreen (spssonnoiWspssongreen);
+spssonnoi WITH spssonblue (spssonnoiWspssonblue);
+spssonplea WITH spssonsafe (spssonpleaWspssonsafe);
+spssonplea WITH spssoncoh (spssonpleaWspssoncoh);
+spssonplea WITH spssongreen (spssonpleaWspssongreen);
+spssonplea WITH spssonblue (spssonpleaWspssonblue);
+spssonsafe WITH spssoncoh (spssonsafeWspssoncoh);
+spssonsafe WITH spssongreen (spssonsafeWspssongreen);
+spssonsafe WITH spssonblue (spssonsafeWspssonblue);
+spssoncoh WITH spssongreen (spssoncohWspssongreen);
+spssoncoh WITH spssonblue (spssoncohWspssonblue);
+spssongreen WITH spssonblue (spssongreenWspssonblue);
+
+
+
+MODEL CONSTRAINT: ! section for computing indirect effect
+NEW(innoi inplea insafe incoh ingreen inblue); ! name the indirect effect
+!ind=a*b+cab; ! compute the indirect effect
+innoi=isphqonpss*ispssonnoi+sphqonpssWspssonnoi;
+inplea=isphqonpss*ispssonplea+sphqonpssWspssonplea;
+insafe=isphqonpss*ispssonsafe+sphqonpssWspssonsafe;
+incoh=isphqonpss*ispssoncoh+sphqonpssWspssoncoh;
+ingreen=isphqonpss*ispssongreen+sphqonpssWspssongreen;
+inblue=isphqonpss*ispssonblue+sphqonpssWspssonblue;
+
+
+
+OUTPUT: TECH1 CINTERVAL (HPD); ! request parameter specifications, starting values,
+ ! optimization history, and confidence intervals for all effects 

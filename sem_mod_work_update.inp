@@ -1,0 +1,165 @@
+DATA:
+FILE = "sem_mod_work_update_6d896da3ed8e111ba275322f20274eb8.dat";
+ 
+VARIABLE:
+NAMES = Pcoh1 Pcoh2 Pcoh3 Ppss1 Ppss2 Ppss3 Ppss4 Ppss5 Pphq1 Pphq2 Pphq3 Pphq4
+     Pphq5 Pplea1 Pplea2 Psafe1 Psafe2 Psafe3 Pgreen1 Pgreen2 river lake beach
+     traffic inside outside phys clus age eduM eduH inc2 inc3 inc4 inc5 hous2c
+     houssp houso marS marW marN work; 
+ MISSING=.;
+ CLUSTER = clus;
+ANALYSIS:
+TYPE = complex random;
+MODEL:
+coh BY Pcoh1*;
+
+coh BY Pcoh2;
+
+coh BY Pcoh3;
+
+[coh@0];
+
+coh@1;
+
+pss BY Ppss1*;
+
+pss BY Ppss2;
+
+pss BY Ppss3;
+
+pss BY Ppss4;
+
+pss BY Ppss5;
+
+[pss@0];
+
+pss@1;
+
+phq BY Pphq1*;
+
+phq BY Pphq2;
+
+phq BY Pphq3;
+
+phq BY Pphq4;
+
+phq BY Pphq5;
+
+[phq@0];
+
+phq@1;
+
+plea BY Pplea1*;
+
+plea BY Pplea2;
+
+[plea@0];
+
+plea@1;
+
+safe BY Psafe1*;
+
+safe BY Psafe2;
+
+safe BY Psafe3;
+
+[safe@0];
+
+safe@1;
+
+green BY Pgreen1*;
+
+green BY Pgreen2;
+
+[green@0];
+
+green@1;
+
+blue BY river*;
+
+blue BY lake;
+
+blue BY beach;
+
+[blue@0];
+
+blue@1;
+
+noi BY traffic*;
+
+noi BY inside;
+
+noi BY outside;
+
+[noi@0];
+
+noi@1;
+
+phq ON age;
+phq ON eduM;
+phq ON eduH;
+phq ON inc2;
+phq ON inc3;
+phq ON inc4;
+phq ON inc5;
+phq ON hous2c;
+phq ON houssp;
+phq ON houso;
+phq ON marS;
+phq ON marW;
+phq ON marN;
+pss ON age;
+pss ON eduM;
+pss ON eduH;
+pss ON inc2;
+pss ON inc3;
+pss ON inc4;
+pss ON inc5;
+pss ON hous2c;
+pss ON houssp;
+pss ON houso;
+pss ON marS;
+pss ON marW;
+pss ON marN;
+phys ON age;
+phys ON eduM;
+phys ON eduH;
+phys ON inc2;
+phys ON inc3;
+phys ON inc4;
+phys ON inc5;
+phys ON hous2c;
+phys ON houssp;
+phys ON houso;
+phys ON marS;
+phys ON marW;
+phys ON marN;
+
+Iblue | work XWITH blue;
+
+phq ON noi;
+phq ON plea;
+phq ON safe;
+phq ON coh;
+phq ON green;
+phq ON blue;
+phq ON work;
+phq ON Iblue;
+pss ON noi;
+pss ON plea;
+pss ON safe;
+pss ON coh;
+pss ON green;
+pss ON blue;
+pss ON work;
+phys ON noi;
+phys ON plea;
+phys ON safe;
+phys ON coh;
+phys ON green;
+phys ON blue;
+phys ON work;
+phq ON pss;
+phq ON phys;
+OUTPUT:
+standardized tech4 modindices;

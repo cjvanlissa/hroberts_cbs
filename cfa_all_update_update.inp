@@ -1,0 +1,96 @@
+DATA:
+FILE = "cfa_all_update_update_36d9a751b1b0d531c9ba2032ea79424a.dat";
+ 
+VARIABLE:
+NAMES = Pcoh1 Pcoh2 Pcoh3 Ppss1 Ppss2 Ppss3 Ppss4 Ppss5 Pphq1 Pphq2 Pphq3 Pphq4
+     Pphq5 Pplea1 Pplea2 Psafe1 Psafe2 Psafe3 Pgreen1 Pgreen2 river lake beach
+     traffic inside outside; 
+ MISSING=.;
+ 
+MODEL:
+coh BY Pcoh1*;
+
+coh BY Pcoh2;
+
+coh BY Pcoh3;
+
+[coh@0];
+
+coh@1;
+
+pss BY Ppss1*;
+
+pss BY Ppss2;
+
+pss BY Ppss3;
+
+pss BY Ppss4;
+
+pss BY Ppss5;
+
+[pss@0];
+
+pss@1;
+
+phq BY Pphq1*;
+
+phq BY Pphq2;
+
+phq BY Pphq3;
+
+phq BY Pphq4;
+
+phq BY Pphq5;
+
+[phq@0];
+
+phq@1;
+
+plea BY Pplea1*;
+
+plea BY Pplea2;
+
+[plea@0];
+
+plea@1;
+
+safe BY Psafe1*;
+
+safe BY Psafe2;
+
+safe BY Psafe3;
+
+[safe@0];
+
+safe@1;
+
+green BY Pgreen1*;
+
+green BY Pgreen2;
+
+[green@0];
+
+green@1;
+
+blue BY river*;
+
+blue BY lake;
+
+blue BY beach;
+
+[blue@0];
+
+blue@1;
+
+noi BY traffic*;
+
+noi BY inside;
+
+noi BY outside;
+
+[noi@0];
+
+noi@1;
+
+OUTPUT:
+standardized tech4 modindices;

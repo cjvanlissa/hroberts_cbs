@@ -1,0 +1,1638 @@
+Mplus VERSION 8
+MUTHEN & MUTHEN
+07/30/2019   6:14 PM
+
+INPUT INSTRUCTIONS
+
+  DATA:
+  FILE = "cfa_all_2lev_1e56bc11b1435036401fac42690cb0b5.dat";
+
+  VARIABLE:
+  NAMES = coh1 coh2 coh3 coh4 coh5 pss1 pss2 pss3 pss4 pss5 pss6 pss7 pss8 pss9 pss10
+       phq1 phq2 phq3 phq4 phq5 phq6 phq7 phq8 phq9 alpha1 alpha2 alpha3 alpha4 alpha6
+       alpha7 alpha8 alpha9 alpha10 alpha11 park play sport forest river lake beach
+       traffic noise inside outside clus;
+   MISSING=.;
+   CATEGORICAL =
+  coh1 coh2 coh3 coh4 coh5 pss1 pss2 pss3 pss4 pss5 pss6 pss7 pss8 pss9
+  pss10 phq1 phq2 phq3 phq4 phq5 phq6 phq7 phq8 phq9 alpha1 alpha2
+  alpha3 alpha4 alpha6 alpha7 alpha8 alpha9 alpha10 alpha11 park play
+  sport forest river lake beach traffic noise inside outside;
+
+  CLUSTER = clus;
+  ANALYSIS:
+  TYPE = TWOLEVEL RANDOM;
+  INTEGRATION=MONTECARLO (1000);
+
+  MODEL:
+  %WITHIN%
+  coh BY coh1;
+  coh BY  coh2 ;
+  coh BY  coh3 ;
+  coh BY  coh4 ;
+  coh BY  coh5 ;
+
+  pss BY pss1;
+  pss BY  pss2 ;
+  pss BY  pss3 ;
+  pss BY  pss4 ;
+  pss BY  pss5 ;
+  pss BY  pss6 ;
+  pss BY  pss7 ;
+  pss BY  pss8 ;
+  pss BY  pss9 ;
+  pss BY  pss10 ;
+
+  phq BY phq1;
+  phq BY  phq2 ;
+  phq BY  phq3 ;
+  phq BY  phq4 ;
+  phq BY  phq5 ;
+  phq BY  phq6 ;
+  phq BY  phq7 ;
+  phq BY  phq8 ;
+  phq BY  phq9 ;
+
+  plea BY alpha1;
+  plea BY  alpha2 ;
+  plea BY  alpha3 ;
+  plea BY  alpha4 ;
+
+  safe BY alpha6;
+  safe BY  alpha7 ;
+  safe BY  alpha8 ;
+  safe BY  alpha9 ;
+  safe BY  alpha10 ;
+  safe BY  alpha11 ;
+
+  green BY park;
+  green BY  play ;
+  green BY  sport ;
+  green BY  forest ;
+
+  blue BY river;
+  blue BY  lake ;
+  blue BY  beach ;
+
+  noi BY traffic;
+  noi BY  noise ;
+  noi BY  inside ;
+  noi BY  outside ;
+
+  sphqonpss | phq ON pss;
+
+  sphqonnoi | phq ON noi;
+  sphqonplea | phq ON plea;
+  sphqonsafe | phq ON safe;
+  sphqoncoh | phq ON coh;
+  sphqongreen | phq ON green;
+  sphqonblue | phq ON blue;
+
+  spssonnoi | pss ON noi;
+  spssonplea | pss ON plea;
+  spssonsafe | pss ON safe;
+  spssoncoh | pss ON coh;
+  spssongreen | pss ON green;
+  spssonblue | pss ON blue;
+
+  %BETWEEN%
+
+  OUTPUT:
+  standardized tech4 modindices;
+
+
+
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  COH1
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  COH2
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  COH3
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  COH4
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  COH5
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PSS1
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PSS2
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PSS3
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PSS4
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PSS5
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PSS6
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PSS7
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PSS8
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PSS9
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PSS10
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PHQ1
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PHQ2
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PHQ3
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PHQ4
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PHQ5
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PHQ6
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PHQ7
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PHQ8
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PHQ9
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  ALPHA1
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  ALPHA2
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  ALPHA3
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  ALPHA4
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  ALPHA6
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  ALPHA7
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  ALPHA8
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  ALPHA9
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  ALPHA10
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  ALPHA11
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PARK
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PLAY
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  SPORT
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  FOREST
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  RIVER
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  LAKE
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  BEACH
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  TRAFFIC
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  NOISE
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  INSIDE
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  OUTSIDE
+*** WARNING
+  One or more individual-level variables have no variation within a
+  cluster for the following clusters.
+
+     Variable   Cluster IDs with no within-cluster variation
+
+      COH1        2262 6436 5398 3633 6833 5465 5472 7136 3832 2172 9991 3826 2935 1613 2042 7327
+                  7421 3273 2181 5583
+      COH2        2262 5462 5465 5472 1606 2172 3601 6438 2957 5662 7421 7532 4715 3124
+      COH3        2465 6247 5398 6833 5462 5465 5472 7136 7535 3832 1606 4744 2172 6438 8303 2042
+                  5662 4321 7327 3273 2718 1446 4715 5583 3521 2587 5463 6031
+      COH4        6235 6247 5398 5462 5465 6987 7136 7535 4416 3832 1606 6438 3826 8172 2957 8931
+                  7211 7327 7532 4535 9671 1687 4281 4931
+      COH5        1976 2465 6235 7732 6247 6436 5398 6833 5462 7136 7535 4416 9991 7901 8172 2042
+                  7532 2355 9603 2591 5975 1508
+      PSS1        2592 6247 6436 5462 6987 5507 7535 4416 4744 9717 2935 2925 3021
+      PSS2        6247 5472 7535 4416 9717 1613 8715 4321 7211 1446 5975 1012 1071
+      PSS3        6247 5398 5462 7045 5472 7136 3743 4416 3832 4744 2982 1613 8715 7534 5975 2964
+                  1012
+      PSS4        3615 3633 7045 7136 5507 5737 4416 3832 1606 4744 2982 8303 2042 8931 7211 9603
+                  5091 2591 2925 2181
+      PSS5        6436 3633 8301 5507 3743 3832 1606 9717 3601 6438 7901 1613 4321 8931 7211 5913
+                  1679 9603 5091 7534 2964 3039 6881
+      PSS6        6247 6436 5398 6987 7045 5472 5507 3743 4416 9673 9717 1613 8715 7495 5913 2925
+                  2551
+      PSS7        6247 6436 6833 7136 7535 5737 3743 4416 3832 1606 4744 9717 2172 6438 3826 2042
+                  7327 7532 5451 3021
+      PSS8        6247 6436 5398 3633 6833 7045 5472 5507 7535 3743 4416 1606 4744 7901 2042 7211
+                  5913 1679 9603 1687 2925 7534 3039 5583 1071 2551
+      PSS9        7876 3633 6833 5507 3832 4744 9717 6438 7532 5913 2925 1508 1071
+      PSS10       3615 8231 3633 8301 5462 5465 6987 4416 4744 2982 1623 1446 5975 2643 2551
+      PHQ1        6436 8301 6833 5465 6987 7045 7136 5507 4416 2172 3601 2935 2982 1613 7327 4567
+                  5091 2925 1446 3039
+      PHQ2        7876 6247 5398 3633 6833 5465 6987 7136 5507 7535 3743 3832 1606 4744 9673 9717
+                  2172 3601 6438 2982 2042 4321 2925 1446 7534 1508 3607
+      PHQ3        7876 6247 6436 5398 3633 5472 5507 3743 4416 9717 2172 3601 7327 7495 7532 5975
+                  4281 5583
+      PHQ4        7876 6436 3633 5462 6987 7045 5472 7136 3743 4416 4744 2172 6438 8303 8311 7327
+                  2163 3451 4931 5464 6931
+      PHQ5        4206 7876 6436 5398 3633 5465 7045 7136 5507 4416 9717 2172 7901 8311 7495 2355
+                  9603 5091 1446 5975 5583 5464 2496 5501
+      PHQ6        6247 5398 3633 6833 5465 7045 5472 7136 5507 3832 4744 9717 2172 3601 6438 3826
+                  2982 8303 2042 7327 5913 5091 2163 1446 7534 1508 2911 3247 3521 7521 2496 5912
+                  2224
+      PHQ7        5398 3633 5465 6987 5472 7136 5507 4416 3832 4744 2172 3601 6438 4321 7211 5913
+                  2355 2718 1446 2181 3039 3043 3247 5527
+      PHQ8        6247 5398 3633 8301 6833 5465 6987 7045 5472 5507 7535 4416 3832 1606 4744 9717
+                  2172 3601 2935 2982 2042 4321 7211 3273 7495 5913 2355 1687 5091 2163 2718 2925
+                  7534 5971 5975 3833 5451 3039 8061 1861 4281 5583 6903 2911 1060 3247 5993 1713
+                  5527 3451 9561 6413 4931 6663 2587 2496 6881 5501 7776 6515 5912 1057 4194 3343
+                  7741 7772 3607 3817 1506 5961
+      PHQ9        3193 6235 7876 6247 6436 5398 3633 8301 6833 5462 5465 6987 7045 5472 7136 5507
+                  7535 5737 3743 4416 3832 1606 4744 9673 9717 2172 3601 6438 3826 2935 2982 8303
+                  8311 2042 8715 4321 7211 7327 7421 7495 5913 1679 2355 4535 1687 5091 2163 2718
+                  1446 7534 5971 5975 4715 2181 2964 1508 3833 5451 3039 8061 3043 1861 4281 5552
+                  5583 2643 6903 8913 2911 1060 3247 2105 5527 3451 8242 9404 9561 3521 6441 1781
+                  1071 5625 2587 1053 5464 7521 2496 3206 5501 7711 2551 4847 8012 2583 6931 6515
+                  9104 5912 1213 4001 1057 1072 4194 1814 5508 2224 2612 7741 5051 3607 7481 3317
+                  7325 3112 3314 4814 3817 1185 2993 1506 5961 3068 3992 1056 3994
+      ALPHA1      6247 6436 5398 3633 5465 6987 7045 5472 7136 5507 7535 5737 3832 4744 9673 2935
+                  2957 1059 2042 8931 7327 1025 5091 2101 2718 5971 5975 4715 5451 1861 5583 3451
+                  2587 6881 1213
+      ALPHA2      6247 3633 5465 5472 7136 5507 5737 3743 3832 1606 9673 9717 2172 9991 3601 6438
+                  2935 2982 5662 8715 4321 4535 5091 5975 5451 4281 5583 3247
+      ALPHA3      6247 6436 5398 6833 5465 7045 5472 5507 5737 4416 3832 9673 2172 9991 2935 1613
+                  7495 4535 9603 9671 5971 5975 2181 3833 5451 5583 5622 7776 1213
+      ALPHA4      5398 8301 6833 5465 7045 7136 7535 9244 3832 1606 2172 3601 6438 2982 5662 8715
+                  7532 1687 5091 2718 1446 5975 4715 3833 5451 1861 5583 5993 5527 9404 4007 6663
+                  6515 1213 7772
+      ALPHA6      7693 6247 6436 3633 7136 7535 5737 3743 4416 3832 1606 8715 4321 5091
+      ALPHA7      1793 8765 6247 6436 6833 7136 7535 3743 9244 3832 1606 2172 3601 7901 3826 8172
+                  1059 8715 9603 9671 1025 2591 2718 5583 2105 1713 3451 4007 3332 7621
+      ALPHA8      1976 5398 8301 5465 7045 7136 5507 7535 5737 3743 3832 1606 4744 3601 8172 8303
+                  1613 5662 9603 2718 2911 3247 2105 3521 2315
+      ALPHA9      6444 7876 5398 5465 7045 7136 5507 7535 5737 9244 3832 1606 4744 9673 3601 8172
+                  1613 7211 7421 2911 3247 3521 2315
+      ALPHA10     6247 6436 5398 3633 8301 5462 5465 5472 7136 5507 5737 4416 3832 1606 4744 9717
+                  2172 7901 3826 2935 8303 2042 5662 8715 4321 7327 1623 2355 1687 1023 5091 2101
+                  2163 2181 5451 8061 4281 5622 2643 2911 2105 8242 9404 4931 1062 4847 6515
+      ALPHA11     6436 3633 6833 5465 7045 5472 7136 5737 4416 3832 1606 9717 2172 7901 2935 1059
+                  2982 2042 5662 8715 2355 1687 5091 5583 2643 2105 4931 5912
+      PARK        2262 6436 6833 5462 7136 5507 7535 3743 4416 1606 9991 7901 1059 8931 7327 3273
+                  1446 3833 4281 5552 1071
+      PLAY        2262 5398 6833 5462 5507 7535 3743 4416 3832 1606 9673 9991 7901 3826 2042 5662
+                  7107 8931 7327 7532 5913 4535 1687 2101 2163 1446 2181 1508 3039 4281 4931 2273
+                  3335 7325 3112 3992
+      SPORT       2262 6436 5398 5462 6987 7136 7535 4416 9673 2172 8931 3273 7495 9671 1508 3043
+                  1861 5993 2273
+      FOREST      6436 5398 3633 6987 5472 4416 9244 4744 9673 2172 3601 6438 7901 2042 8715 8931
+                  7211 3273 2101 2964 1012 3043 5622 1060 9404 5501 2211
+      RIVER       6247 6436 6833 6987 5472 3743 4416 1606 4321 7495 1679 1687 3833 2643
+      LAKE        5465 6987 7535 3743 9717 3601 8172
+      BEACH       6247 6436 5398 8301 6833 5462 7045 5472 7136 5507 7535 5737 3743 9244 3832 4744
+                  9673 9717 3601 3826 2957 8311 5662 7107 8931 7211 7327 7421 3273 7495 1623 5913
+                  1679 2355 4535 9671 4567 1687 5091 2101 2526 2718 7534 5971 5975 4715 3833 1012
+                  3893 3025 3039 8061 3043 5552 5622 2643 6903 2911 1060 5993 7206 1713 5527 9404
+                  9561 3521 4931 1781 1071 5625 2587 1053 7316 3132 3206 6881 5501 6951 3328 7776
+                  4847 7621 8171 6931 6031 5912 3124 1852 2492 1072 4194 3343 7772 2211 5051 2315
+                  7325 3112 3817 1185 1056 2134
+      TRAFFIC     7547 6247 2262 6833 6987 7045 5507 5737 4416 3832 9673 2982 1613 5662 8931 7532
+                  1687 4281 2911 2105
+      NOISE       1028 1946 2965 3615 3849 4002 5133 5445 5752 5987 6214 7106 7693 7732 7754 7826
+                  7871 7884 8064 8166 8231 8713 9064 9114 9131 9141 9241 9289 9992 6247 2262 3633
+                  5465 6987 7045 5472 7136 5507 5737 4416 1606 2172 7901 8172 2982 8303 2042 8715
+                  7327 7495 1623 5913 1023 5091 2526 2591 5971 4715 2181 1508 8061 4281 1060 3247
+                  1713 5527 3451 9561 1781 7621 6931 5912 4702
+      INSIDE      6247 2262 3633 8301 5462 5465 6987 7045 5472 7136 5507 5737 4416 2172 8303 1613
+                  8715 4321 7495 5913 9603 1687 1023 5091 8061 1861 4281 2643 2628
+      OUTSIDE     6247 3633 6833 5465 6987 7045 5472 7136 5507 5737 4416 1606 4744 9673 2172 3601
+                  7901 8172 8303 8715 7495 5913 1679 3833 4281 5527 3451 6663 5625 5912
+
+*** WARNING in OUTPUT command
+  STANDARDIZED (STD, STDY, STDYX) options are available only for TYPE=TWOLEVEL RANDOM
+  with ESTIMATOR=BAYES.  Request for STANDARDIZED (STD, STDY, STDYX) is ignored.
+*** WARNING in OUTPUT command
+  MODINDICES option is not available for ALGORITHM=INTEGRATION.
+  Request for MODINDICES is ignored.
+*** WARNING in OUTPUT command
+  TECH4 option is only available for TYPE=TWOLEVEL RANDOM with ESTIMATOR=BAYES.
+  Request for TECH4 is ignored.
+  49 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        1221
+
+Number of dependent variables                                   45
+Number of independent variables                                  0
+Number of continuous latent variables                           21
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   COH1        COH2        COH3        COH4        COH5        PSS1
+   PSS2        PSS3        PSS4        PSS5        PSS6        PSS7
+   PSS8        PSS9        PSS10       PHQ1        PHQ2        PHQ3
+   PHQ4        PHQ5        PHQ6        PHQ7        PHQ8        PHQ9
+   ALPHA1      ALPHA2      ALPHA3      ALPHA4      ALPHA6      ALPHA7
+   ALPHA8      ALPHA9      ALPHA10     ALPHA11     PARK        PLAY
+   SPORT       FOREST      RIVER       LAKE        BEACH       TRAFFIC
+   NOISE       INSIDE      OUTSIDE
+
+Continuous latent variables
+   COH         PSS         PHQ         PLEA        SAFE        GREEN
+   BLUE        NOI         SPHQONPS    SPHQONNO    SPHQONPL    SPHQONSA
+   SPHQONCO    SPHQONGR    SPHQONBL    SPSSONNO    SPSSONPL    SPSSONSA
+   SPSSONCO    SPSSONGR    SPSSONBL
+
+Variables with special functions
+
+  Cluster variable      CLUS
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                  MONTECARLO
+  Number of integration points                                1000
+  Dimensions of numerical integration                           21
+  Adaptive quadrature                                          OFF
+  Monte Carlo integration seed                                   0
+Link                                                         LOGIT
+Cholesky                                                        ON
+
+Input data file(s)
+  cfa_all_2lev_1e56bc11b1435036401fac42690cb0b5.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns           140
+     Number of y missing data patterns           0
+     Number of u missing data patterns         140
+     Number of clusters                        277
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR U
+
+
+           Covariance Coverage
+              COH1          COH2          COH3          COH4          COH5
+              ________      ________      ________      ________      ________
+ COH1           0.969
+ COH2           0.965         0.982
+ COH3           0.951         0.958         0.962
+ COH4           0.944         0.949         0.940         0.953
+ COH5           0.914         0.917         0.912         0.914         0.922
+ PSS1           0.958         0.971         0.951         0.943         0.913
+ PSS2           0.953         0.965         0.945         0.938         0.908
+ PSS3           0.958         0.971         0.951         0.943         0.913
+ PSS4           0.944         0.956         0.935         0.928         0.900
+ PSS5           0.955         0.967         0.948         0.940         0.911
+ PSS6           0.953         0.965         0.945         0.938         0.908
+ PSS7           0.952         0.964         0.944         0.938         0.908
+ PSS8           0.952         0.963         0.943         0.937         0.907
+ PSS9           0.954         0.966         0.945         0.939         0.910
+ PSS10          0.952         0.962         0.943         0.935         0.907
+ PHQ1           0.953         0.964         0.944         0.937         0.908
+ PHQ2           0.954         0.966         0.946         0.939         0.911
+ PHQ3           0.955         0.967         0.948         0.939         0.911
+ PHQ4           0.958         0.971         0.951         0.943         0.913
+ PHQ5           0.952         0.964         0.946         0.937         0.910
+ PHQ6           0.957         0.968         0.948         0.941         0.912
+ PHQ7           0.954         0.966         0.946         0.939         0.909
+ PHQ8           0.951         0.963         0.943         0.935         0.907
+ PHQ9           0.948         0.961         0.940         0.933         0.905
+ ALPHA1         0.962         0.975         0.954         0.946         0.915
+ ALPHA2         0.961         0.973         0.952         0.944         0.915
+ ALPHA3         0.966         0.980         0.959         0.950         0.919
+ ALPHA4         0.961         0.974         0.953         0.945         0.914
+ ALPHA6         0.951         0.961         0.940         0.934         0.907
+ ALPHA7         0.951         0.963         0.943         0.934         0.905
+ ALPHA8         0.961         0.975         0.953         0.944         0.917
+ ALPHA9         0.959         0.973         0.952         0.943         0.916
+ ALPHA10        0.958         0.972         0.952         0.943         0.917
+ ALPHA11        0.952         0.966         0.947         0.938         0.913
+ PARK           0.969         0.982         0.962         0.953         0.922
+ PLAY           0.969         0.982         0.962         0.953         0.922
+ SPORT          0.969         0.982         0.962         0.953         0.922
+ FOREST         0.969         0.982         0.962         0.953         0.922
+ RIVER          0.969         0.982         0.962         0.953         0.922
+ LAKE           0.969         0.982         0.962         0.953         0.922
+ BEACH          0.969         0.982         0.962         0.953         0.922
+ TRAFFIC        0.960         0.972         0.952         0.945         0.915
+ NOISE          0.590         0.596         0.581         0.580         0.563
+ INSIDE         0.969         0.982         0.962         0.953         0.922
+ OUTSIDE        0.961         0.973         0.955         0.948         0.917
+
+
+           Covariance Coverage
+              PSS1          PSS2          PSS3          PSS4          PSS5
+              ________      ________      ________      ________      ________
+ PSS1           0.983
+ PSS2           0.975         0.977
+ PSS3           0.980         0.977         0.983
+ PSS4           0.966         0.962         0.967         0.967
+ PSS5           0.978         0.974         0.979         0.964         0.980
+ PSS6           0.975         0.973         0.976         0.962         0.974
+ PSS7           0.974         0.971         0.975         0.962         0.973
+ PSS8           0.973         0.970         0.974         0.962         0.972
+ PSS9           0.975         0.971         0.976         0.964         0.974
+ PSS10          0.973         0.970         0.974         0.962         0.971
+ PHQ1           0.973         0.971         0.974         0.961         0.971
+ PHQ2           0.975         0.971         0.976         0.962         0.974
+ PHQ3           0.977         0.974         0.978         0.963         0.975
+ PHQ4           0.980         0.976         0.981         0.966         0.978
+ PHQ5           0.973         0.970         0.975         0.959         0.971
+ PHQ6           0.977         0.974         0.979         0.964         0.975
+ PHQ7           0.975         0.971         0.976         0.962         0.973
+ PHQ8           0.971         0.969         0.973         0.959         0.970
+ PHQ9           0.969         0.966         0.971         0.957         0.967
+ ALPHA1         0.973         0.968         0.973         0.959         0.971
+ ALPHA2         0.971         0.966         0.972         0.959         0.969
+ ALPHA3         0.980         0.974         0.980         0.965         0.976
+ ALPHA4         0.973         0.969         0.974         0.960         0.971
+ ALPHA6         0.962         0.957         0.963         0.950         0.960
+ ALPHA7         0.965         0.960         0.966         0.950         0.962
+ ALPHA8         0.975         0.970         0.975         0.961         0.972
+ ALPHA9         0.973         0.968         0.974         0.959         0.971
+ ALPHA10        0.973         0.969         0.974         0.959         0.971
+ ALPHA11        0.966         0.961         0.966         0.952         0.963
+ PARK           0.983         0.977         0.983         0.967         0.980
+ PLAY           0.983         0.977         0.983         0.967         0.980
+ SPORT          0.983         0.977         0.983         0.967         0.980
+ FOREST         0.983         0.977         0.983         0.967         0.980
+ RIVER          0.983         0.977         0.983         0.967         0.980
+ LAKE           0.983         0.977         0.983         0.967         0.980
+ BEACH          0.983         0.977         0.983         0.967         0.980
+ TRAFFIC        0.973         0.967         0.973         0.957         0.970
+ NOISE          0.598         0.597         0.600         0.593         0.597
+ INSIDE         0.983         0.977         0.983         0.967         0.980
+ OUTSIDE        0.975         0.970         0.975         0.960         0.971
+
+
+           Covariance Coverage
+              PSS6          PSS7          PSS8          PSS9          PSS10
+              ________      ________      ________      ________      ________
+ PSS6           0.977
+ PSS7           0.973         0.975
+ PSS8           0.972         0.971         0.975
+ PSS9           0.973         0.971         0.972         0.978
+ PSS10          0.971         0.969         0.968         0.971         0.975
+ PHQ1           0.971         0.969         0.969         0.971         0.968
+ PHQ2           0.972         0.971         0.970         0.973         0.971
+ PHQ3           0.974         0.972         0.971         0.974         0.971
+ PHQ4           0.976         0.975         0.974         0.976         0.973
+ PHQ5           0.971         0.969         0.968         0.971         0.968
+ PHQ6           0.975         0.973         0.972         0.975         0.972
+ PHQ7           0.971         0.970         0.970         0.973         0.969
+ PHQ8           0.969         0.967         0.966         0.969         0.966
+ PHQ9           0.966         0.964         0.964         0.966         0.964
+ ALPHA1         0.968         0.966         0.967         0.969         0.965
+ ALPHA2         0.966         0.965         0.966         0.969         0.965
+ ALPHA3         0.974         0.972         0.972         0.975         0.971
+ ALPHA4         0.969         0.967         0.968         0.970         0.966
+ ALPHA6         0.957         0.956         0.956         0.959         0.957
+ ALPHA7         0.960         0.958         0.957         0.960         0.957
+ ALPHA8         0.970         0.968         0.968         0.971         0.967
+ ALPHA9         0.968         0.966         0.966         0.969         0.966
+ ALPHA10        0.968         0.966         0.966         0.969         0.966
+ ALPHA11        0.961         0.959         0.959         0.962         0.958
+ PARK           0.977         0.975         0.975         0.978         0.975
+ PLAY           0.977         0.975         0.975         0.978         0.975
+ SPORT          0.977         0.975         0.975         0.978         0.975
+ FOREST         0.977         0.975         0.975         0.978         0.975
+ RIVER          0.977         0.975         0.975         0.978         0.975
+ LAKE           0.977         0.975         0.975         0.978         0.975
+ BEACH          0.977         0.975         0.975         0.978         0.975
+ TRAFFIC        0.967         0.966         0.965         0.968         0.966
+ NOISE          0.598         0.595         0.597         0.597         0.598
+ INSIDE         0.977         0.975         0.975         0.978         0.975
+ OUTSIDE        0.969         0.967         0.967         0.970         0.966
+
+
+           Covariance Coverage
+              PHQ1          PHQ2          PHQ3          PHQ4          PHQ5
+              ________      ________      ________      ________      ________
+ PHQ1           0.975
+ PHQ2           0.972         0.979
+ PHQ3           0.973         0.976         0.980
+ PHQ4           0.975         0.978         0.980         0.984
+ PHQ5           0.970         0.973         0.975         0.977         0.977
+ PHQ6           0.973         0.977         0.979         0.981         0.975
+ PHQ7           0.971         0.975         0.975         0.978         0.972
+ PHQ8           0.968         0.971         0.973         0.975         0.969
+ PHQ9           0.965         0.968         0.970         0.973         0.967
+ ALPHA1         0.968         0.971         0.971         0.974         0.967
+ ALPHA2         0.967         0.968         0.970         0.973         0.966
+ ALPHA3         0.973         0.975         0.976         0.980         0.973
+ ALPHA4         0.969         0.969         0.971         0.975         0.968
+ ALPHA6         0.957         0.959         0.961         0.963         0.957
+ ALPHA7         0.958         0.961         0.962         0.966         0.959
+ ALPHA8         0.969         0.971         0.972         0.975         0.969
+ ALPHA9         0.968         0.969         0.971         0.974         0.968
+ ALPHA10        0.968         0.969         0.971         0.974         0.968
+ ALPHA11        0.961         0.962         0.965         0.966         0.961
+ PARK           0.975         0.979         0.980         0.984         0.977
+ PLAY           0.975         0.979         0.980         0.984         0.977
+ SPORT          0.975         0.979         0.980         0.984         0.977
+ FOREST         0.975         0.979         0.980         0.984         0.977
+ RIVER          0.975         0.979         0.980         0.984         0.977
+ LAKE           0.975         0.979         0.980         0.984         0.977
+ BEACH          0.975         0.979         0.980         0.984         0.977
+ TRAFFIC        0.966         0.969         0.971         0.974         0.967
+ NOISE          0.595         0.598         0.597         0.600         0.595
+ INSIDE         0.975         0.979         0.980         0.984         0.977
+ OUTSIDE        0.968         0.970         0.971         0.975         0.968
+
+
+           Covariance Coverage
+              PHQ6          PHQ7          PHQ8          PHQ9          ALPHA1
+              ________      ________      ________      ________      ________
+ PHQ6           0.981
+ PHQ7           0.977         0.979
+ PHQ8           0.975         0.973         0.975
+ PHQ9           0.971         0.968         0.968         0.973
+ ALPHA1         0.972         0.970         0.967         0.964         0.986
+ ALPHA2         0.971         0.969         0.966         0.965         0.975
+ ALPHA3         0.977         0.975         0.972         0.970         0.983
+ ALPHA4         0.972         0.970         0.967         0.965         0.979
+ ALPHA6         0.962         0.960         0.957         0.954         0.965
+ ALPHA7         0.963         0.962         0.959         0.955         0.966
+ ALPHA8         0.973         0.972         0.970         0.966         0.977
+ ALPHA9         0.971         0.971         0.968         0.966         0.975
+ ALPHA10        0.971         0.971         0.967         0.965         0.975
+ ALPHA11        0.965         0.964         0.961         0.957         0.969
+ PARK           0.981         0.979         0.975         0.973         0.986
+ PLAY           0.981         0.979         0.975         0.973         0.986
+ SPORT          0.981         0.979         0.975         0.973         0.986
+ FOREST         0.981         0.979         0.975         0.973         0.986
+ RIVER          0.981         0.979         0.975         0.973         0.986
+ LAKE           0.981         0.979         0.975         0.973         0.986
+ BEACH          0.981         0.979         0.975         0.973         0.986
+ TRAFFIC        0.971         0.969         0.966         0.963         0.975
+ NOISE          0.600         0.597         0.595         0.592         0.599
+ INSIDE         0.981         0.979         0.975         0.973         0.986
+ OUTSIDE        0.972         0.970         0.966         0.964         0.976
+
+
+           Covariance Coverage
+              ALPHA2        ALPHA3        ALPHA4        ALPHA6        ALPHA7
+              ________      ________      ________      ________      ________
+ ALPHA2         0.983
+ ALPHA3         0.980         0.991
+ ALPHA4         0.977         0.983         0.985
+ ALPHA6         0.966         0.969         0.966         0.972
+ ALPHA7         0.966         0.972         0.967         0.960         0.975
+ ALPHA8         0.976         0.983         0.978         0.968         0.971
+ ALPHA9         0.975         0.981         0.976         0.968         0.969
+ ALPHA10        0.975         0.980         0.976         0.968         0.969
+ ALPHA11        0.969         0.973         0.969         0.962         0.962
+ PARK           0.983         0.991         0.985         0.972         0.975
+ PLAY           0.983         0.991         0.985         0.972         0.975
+ SPORT          0.983         0.991         0.985         0.972         0.975
+ FOREST         0.983         0.991         0.985         0.972         0.975
+ RIVER          0.983         0.991         0.985         0.972         0.975
+ LAKE           0.983         0.991         0.985         0.972         0.975
+ BEACH          0.983         0.991         0.985         0.972         0.975
+ TRAFFIC        0.973         0.981         0.975         0.963         0.965
+ NOISE          0.600         0.602         0.599         0.595         0.593
+ INSIDE         0.983         0.991         0.985         0.972         0.975
+ OUTSIDE        0.974         0.981         0.976         0.964         0.965
+
+
+           Covariance Coverage
+              ALPHA8        ALPHA9        ALPHA10       ALPHA11       PARK
+              ________      ________      ________      ________      ________
+ ALPHA8         0.985
+ ALPHA9         0.982         0.984
+ ALPHA10        0.980         0.980         0.983
+ ALPHA11        0.972         0.972         0.975         0.975
+ PARK           0.985         0.984         0.983         0.975         1.000
+ PLAY           0.985         0.984         0.983         0.975         1.000
+ SPORT          0.985         0.984         0.983         0.975         1.000
+ FOREST         0.985         0.984         0.983         0.975         1.000
+ RIVER          0.985         0.984         0.983         0.975         1.000
+ LAKE           0.985         0.984         0.983         0.975         1.000
+ BEACH          0.985         0.984         0.983         0.975         1.000
+ TRAFFIC        0.976         0.975         0.973         0.966         0.986
+ NOISE          0.599         0.597         0.600         0.595         0.604
+ INSIDE         0.985         0.984         0.983         0.975         1.000
+ OUTSIDE        0.975         0.974         0.975         0.967         0.986
+
+
+           Covariance Coverage
+              PLAY          SPORT         FOREST        RIVER         LAKE
+              ________      ________      ________      ________      ________
+ PLAY           1.000
+ SPORT          1.000         1.000
+ FOREST         1.000         1.000         1.000
+ RIVER          1.000         1.000         1.000         1.000
+ LAKE           1.000         1.000         1.000         1.000         1.000
+ BEACH          1.000         1.000         1.000         1.000         1.000
+ TRAFFIC        0.986         0.986         0.986         0.986         0.986
+ NOISE          0.604         0.604         0.604         0.604         0.604
+ INSIDE         1.000         1.000         1.000         1.000         1.000
+ OUTSIDE        0.986         0.986         0.986         0.986         0.986
+
+
+           Covariance Coverage
+              BEACH         TRAFFIC       NOISE         INSIDE        OUTSIDE
+              ________      ________      ________      ________      ________
+ BEACH          1.000
+ TRAFFIC        0.986         0.986
+ NOISE          0.604         0.595         0.604
+ INSIDE         1.000         0.986         0.604         1.000
+ OUTSIDE        0.986         0.975         0.604         0.986         0.986
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    COH1
+      Category 1    0.013           15.000
+      Category 2    0.032           38.000
+      Category 3    0.154          182.000
+      Category 4    0.549          649.000
+      Category 5    0.253          299.000
+    COH2
+      Category 1    0.014           17.000
+      Category 2    0.068           81.000
+      Category 3    0.252          302.000
+      Category 4    0.460          552.000
+      Category 5    0.206          247.000
+    COH3
+      Category 1    0.010           12.000
+      Category 2    0.045           53.000
+      Category 3    0.197          231.000
+      Category 4    0.540          635.000
+      Category 5    0.208          244.000
+    COH4
+      Category 1    0.007            8.000
+      Category 2    0.058           67.000
+      Category 3    0.180          210.000
+      Category 4    0.537          625.000
+      Category 5    0.218          254.000
+    COH5
+      Category 1    0.028           31.000
+      Category 2    0.132          149.000
+      Category 3    0.291          328.000
+      Category 4    0.410          462.000
+      Category 5    0.139          156.000
+    PSS1
+      Category 1    0.287          345.000
+      Category 2    0.337          404.000
+      Category 3    0.283          340.000
+      Category 4    0.077           92.000
+      Category 5    0.016           19.000
+    PSS2
+      Category 1    0.322          384.000
+      Category 2    0.322          384.000
+      Category 3    0.238          284.000
+      Category 4    0.088          105.000
+      Category 5    0.030           36.000
+    PSS3
+      Category 1    0.113          136.000
+      Category 2    0.278          334.000
+      Category 3    0.407          489.000
+      Category 4    0.157          188.000
+      Category 5    0.044           53.000
+    PSS4
+      Category 1    0.177          209.000
+      Category 2    0.464          548.000
+      Category 3    0.252          298.000
+      Category 4    0.083           98.000
+      Category 5    0.024           28.000
+    PSS5
+      Category 1    0.072           86.000
+      Category 2    0.501          599.000
+      Category 3    0.340          407.000
+      Category 4    0.075           90.000
+      Category 5    0.012           14.000
+    PSS6
+      Category 1    0.182          217.000
+      Category 2    0.334          399.000
+      Category 3    0.338          403.000
+      Category 4    0.123          147.000
+      Category 5    0.023           27.000
+    PSS7
+      Category 1    0.176          210.000
+      Category 2    0.529          630.000
+      Category 3    0.243          289.000
+      Category 4    0.041           49.000
+      Category 5    0.011           13.000
+    PSS8
+      Category 1    0.133          158.000
+      Category 2    0.534          636.000
+      Category 3    0.263          313.000
+      Category 4    0.058           69.000
+      Category 5    0.012           14.000
+    PSS9
+      Category 1    0.180          215.000
+      Category 2    0.385          460.000
+      Category 3    0.322          385.000
+      Category 4    0.095          113.000
+      Category 5    0.018           21.000
+    PSS10
+      Category 1    0.413          492.000
+      Category 2    0.325          387.000
+      Category 3    0.182          217.000
+      Category 4    0.056           67.000
+      Category 5    0.023           27.000
+    PHQ1
+      Category 1    0.484          577.000
+      Category 2    0.405          482.000
+      Category 3    0.063           75.000
+      Category 4    0.048           57.000
+    PHQ2
+      Category 1    0.628          751.000
+      Category 2    0.276          330.000
+      Category 3    0.061           73.000
+      Category 4    0.034           41.000
+    PHQ3
+      Category 1    0.391          468.000
+      Category 2    0.401          480.000
+      Category 3    0.119          142.000
+      Category 4    0.089          107.000
+    PHQ4
+      Category 1    0.276          332.000
+      Category 2    0.473          568.000
+      Category 3    0.133          160.000
+      Category 4    0.117          141.000
+    PHQ5
+      Category 1    0.583          696.000
+      Category 2    0.258          308.000
+      Category 3    0.103          123.000
+      Category 4    0.055           66.000
+    PHQ6
+      Category 1    0.673          806.000
+      Category 2    0.211          253.000
+      Category 3    0.063           76.000
+      Category 4    0.053           63.000
+    PHQ7
+      Category 1    0.619          740.000
+      Category 2    0.254          304.000
+      Category 3    0.076           91.000
+      Category 4    0.050           60.000
+    PHQ8
+      Category 1    0.824          981.000
+      Category 2    0.128          153.000
+      Category 3    0.024           29.000
+      Category 4    0.024           28.000
+    PHQ9
+      Category 1    0.906         1076.000
+      Category 2    0.069           82.000
+      Category 3    0.012           14.000
+      Category 4    0.013           16.000
+    ALPHA1
+      Category 1    0.019           23.000
+      Category 2    0.076           92.000
+      Category 3    0.457          550.000
+      Category 4    0.448          539.000
+    ALPHA2
+      Category 1    0.037           45.000
+      Category 2    0.163          195.000
+      Category 3    0.343          411.000
+      Category 4    0.458          549.000
+    ALPHA3
+      Category 1    0.019           23.000
+      Category 2    0.064           78.000
+      Category 3    0.448          542.000
+      Category 4    0.469          567.000
+    ALPHA4
+      Category 1    0.027           33.000
+      Category 2    0.114          137.000
+      Category 3    0.336          404.000
+      Category 4    0.523          629.000
+    ALPHA6
+      Category 1    0.078           93.000
+      Category 2    0.211          250.000
+      Category 3    0.441          523.000
+      Category 4    0.270          321.000
+    ALPHA7
+      Category 1    0.031           37.000
+      Category 2    0.142          169.000
+      Category 3    0.560          666.000
+      Category 4    0.267          318.000
+    ALPHA8
+      Category 1    0.012           14.000
+      Category 2    0.045           54.000
+      Category 3    0.460          553.000
+      Category 4    0.484          582.000
+    ALPHA9
+      Category 1    0.013           16.000
+      Category 2    0.074           89.000
+      Category 3    0.460          553.000
+      Category 4    0.452          543.000
+    ALPHA10
+      Category 1    0.009           11.000
+      Category 2    0.020           24.000
+      Category 3    0.328          394.000
+      Category 4    0.642          771.000
+    ALPHA11
+      Category 1    0.015           18.000
+      Category 2    0.076           90.000
+      Category 3    0.445          530.000
+      Category 4    0.464          553.000
+    PARK
+      Category 1    0.410          500.000
+      Category 2    0.378          462.000
+      Category 3    0.144          176.000
+      Category 4    0.043           52.000
+      Category 5    0.025           31.000
+    PLAY
+      Category 1    0.609          743.000
+      Category 2    0.237          289.000
+      Category 3    0.066           80.000
+      Category 4    0.016           19.000
+      Category 5    0.074           90.000
+    SPORT
+      Category 1    0.241          294.000
+      Category 2    0.385          470.000
+      Category 3    0.272          332.000
+      Category 4    0.038           47.000
+      Category 5    0.064           78.000
+    FOREST
+      Category 1    0.076           93.000
+      Category 2    0.192          234.000
+      Category 3    0.387          472.000
+      Category 4    0.319          389.000
+      Category 5    0.027           33.000
+    RIVER
+      Category 1    0.125          153.000
+      Category 2    0.203          248.000
+      Category 3    0.360          439.000
+      Category 4    0.252          308.000
+      Category 5    0.060           73.000
+    LAKE
+      Category 1    0.127          155.000
+      Category 2    0.212          259.000
+      Category 3    0.344          420.000
+      Category 4    0.260          318.000
+      Category 5    0.057           69.000
+    BEACH
+      Category 1    0.011           14.000
+      Category 2    0.034           42.000
+      Category 3    0.107          131.000
+      Category 4    0.802          979.000
+      Category 5    0.045           55.000
+    TRAFFIC
+      Category 1    0.195          235.000
+      Category 2    0.436          525.000
+      Category 3    0.330          397.000
+      Category 4    0.039           47.000
+    NOISE
+      Category 1    0.579          427.000
+      Category 2    0.327          241.000
+      Category 3    0.065           48.000
+      Category 4    0.024           18.000
+      Category 5    0.004            3.000
+    INSIDE
+      Category 1    0.527          643.000
+      Category 2    0.378          461.000
+      Category 3    0.055           67.000
+      Category 4    0.033           40.000
+      Category 5    0.008           10.000
+    OUTSIDE
+      Category 1    0.388          467.000
+      Category 2    0.494          595.000
+      Category 3    0.086          103.000
+      Category 4    0.032           39.000
+
+
+     THE MODEL ESTIMATION DID NOT TERMINATE NORMALLY DUE TO A NON-ZERO
+     DERIVATIVE OF THE OBSERVED-DATA LOGLIKELIHOOD.
+
+     THE MCONVERGENCE CRITERION OF THE EM ALGORITHM IS NOT FULFILLED.
+     CHECK YOUR STARTING VALUES OR INCREASE THE NUMBER OF MITERATIONS.
+     ESTIMATES CANNOT BE TRUSTED.  THE LOGLIKELIHOOD DERIVATIVE
+     FOR THE FOLLOWING PARAMETER IS  0.15254174D+01:
+     Parameter 62, %BETWEEN%: [ SPHQONNOI ]
+
+
+
+
+
+
+MODEL RESULTS
+
+                    Estimate
+
+Within Level
+
+ COH      BY
+    COH1               1.000
+    COH2              79.859
+    COH3              97.372
+    COH4             100.100
+    COH5              91.304
+
+ PSS      BY
+    PSS1               1.000
+    PSS2               0.007
+    PSS3               0.006
+    PSS4               0.004
+    PSS5               0.005
+    PSS6               0.005
+    PSS7               0.005
+    PSS8               0.005
+    PSS9               0.005
+    PSS10              0.007
+
+ PHQ      BY
+    PHQ1               1.000
+    PHQ2               0.763
+    PHQ3               0.407
+    PHQ4               0.509
+    PHQ5               0.447
+    PHQ6               0.620
+    PHQ7               0.494
+    PHQ8               0.574
+    PHQ9               0.677
+
+ PLEA     BY
+    ALPHA1             1.000
+    ALPHA2            17.813
+    ALPHA3             8.896
+    ALPHA4            18.391
+
+ SAFE     BY
+    ALPHA6             1.000
+    ALPHA7            90.485
+    ALPHA8           151.054
+    ALPHA9           140.744
+    ALPHA10          130.303
+    ALPHA11          106.507
+
+ GREEN    BY
+    PARK               1.000
+    PLAY              -1.863
+    SPORT             -1.056
+    FOREST            -1.023
+
+ BLUE     BY
+    RIVER              1.000
+    LAKE               0.063
+    BEACH             -0.381
+
+ NOI      BY
+    TRAFFIC            1.000
+    NOISE              2.054
+    INSIDE             2.749
+    OUTSIDE            2.828
+
+ PLEA     WITH
+    COH                0.000
+
+ SAFE     WITH
+    COH                0.000
+    PLEA               0.001
+
+ GREEN    WITH
+    COH                0.000
+    PLEA               0.002
+    SAFE               0.000
+
+ BLUE     WITH
+    COH                0.003
+    PLEA               0.019
+    SAFE               0.004
+    GREEN              0.012
+
+ NOI      WITH
+    COH               -0.002
+    PLEA              -0.009
+    SAFE              -0.002
+    GREEN             -0.002
+    BLUE              -0.086
+
+ Variances
+    COH                0.000
+    PLEA               0.003
+    SAFE               0.000
+    GREEN              0.009
+    BLUE               0.349
+    NOI                0.060
+
+ Residual Variances
+    PSS            90321.453
+    PHQ                0.131
+
+Between Level
+
+ Means
+    SPHQONPSS          0.010
+    SPHQONNOI          9.386
+    SPHQONPLEA        -2.541
+    SPHQONSAFE        -4.604
+    SPHQONCOH         -0.379
+    SPHQONGREE        -2.371
+    SPHQONBLUE         3.148
+    SPSSONNOI         29.420
+    SPSSONPLEA        87.517
+    SPSSONSAFE        84.893
+    SPSSONCOH       -134.665
+    SPSSONGREE        30.969
+    SPSSONBLUE       -41.011
+
+ Thresholds
+    COH1$1            -4.358
+    COH1$2            -3.062
+    COH1$3            -1.396
+    COH1$4             1.085
+    COH2$1            -4.717
+    COH2$2            -2.809
+    COH2$3            -0.839
+    COH2$4             1.617
+    COH3$1            -5.258
+    COH3$2            -3.449
+    COH3$3            -1.389
+    COH3$4             1.744
+    COH4$1            -5.678
+    COH4$2            -3.277
+    COH4$3            -1.460
+    COH4$4             1.680
+    COH5$1            -4.139
+    COH5$2            -2.054
+    COH5$3            -0.262
+    COH5$4             2.274
+    PSS1$1          -139.361
+    PSS1$2            47.033
+    PSS1$3           283.029
+    PSS1$4           487.838
+    PSS2$1            -1.273
+    PSS2$2             0.786
+    PSS2$3             2.851
+    PSS2$4             4.687
+    PSS3$1            -2.911
+    PSS3$2            -0.738
+    PSS3$3             1.746
+    PSS3$4             3.854
+    PSS4$1            -1.878
+    PSS4$2             0.652
+    PSS4$3             2.428
+    PSS4$4             4.091
+    PSS5$1            -3.201
+    PSS5$2             0.282
+    PSS5$3             2.761
+    PSS5$4             4.959
+    PSS6$1            -2.054
+    PSS6$2            -0.005
+    PSS6$3             2.140
+    PSS6$4             4.371
+    PSS7$1            -1.996
+    PSS7$2             1.010
+    PSS7$3             3.372
+    PSS7$4             5.040
+    PSS8$1            -2.537
+    PSS8$2             0.793
+    PSS8$3             3.150
+    PSS8$4             5.161
+    PSS9$1            -2.102
+    PSS9$2             0.203
+    PSS9$3             2.489
+    PSS9$4             4.696
+    PSS10$1           -0.672
+    PSS10$2            1.299
+    PSS10$3            3.208
+    PSS10$4            4.794
+    PHQ1$1            -0.301
+    PHQ1$2             4.246
+    PHQ1$3             5.971
+    PHQ2$1             0.764
+    PHQ2$2             3.845
+    PHQ2$3             5.751
+    PHQ3$1            -0.684
+    PHQ3$2             1.628
+    PHQ3$3             2.908
+    PHQ4$1            -1.488
+    PHQ4$2             1.473
+    PHQ4$3             2.791
+    PHQ5$1             0.341
+    PHQ5$2             2.138
+    PHQ5$3             3.678
+    PHQ6$1             0.979
+    PHQ6$2             3.022
+    PHQ6$3             4.361
+    PHQ7$1             0.573
+    PHQ7$2             2.593
+    PHQ7$3             3.945
+    PHQ8$1             2.174
+    PHQ8$2             4.291
+    PHQ8$3             5.328
+    PHQ9$1             3.594
+    PHQ9$2             5.791
+    PHQ9$3             6.643
+    ALPHA1$1          -3.946
+    ALPHA1$2          -2.253
+    ALPHA1$3           0.215
+    ALPHA2$1          -3.589
+    ALPHA2$2          -1.582
+    ALPHA2$3           0.252
+    ALPHA3$1          -4.028
+    ALPHA3$2          -2.472
+    ALPHA3$3           0.150
+    ALPHA4$1          -3.936
+    ALPHA4$2          -2.054
+    ALPHA4$3          -0.056
+    ALPHA6$1          -2.467
+    ALPHA6$2          -0.901
+    ALPHA6$3           0.994
+    ALPHA7$1          -4.085
+    ALPHA7$2          -2.005
+    ALPHA7$3           1.392
+    ALPHA8$1          -6.210
+    ALPHA8$2          -4.339
+    ALPHA8$3           0.194
+    ALPHA9$1          -5.885
+    ALPHA9$2          -3.571
+    ALPHA9$3           0.399
+    ALPHA10$1         -6.004
+    ALPHA10$2         -4.754
+    ALPHA10$3         -0.853
+    ALPHA11$1         -5.111
+    ALPHA11$2         -3.037
+    ALPHA11$3          0.288
+    PARK$1            -0.363
+    PARK$2             1.314
+    PARK$3             2.621
+    PARK$4             3.651
+    PLAY$1             0.440
+    PLAY$2             1.703
+    PLAY$3             2.329
+    PLAY$4             2.538
+    SPORT$1           -1.157
+    SPORT$2            0.509
+    SPORT$3            2.170
+    SPORT$4            2.685
+    FOREST$1          -2.503
+    FOREST$2          -1.011
+    FOREST$3           0.636
+    FOREST$4           3.584
+    RIVER$1           -1.999
+    RIVER$2           -0.727
+    RIVER$3            0.861
+    RIVER$4            2.877
+    LAKE$1            -1.928
+    LAKE$2            -0.667
+    LAKE$3             0.769
+    LAKE$4             2.817
+    BEACH$1           -4.489
+    BEACH$2           -3.066
+    BEACH$3           -1.734
+    BEACH$4            3.071
+    TRAFFIC$1         -1.456
+    TRAFFIC$2          0.537
+    TRAFFIC$3          3.234
+    NOISE$1            0.425
+    NOISE$2            2.452
+    NOISE$3            3.729
+    NOISE$4            5.702
+    INSIDE$1           0.087
+    INSIDE$2           2.390
+    INSIDE$3           3.329
+    INSIDE$4           4.986
+    OUTSIDE$1         -0.546
+    OUTSIDE$2          2.136
+    OUTSIDE$3          3.573
+
+ Variances
+    SPHQONPSS          0.000
+    SPHQONNOI          0.000
+    SPHQONPLEA         0.000
+    SPHQONSAFE         0.000
+    SPHQONCOH          0.000
+    SPHQONGREE         4.989
+    SPHQONBLUE         0.461
+    SPSSONNOI        830.875
+    SPSSONPLEA     12731.508
+    SPSSONSAFE       759.029
+    SPSSONCOH      *********
+    SPSSONGREE     17066.457
+    SPSSONBLUE     66565.234
+
+
+MODEL COMMAND WITH FINAL ESTIMATES USED AS STARTING VALUES
+
+     %WITHIN%
+
+     sphqonpss | phq ON pss;
+     sphqonnoi | phq ON noi;
+     sphqonplea | phq ON plea;
+     sphqonsafe | phq ON safe;
+     sphqoncoh | phq ON coh;
+     sphqongreen | phq ON green;
+     sphqonblue | phq ON blue;
+     spssonnoi | pss ON noi;
+     spssonplea | pss ON plea;
+     spssonsafe | pss ON safe;
+     spssoncoh | pss ON coh;
+     spssongreen | pss ON green;
+     spssonblue | pss ON blue;
+
+     coh BY coh1@1;
+     coh BY coh2*79.85851;
+     coh BY coh3*97.37230;
+     coh BY coh4*100.09987;
+     coh BY coh5*91.30449;
+     pss BY pss1@1;
+     pss BY pss2*0.00746;
+     pss BY pss3*0.00616;
+     pss BY pss4*0.00400;
+     pss BY pss5*0.00470;
+     pss BY pss6*0.00533;
+     pss BY pss7*0.00467;
+     pss BY pss8*0.00541;
+     pss BY pss9*0.00543;
+     pss BY pss10*0.00676;
+     phq BY phq1@1;
+     phq BY phq2*0.76269;
+     phq BY phq3*0.40738;
+     phq BY phq4*0.50858;
+     phq BY phq5*0.44690;
+     phq BY phq6*0.62009;
+     phq BY phq7*0.49400;
+     phq BY phq8*0.57430;
+     phq BY phq9*0.67684;
+     plea BY alpha1@1;
+     plea BY alpha2*17.81340;
+     plea BY alpha3*8.89595;
+     plea BY alpha4*18.39134;
+     safe BY alpha6@1;
+     safe BY alpha7*90.48541;
+     safe BY alpha8*151.05432;
+     safe BY alpha9*140.74356;
+     safe BY alpha10*130.30276;
+     safe BY alpha11*106.50711;
+     green BY park@1;
+     green BY play*-1.86274;
+     green BY sport*-1.05626;
+     green BY forest*-1.02290;
+     blue BY river@1;
+     blue BY lake*0.06253;
+     blue BY beach*-0.38055;
+     noi BY traffic@1;
+     noi BY noise*2.05445;
+     noi BY inside*2.74943;
+     noi BY outside*2.82810;
+
+     plea WITH coh*0.00044;
+     safe WITH coh*0.00009;
+     safe WITH plea*0.00058;
+     green WITH coh*0.00037;
+     green WITH plea*0.00186;
+     green WITH safe*0.00043;
+     blue WITH coh*0.00310;
+     blue WITH plea*0.01874;
+     blue WITH safe*0.00425;
+     blue WITH green*0.01237;
+     noi WITH coh*-0.00168;
+     noi WITH plea*-0.00905;
+     noi WITH safe*-0.00167;
+     noi WITH green*-0.00180;
+     noi WITH blue*-0.08649;
+
+     coh*0.00007;
+     pss*90321.45312;
+     phq*0.13133;
+     plea*0.00279;
+     safe*0.00012;
+     green*0.00872;
+     blue*0.34888;
+     noi*0.06028;
+
+     %BETWEEN%
+
+     [ sphqonpss*0.00967 ];
+     [ sphqonnoi*9.38556 ];
+     [ sphqonplea*-2.54074 ];
+     [ sphqonsafe*-4.60409 ];
+     [ sphqoncoh*-0.37855 ];
+     [ sphqongreen*-2.37122 ];
+     [ sphqonblue*3.14782 ];
+     [ spssonnoi*29.41955 ];
+     [ spssonplea*87.51703 ];
+     [ spssonsafe*84.89336 ];
+     [ spssoncoh*-134.66531 ];
+     [ spssongreen*30.96946 ];
+     [ spssonblue*-41.01087 ];
+
+     [ coh1$1*-4.35753 ];
+     [ coh1$2*-3.06199 ];
+     [ coh1$3*-1.39610 ];
+     [ coh1$4*1.08521 ];
+     [ coh2$1*-4.71654 ];
+     [ coh2$2*-2.80873 ];
+     [ coh2$3*-0.83923 ];
+     [ coh2$4*1.61700 ];
+     [ coh3$1*-5.25824 ];
+     [ coh3$2*-3.44910 ];
+     [ coh3$3*-1.38873 ];
+     [ coh3$4*1.74378 ];
+     [ coh4$1*-5.67765 ];
+     [ coh4$2*-3.27742 ];
+     [ coh4$3*-1.46038 ];
+     [ coh4$4*1.68023 ];
+     [ coh5$1*-4.13927 ];
+     [ coh5$2*-2.05442 ];
+     [ coh5$3*-0.26225 ];
+     [ coh5$4*2.27357 ];
+     [ pss1$1*-139.36147 ];
+     [ pss1$2*47.03291 ];
+     [ pss1$3*283.02866 ];
+     [ pss1$4*487.83780 ];
+     [ pss2$1*-1.27313 ];
+     [ pss2$2*0.78584 ];
+     [ pss2$3*2.85145 ];
+     [ pss2$4*4.68741 ];
+     [ pss3$1*-2.91131 ];
+     [ pss3$2*-0.73769 ];
+     [ pss3$3*1.74615 ];
+     [ pss3$4*3.85401 ];
+     [ pss4$1*-1.87812 ];
+     [ pss4$2*0.65167 ];
+     [ pss4$3*2.42780 ];
+     [ pss4$4*4.09129 ];
+     [ pss5$1*-3.20080 ];
+     [ pss5$2*0.28224 ];
+     [ pss5$3*2.76104 ];
+     [ pss5$4*4.95924 ];
+     [ pss6$1*-2.05421 ];
+     [ pss6$2*-0.00507 ];
+     [ pss6$3*2.13998 ];
+     [ pss6$4*4.37075 ];
+     [ pss7$1*-1.99585 ];
+     [ pss7$2*1.00962 ];
+     [ pss7$3*3.37221 ];
+     [ pss7$4*5.04016 ];
+     [ pss8$1*-2.53699 ];
+     [ pss8$2*0.79310 ];
+     [ pss8$3*3.15049 ];
+     [ pss8$4*5.16146 ];
+     [ pss9$1*-2.10194 ];
+     [ pss9$2*0.20255 ];
+     [ pss9$3*2.48898 ];
+     [ pss9$4*4.69626 ];
+     [ pss10$1*-0.67229 ];
+     [ pss10$2*1.29861 ];
+     [ pss10$3*3.20758 ];
+     [ pss10$4*4.79393 ];
+     [ phq1$1*-0.30140 ];
+     [ phq1$2*4.24584 ];
+     [ phq1$3*5.97091 ];
+     [ phq2$1*0.76353 ];
+     [ phq2$2*3.84508 ];
+     [ phq2$3*5.75137 ];
+     [ phq3$1*-0.68410 ];
+     [ phq3$2*1.62751 ];
+     [ phq3$3*2.90789 ];
+     [ phq4$1*-1.48793 ];
+     [ phq4$2*1.47270 ];
+     [ phq4$3*2.79087 ];
+     [ phq5$1*0.34108 ];
+     [ phq5$2*2.13765 ];
+     [ phq5$3*3.67764 ];
+     [ phq6$1*0.97934 ];
+     [ phq6$2*3.02172 ];
+     [ phq6$3*4.36138 ];
+     [ phq7$1*0.57320 ];
+     [ phq7$2*2.59293 ];
+     [ phq7$3*3.94516 ];
+     [ phq8$1*2.17381 ];
+     [ phq8$2*4.29121 ];
+     [ phq8$3*5.32760 ];
+     [ phq9$1*3.59434 ];
+     [ phq9$2*5.79084 ];
+     [ phq9$3*6.64323 ];
+     [ alpha1$1*-3.94604 ];
+     [ alpha1$2*-2.25283 ];
+     [ alpha1$3*0.21535 ];
+     [ alpha2$1*-3.58903 ];
+     [ alpha2$2*-1.58173 ];
+     [ alpha2$3*0.25222 ];
+     [ alpha3$1*-4.02759 ];
+     [ alpha3$2*-2.47248 ];
+     [ alpha3$3*0.14992 ];
+     [ alpha4$1*-3.93639 ];
+     [ alpha4$2*-2.05369 ];
+     [ alpha4$3*-0.05642 ];
+     [ alpha6$1*-2.46671 ];
+     [ alpha6$2*-0.90137 ];
+     [ alpha6$3*0.99401 ];
+     [ alpha7$1*-4.08475 ];
+     [ alpha7$2*-2.00503 ];
+     [ alpha7$3*1.39188 ];
+     [ alpha8$1*-6.21034 ];
+     [ alpha8$2*-4.33856 ];
+     [ alpha8$3*0.19379 ];
+     [ alpha9$1*-5.88481 ];
+     [ alpha9$2*-3.57084 ];
+     [ alpha9$3*0.39897 ];
+     [ alpha10$1*-6.00379 ];
+     [ alpha10$2*-4.75404 ];
+     [ alpha10$3*-0.85264 ];
+     [ alpha11$1*-5.11061 ];
+     [ alpha11$2*-3.03701 ];
+     [ alpha11$3*0.28820 ];
+     [ park$1*-0.36324 ];
+     [ park$2*1.31424 ];
+     [ park$3*2.62072 ];
+     [ park$4*3.65065 ];
+     [ play$1*0.43991 ];
+     [ play$2*1.70344 ];
+     [ play$3*2.32945 ];
+     [ play$4*2.53822 ];
+     [ sport$1*-1.15666 ];
+     [ sport$2*0.50882 ];
+     [ sport$3*2.17046 ];
+     [ sport$4*2.68487 ];
+     [ forest$1*-2.50326 ];
+     [ forest$2*-1.01142 ];
+     [ forest$3*0.63588 ];
+     [ forest$4*3.58362 ];
+     [ river$1*-1.99891 ];
+     [ river$2*-0.72706 ];
+     [ river$3*0.86062 ];
+     [ river$4*2.87725 ];
+     [ lake$1*-1.92768 ];
+     [ lake$2*-0.66689 ];
+     [ lake$3*0.76904 ];
+     [ lake$4*2.81713 ];
+     [ beach$1*-4.48925 ];
+     [ beach$2*-3.06550 ];
+     [ beach$3*-1.73412 ];
+     [ beach$4*3.07056 ];
+     [ traffic$1*-1.45558 ];
+     [ traffic$2*0.53743 ];
+     [ traffic$3*3.23427 ];
+     [ noise$1*0.42450 ];
+     [ noise$2*2.45168 ];
+     [ noise$3*3.72945 ];
+     [ noise$4*5.70161 ];
+     [ inside$1*0.08724 ];
+     [ inside$2*2.39001 ];
+     [ inside$3*3.32874 ];
+     [ inside$4*4.98572 ];
+     [ outside$1*-0.54610 ];
+     [ outside$2*2.13590 ];
+     [ outside$3*3.57277 ];
+
+     sphqonpss*0.00000;
+     sphqonnoi*0.00001;
+     sphqonplea*0.00000;
+     sphqonsafe*0.00000;
+     sphqoncoh*0.00000;
+     sphqongreen*4.98912;
+     sphqonblue*0.46089;
+     spssonnoi*830.87500;
+     spssonplea*12731.50781;
+     spssonsafe*759.02893;
+     spssoncoh*316955.34375;
+     spssongreen*17066.45703;
+     spssonblue*66565.23438;
+
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  18:14:09
+        Ending Time:  05:44:04
+       Elapsed Time:  11:29:55
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2017 Muthen & Muthen

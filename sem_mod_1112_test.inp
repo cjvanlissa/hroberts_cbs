@@ -1,0 +1,427 @@
+DATA:
+FILE = "sem_mod_1112_test_c4be37fec31dfddf2b4ec9fe1f20ad41.dat";
+ 
+VARIABLE:
+NAMES = Pcoh1 Pcoh2 Pcoh3 Ppss1 Ppss2 Ppss3 Ppss4 Ppss5 Pphq1 Pphq2 Pphq3 Pphq4
+     Pphq5 Pplea1 Pplea2 Psafe1 Psafe2 Psafe3 Pgreen1 Pgreen2 river lake beach
+     traffic inside outside phys clus dep frag age urb eduM eduH inc2 inc3 inc4 inc5
+     hous2c houssp houso marS marW marN Dworkhome; 
+ MISSING=.;
+ CLUSTER = clus;
+GROUPING = Dworkhome (1 = LO 2 = HI);
+
+ANALYSIS:
+TYPE = COMPLEX;
+
+MODEL:
+coh BY Pcoh1* (cohBpcoh1);
+coh BY Pcoh2 (cohBpcoh2);
+coh BY Pcoh3 (cohBpcoh3);
+[coh@0];
+coh@1;
+pss BY Ppss1* (pssBppss1);
+pss BY Ppss2 (pssBppss2);
+pss BY Ppss3 (pssBppss3);
+pss BY Ppss4 (pssBppss4);
+pss BY Ppss5 (pssBppss5);
+[pss@0];
+pss@1;
+phq BY Pphq1* (phqBpphq1);
+phq BY Pphq2 (phqBpphq2);
+phq BY Pphq3 (phqBpphq3);
+phq BY Pphq4 (phqBpphq4);
+phq BY Pphq5 (phqBpphq5);
+[phq@0];
+phq@1;
+PPHQ4 WITH PPHQ3 (phq4Wphq3);
+plea BY Pplea1* (pleaBpplea1);
+plea BY Pplea2 (pleaBpplea2);
+[plea@0];
+plea@1;
+safe BY Psafe1* (safeBpsafe1);
+safe BY Psafe2 (safeBpsafe2);
+safe BY Psafe3 (safeBpsafe3);
+safe BY traffic (safeBtraffic);
+[safe@0];
+safe@1;
+green BY Pgreen1* (greenBpgreen1);
+green BY Pgreen2 (greenBpgreen2);
+[green@0];
+green@1;
+blue BY river* (blueBriver);
+blue BY lake (blueBlake);
+blue BY beach (blueBbeach);
+[blue@0];
+blue@1;
+noi BY traffic* (noiBtraffic);
+noi BY inside (noiBinside);
+noi BY outside (noiBoutside);
+[noi@0];
+noi@1;
+phq ON dep (phqOdep);
+phq ON frag (phqOfrag);
+phq ON age (phqOage);
+phq ON urb (phqOurb);
+phq ON eduM (phqOedum);
+phq ON eduH (phqOeduh);
+phq ON inc2 (phqOinc2);
+phq ON inc3 (phqOinc3);
+phq ON inc4 (phqOinc4);
+phq ON inc5 (phqOinc5);
+phq ON hous2c (phqOhous2c);
+phq ON houssp (phqOhoussp);
+phq ON houso (phqOhouso);
+phq ON marS (phqOmars);
+phq ON marW (phqOmarw);
+phq ON marN (phqOmarn);
+pss ON dep (pssOdep);
+pss ON frag (pssOfrag);
+pss ON age (pssOage);
+pss ON urb (pssOurb);
+pss ON eduM (pssOedum);
+pss ON eduH (pssOeduh);
+pss ON inc2 (pssOinc2);
+pss ON inc3 (pssOinc3);
+pss ON inc4 (pssOinc4);
+pss ON inc5 (pssOinc5);
+pss ON hous2c (pssOhous2c);
+pss ON houssp (pssOhoussp);
+pss ON houso (pssOhouso);
+pss ON marS (pssOmars);
+pss ON marW (pssOmarw);
+pss ON marN (pssOmarn);
+phys ON dep (physOdep);
+phys ON frag (physOfrag);
+phys ON age (physOage);
+phys ON urb (physOurb);
+phys ON eduM (physOedum);
+phys ON eduH (physOeduh);
+phys ON inc2 (physOinc2);
+phys ON inc3 (physOinc3);
+phys ON inc4 (physOinc4);
+phys ON inc5 (physOinc5);
+phys ON hous2c (physOhous2c);
+phys ON houssp (physOhoussp);
+phys ON houso (physOhouso);
+phys ON marS (physOmars);
+phys ON marW (physOmarw);
+phys ON marN (physOmarn);
+phq ON noi (phqOnoi);
+phq ON plea (phqOplea);
+phq ON safe (phqOsafe);
+phq ON coh (phqOcoh);
+phq ON green (phqOgreen);
+phq ON blue (phqOblue);
+pss ON noi (pssOnoi);
+pss ON plea (pssOplea);
+pss ON safe (pssOsafe);
+pss ON coh (pssOcoh);
+pss ON green (pssOgreen);
+pss ON blue (pssOblue);
+phys ON noi (physOnoi);
+phys ON plea (physOplea);
+phys ON safe (physOsafe);
+phys ON coh (physOcoh);
+phys ON green (physOgreen);
+phys ON blue (physOblue);
+phq ON pss (phqOpss);
+phq ON phys (phqOphys);
+pss WITH phys;
+MODEL INDIRECT:
+
+
+phq IND pss noi;
+phq IND pss plea;
+phq IND pss safe;
+phq IND pss coh;
+phq IND pss green;
+phq IND pss blue;
+
+phq IND phys noi;
+phq IND phys plea;
+phq IND phys safe;
+phq IND phys coh;
+phq IND phys green;
+phq IND phys blue;
+
+MODEL LO:
+
+phq ON dep (phqOdepL);
+phq ON frag (phqOfragL);
+phq ON age (phqOageL);
+phq ON urb (phqOurbL);
+phq ON eduM (phqOedumL);
+phq ON eduH (phqOeduhL);
+phq ON inc2 (phqOinc2L);
+phq ON inc3 (phqOinc3L);
+phq ON inc4 (phqOinc4L);
+phq ON inc5 (phqOinc5L);
+phq ON hous2c (phqOhous2cL);
+phq ON houssp (phqOhousspL);
+phq ON houso (phqOhousoL);
+phq ON marS (phqOmarsL);
+phq ON marW (phqOmarwL);
+phq ON marN (phqOmarnL);
+pss ON dep (pssOdepL);
+pss ON frag (pssOfragL);
+pss ON age (pssOageL);
+pss ON urb (pssOurbL);
+pss ON eduM (pssOedumL);
+pss ON eduH (pssOeduhL);
+pss ON inc2 (pssOinc2L);
+pss ON inc3 (pssOinc3L);
+pss ON inc4 (pssOinc4L);
+pss ON inc5 (pssOinc5L);
+pss ON hous2c (pssOhous2cL);
+pss ON houssp (pssOhousspL);
+pss ON houso (pssOhousoL);
+pss ON marS (pssOmarsL);
+pss ON marW (pssOmarwL);
+pss ON marN (pssOmarnL);
+phys ON dep (physOdepL);
+phys ON frag (physOfragL);
+phys ON age (physOageL);
+phys ON urb (physOurbL);
+phys ON eduM (physOedumL);
+phys ON eduH (physOeduhL);
+phys ON inc2 (physOinc2L);
+phys ON inc3 (physOinc3L);
+phys ON inc4 (physOinc4L);
+phys ON inc5 (physOinc5L);
+phys ON hous2c (physOhous2cL);
+phys ON houssp (physOhousspL);
+phys ON houso (physOhousoL);
+phys ON marS (physOmarsL);
+phys ON marW (physOmarwL);
+phys ON marN (physOmarnL);
+phq ON noi (phqOnoiL);
+phq ON plea (phqOpleaL);
+phq ON safe (phqOsafeL);
+phq ON coh (phqOcohL);
+phq ON green (phqOgreenL);
+phq ON blue (phqOblueL);
+pss ON noi (pssOnoiL);
+pss ON plea (pssOpleaL);
+pss ON safe (pssOsafeL);
+pss ON coh (pssOcohL);
+pss ON green (pssOgreenL);
+pss ON blue (pssOblueL);
+phys ON noi (physOnoiL);
+phys ON plea (physOpleaL);
+phys ON safe (physOsafeL);
+phys ON coh (physOcohL);
+phys ON green (physOgreenL);
+phys ON blue (physOblueL);
+phq ON pss (phqOpssL);
+phq ON phys (phqOphysL);
+MODEL HI:
+
+phq ON dep (phqOdepH);
+phq ON frag (phqOfragH);
+phq ON age (phqOageH);
+phq ON urb (phqOurbH);
+phq ON eduM (phqOedumH);
+phq ON eduH (phqOeduhH);
+phq ON inc2 (phqOinc2H);
+phq ON inc3 (phqOinc3H);
+phq ON inc4 (phqOinc4H);
+phq ON inc5 (phqOinc5H);
+phq ON hous2c (phqOhous2cH);
+phq ON houssp (phqOhousspH);
+phq ON houso (phqOhousoH);
+phq ON marS (phqOmarsH);
+phq ON marW (phqOmarwH);
+phq ON marN (phqOmarnH);
+pss ON dep (pssOdepH);
+pss ON frag (pssOfragH);
+pss ON age (pssOageH);
+pss ON urb (pssOurbH);
+pss ON eduM (pssOedumH);
+pss ON eduH (pssOeduhH);
+pss ON inc2 (pssOinc2H);
+pss ON inc3 (pssOinc3H);
+pss ON inc4 (pssOinc4H);
+pss ON inc5 (pssOinc5H);
+pss ON hous2c (pssOhous2cH);
+pss ON houssp (pssOhousspH);
+pss ON houso (pssOhousoH);
+pss ON marS (pssOmarsH);
+pss ON marW (pssOmarwH);
+pss ON marN (pssOmarnH);
+phys ON dep (physOdepH);
+phys ON frag (physOfragH);
+phys ON age (physOageH);
+phys ON urb (physOurbH);
+phys ON eduM (physOedumH);
+phys ON eduH (physOeduhH);
+phys ON inc2 (physOinc2H);
+phys ON inc3 (physOinc3H);
+phys ON inc4 (physOinc4H);
+phys ON inc5 (physOinc5H);
+phys ON hous2c (physOhous2cH);
+phys ON houssp (physOhousspH);
+phys ON houso (physOhousoH);
+phys ON marS (physOmarsH);
+phys ON marW (physOmarwH);
+phys ON marN (physOmarnH);
+phq ON noi (phqOnoiH);
+phq ON plea (phqOpleaH);
+phq ON safe (phqOsafeH);
+phq ON coh (phqOcohH);
+phq ON green (phqOgreenH);
+phq ON blue (phqOblueH);
+pss ON noi (pssOnoiH);
+pss ON plea (pssOpleaH);
+pss ON safe (pssOsafeH);
+pss ON coh (pssOcohH);
+pss ON green (pssOgreenH);
+pss ON blue (pssOblueH);
+phys ON noi (physOnoiH);
+phys ON plea (physOpleaH);
+phys ON safe (physOsafeH);
+phys ON coh (physOcohH);
+phys ON green (physOgreenH);
+phys ON blue (physOblueH);
+phq ON pss (phqOpssH);
+phq ON phys (phqOphysH);
+MODEL CONSTRAINT:
+NEW (
+p1
+p2
+p3
+p4
+p5
+p6
+p7
+p8
+p9
+p10
+p11
+p12
+p13
+p14
+p15
+p16
+p17
+p18
+p19
+p20
+p21
+p22
+p23
+p24
+p25
+p26
+p27
+p28
+p29
+p30
+p31
+p32
+p33
+p34
+p35
+p36
+p37
+p38
+p39
+p40
+p41
+p42
+p43
+p44
+p45
+p46
+p47
+p48
+p49
+p50
+p51
+p52
+p53
+p54
+p55
+p56
+p57
+p58
+p59
+p60
+p61
+p62
+p63
+p64
+p65
+p66
+p67
+p68
+);
+p1 = phqOdepH - phqOdepL;
+p2 = phqOfragH - phqOfragL;
+p3 = phqOageH - phqOageL;
+p4 = phqOurbH - phqOurbL;
+p5 = phqOedumH - phqOedumL;
+p6 = phqOeduhH - phqOeduhL;
+p7 = phqOinc2H - phqOinc2L;
+p8 = phqOinc3H - phqOinc3L;
+p9 = phqOinc4H - phqOinc4L;
+p10 = phqOinc5H - phqOinc5L;
+p11 = phqOhous2cH - phqOhous2cL;
+p12 = phqOhousspH - phqOhousspL;
+p13 = phqOhousoH - phqOhousoL;
+p14 = phqOmarsH - phqOmarsL;
+p15 = phqOmarwH - phqOmarwL;
+p16 = phqOmarnH - phqOmarnL;
+p17 = pssOdepH - pssOdepL;
+p18 = pssOfragH - pssOfragL;
+p19 = pssOageH - pssOageL;
+p20 = pssOurbH - pssOurbL;
+p21 = pssOedumH - pssOedumL;
+p22 = pssOeduhH - pssOeduhL;
+p23 = pssOinc2H - pssOinc2L;
+p24 = pssOinc3H - pssOinc3L;
+p25 = pssOinc4H - pssOinc4L;
+p26 = pssOinc5H - pssOinc5L;
+p27 = pssOhous2cH - pssOhous2cL;
+p28 = pssOhousspH - pssOhousspL;
+p29 = pssOhousoH - pssOhousoL;
+p30 = pssOmarsH - pssOmarsL;
+p31 = pssOmarwH - pssOmarwL;
+p32 = pssOmarnH - pssOmarnL;
+p33 = physOdepH - physOdepL;
+p34 = physOfragH - physOfragL;
+p35 = physOageH - physOageL;
+p36 = physOurbH - physOurbL;
+p37 = physOedumH - physOedumL;
+p38 = physOeduhH - physOeduhL;
+p39 = physOinc2H - physOinc2L;
+p40 = physOinc3H - physOinc3L;
+p41 = physOinc4H - physOinc4L;
+p42 = physOinc5H - physOinc5L;
+p43 = physOhous2cH - physOhous2cL;
+p44 = physOhousspH - physOhousspL;
+p45 = physOhousoH - physOhousoL;
+p46 = physOmarsH - physOmarsL;
+p47 = physOmarwH - physOmarwL;
+p48 = physOmarnH - physOmarnL;
+p49 = phqOnoiH - phqOnoiL;
+p50 = phqOpleaH - phqOpleaL;
+p51 = phqOsafeH - phqOsafeL;
+p52 = phqOcohH - phqOcohL;
+p53 = phqOgreenH - phqOgreenL;
+p54 = phqOblueH - phqOblueL;
+p55 = pssOnoiH - pssOnoiL;
+p56 = pssOpleaH - pssOpleaL;
+p57 = pssOsafeH - pssOsafeL;
+p58 = pssOcohH - pssOcohL;
+p59 = pssOgreenH - pssOgreenL;
+p60 = pssOblueH - pssOblueL;
+p61 = physOnoiH - physOnoiL;
+p62 = physOpleaH - physOpleaL;
+p63 = physOsafeH - physOsafeL;
+p64 = physOcohH - physOcohL;
+p65 = physOgreenH - physOgreenL;
+p66 = physOblueH - physOblueL;
+p67 = phqOpssH - phqOpssL;
+p68 = phqOphysH - phqOphysL;
+OUTPUT:
+standardized tech4 modindices;

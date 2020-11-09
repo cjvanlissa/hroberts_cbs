@@ -1,0 +1,93 @@
+DATA:
+FILE = "cfa_all_bdbb68b62ca530c326d9b4ddf16c1683.dat";
+ 
+VARIABLE:
+NAMES = coh1 coh2 coh3 coh4 coh5 pss1 pss2 pss3 pss4 pss5 pss6 pss7 pss8 pss9 pss10
+     phq1 phq2 phq3 phq4 phq5 phq6 phq7 phq8 phq9 alpha1 alpha2 alpha3 alpha4 alpha6
+     alpha7 alpha8 alpha9 alpha10 alpha11 park play sport forest river lake beach
+     traffic noise inside outside; 
+ MISSING=.;
+ CATEGORICAL = 
+coh1 coh2 coh3 coh4 coh5 pss1 pss2 pss3 pss4 pss5 pss6 pss7 pss8 pss9
+pss10 phq1 phq2 phq3 phq4 phq5 phq6 phq7 phq8 phq9 alpha1 alpha2
+alpha3 alpha4 alpha6 alpha7 alpha8 alpha9 alpha10 alpha11 park play
+sport forest river lake beach traffic noise inside outside;
+MODEL:
+coh BY coh1*;
+coh  BY  coh2 ;
+coh  BY  coh3 ;
+coh  BY  coh4 ;
+coh  BY  coh5 ;
+
+coh@1;
+
+
+pss BY pss1*;
+pss  BY  pss2 ;
+pss  BY  pss3 ;
+pss  BY  pss4 ;
+pss  BY  pss5 ;
+pss  BY  pss6 ;
+pss  BY  pss7 ;
+pss  BY  pss8 ;
+pss  BY  pss9 ;
+pss  BY  pss10 ;
+
+pss@1;
+
+
+phq BY phq1*;
+phq  BY  phq2 ;
+phq  BY  phq3 ;
+phq  BY  phq4 ;
+phq  BY  phq5 ;
+phq  BY  phq6 ;
+phq  BY  phq7 ;
+phq  BY  phq8 ;
+phq  BY  phq9 ;
+
+phq@1;
+
+
+plea BY alpha1*;
+plea  BY  alpha2 ;
+plea  BY  alpha3 ;
+plea  BY  alpha4 ;
+
+plea@1;
+
+
+safe BY alpha6*;
+safe  BY  alpha7 ;
+safe  BY  alpha8 ;
+safe  BY  alpha9 ;
+safe  BY  alpha10 ;
+safe  BY  alpha11 ;
+
+safe@1;
+
+
+green BY park*;
+green  BY  play ;
+green  BY  sport ;
+green  BY  forest ;
+
+green@1;
+
+
+blue BY river*;
+blue  BY  lake ;
+blue  BY  beach ;
+
+blue@1;
+
+
+noi BY traffic*;
+noi  BY  noise ;
+noi  BY  inside ;
+noi  BY  outside ;
+
+noi@1;
+
+OUTPUT:
+standardized tech4 modindices;

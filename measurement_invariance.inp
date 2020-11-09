@@ -1,0 +1,67 @@
+DATA:
+FILE = "sem_mod_1112_full_eb5f93a74e3b65e638f3690274e1fa5c.dat";
+ 
+VARIABLE:
+NAMES = Pcoh1 Pcoh2 Pcoh3 Ppss1 Ppss2 Ppss3 Ppss4 Ppss5 Pphq1 Pphq2 Pphq3 Pphq4
+     Pphq5 Pplea1 Pplea2 Psafe1 Psafe2 Psafe3 Pgreen1 Pgreen2 river lake beach
+     traffic inside outside phys clus dep frag age urb eduM eduH inc2 inc3 inc4 inc5
+     hous2c houssp houso marS marW marN Dworkhome; 
+USEVARIABLES = Pcoh1 Pcoh2 Pcoh3 Ppss1 Ppss2 Ppss3 Ppss4 Ppss5 Pphq1 Pphq2 Pphq3
+Pphq4 Pphq5 Pplea1 Pplea2 Psafe1 Psafe2 Psafe3 traffic Pgreen1 Pgreen2
+river lake beach traffic inside outside;
+ MISSING=.;
+ CLUSTER = clus;
+GROUPING = Dworkhome (1 = LO 2 = HI);
+
+ANALYSIS:
+TYPE = COMPLEX;
+Model = Configural metric scalar;
+
+MODEL:
+coh BY Pcoh1* (cohBpcoh1);
+coh BY Pcoh2 (cohBpcoh2);
+coh BY Pcoh3 (cohBpcoh3);
+[coh@0];
+coh@1;
+pss BY Ppss1* (pssBppss1);
+pss BY Ppss2 (pssBppss2);
+pss BY Ppss3 (pssBppss3);
+pss BY Ppss4 (pssBppss4);
+pss BY Ppss5 (pssBppss5);
+[pss@0];
+pss@1;
+phq BY Pphq1* (phqBpphq1);
+phq BY Pphq2 (phqBpphq2);
+phq BY Pphq3 (phqBpphq3);
+phq BY Pphq4 (phqBpphq4);
+phq BY Pphq5 (phqBpphq5);
+[phq@0];
+phq@1;
+PPHQ4 WITH PPHQ3 (phq4Wphq3);
+plea BY Pplea1* (pleaBpplea1);
+plea BY Pplea2 (pleaBpplea2);
+[plea@0];
+plea@1;
+safe BY Psafe1* (safeBpsafe1);
+safe BY Psafe2 (safeBpsafe2);
+safe BY Psafe3 (safeBpsafe3);
+safe BY traffic (safeBtraffic);
+[safe@0];
+safe@1;
+green BY Pgreen1* (greenBpgreen1);
+green BY Pgreen2 (greenBpgreen2);
+[green@0];
+green@1;
+blue BY river* (blueBriver);
+blue BY lake (blueBlake);
+blue BY beach (blueBbeach);
+[blue@0];
+blue@1;
+noi BY traffic* (noiBtraffic);
+noi BY inside (noiBinside);
+noi BY outside (noiBoutside);
+[noi@0];
+noi@1;
+
+OUTPUT:
+standardized tech4 modindices;

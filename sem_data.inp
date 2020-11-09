@@ -1,0 +1,855 @@
+Title: 
+  Stata2Mplus conversion for U:\Data\sem_data.dta
+  List of variables converted shown below
+
+  WE_ID : WE_ID
+  weighting : Final weight weighting
+  idpc4i : Postcode number
+  municipality : Municipality code [380] [2018]
+    3: Appingedam
+    5: Bedum
+    9: Ten Boer
+    10: Delfzijl
+    14: Groningen
+    15: Grootegast
+    17: Haren
+    22: Leek
+    24: Loppersum
+    25: Marum
+    34: Almere
+    37: Stadskanaal
+    47: Veendam
+    50: Zeewolde
+    53: Winsum
+    56: Zuidhorn
+    58: Dongeradeel
+    59: Achtkarspelen
+    60: Ameland
+    72: Harlingen
+    74: Heerenveen
+    79: Kollumerland en Nieuwkruisland
+    80: Leeuwarden
+    85: Ooststellingwerf
+    86: Opsterland
+    90: Smallingerland
+    98: Weststellingwerf
+    106: Assen
+    109: Coevorden
+    114: Emmen
+    118: Hoogeveen
+    119: Meppel
+    141: Almelo
+    147: Borne
+    148: Dalfsen
+    150: Deventer
+    153: Enschede
+    158: Haaksbergen
+    160: Hardenberg
+    163: Hellendoorn
+    164: Hengelo
+    166: Kampen
+    168: Losser
+    171: Noordoostpolder
+    173: Oldenzaal
+    175: Ommen
+    177: Raalte
+    180: Staphorst
+    183: Tubbergen
+    184: Urk
+    189: Wierden
+    193: Zwolle
+    197: Aalten
+    200: Apeldoorn
+    202: Arnhem
+    203: Barneveld
+    209: Beuningen
+    213: Brummen
+    214: Buren
+    216: Culemborg
+    221: Doesburg
+    222: Doetinchem
+    225: Druten
+    226: Duiven
+    228: Ede
+    230: Elburg
+    232: Epe
+    233: Ermelo
+    236: Geldermalsen
+    243: Harderwijk
+    244: Hattem
+    246: Heerde
+    252: Heumen
+    262: Lochem
+    263: Maasdriel
+    267: Nijkerk
+    268: Nijmegen
+    269: Oldebroek
+    273: Putten
+    274: Renkum
+    275: Rheden
+    277: Rozendaal
+    279: Scherpenzeel
+    281: Tiel
+    285: Voorst
+    289: Wageningen
+    293: Westervoort
+    294: Winterswijk
+    296: Wijchen
+    297: Zaltbommel
+    299: Zevenaar
+    301: Zutphen
+    302: Nunspeet
+    303: Dronten
+    304: Neerijnen
+    307: Amersfoort
+    308: Baarn
+    310: De Bilt
+    312: Bunnik
+    313: Bunschoten
+    317: Eemnes
+    321: Houten
+    327: Leusden
+    331: Lopik
+    335: Montfoort
+    339: Renswoude
+    340: Rhenen
+    342: Soest
+    344: Utrecht
+    345: Veenendaal
+    351: Woudenberg
+    352: Wijk bij Duurstede
+    353: IJsselstein
+    355: Zeist
+    356: Nieuwegein
+    358: Aalsmeer
+    361: Alkmaar
+    362: Amstelveen
+    363: Amsterdam
+    370: Beemster
+    373: Bergen (NH.)
+    375: Beverwijk
+    376: Blaricum
+    377: Bloemendaal
+    383: Castricum
+    384: Diemen
+    385: Edam-Volendam
+    388: Enkhuizen
+    392: Haarlem
+    393: Haarlemmerliede en Spaarnwoude
+    394: Haarlemmermeer
+    396: Heemskerk
+    397: Heemstede
+    398: Heerhugowaard
+    399: Heiloo
+    400: Den Helder
+    402: Hilversum
+    405: Hoorn
+    406: Huizen
+    415: Landsmeer
+    416: Langedijk
+    417: Laren
+    420: Medemblik
+    431: Oostzaan
+    432: Opmeer
+    437: Ouder-Amstel
+    439: Purmerend
+    441: Schagen
+    448: Texel
+    450: Uitgeest
+    451: Uithoorn
+    453: Velsen
+    457: Weesp
+    473: Zandvoort
+    479: Zaanstad
+    482: Alblasserdam
+    484: Alphen aan den Rijn
+    489: Barendrecht
+    498: Drechterland
+    501: Brielle
+    502: Capelle aan den IJssel
+    503: Delft
+    505: Dordrecht
+    512: Gorinchem
+    513: Gouda
+    518: s-Gravenhage
+    523: Hardinxveld-Giessendam
+    530: Hellevoetsluis
+    531: Hendrik-Ido-Ambacht
+    532: Stede Broec
+    534: Hillegom
+    537: Katwijk
+    542: Krimpen aan den IJssel
+    545: Leerdam
+    546: Leiden
+    547: Leiderdorp
+    553: Lisse
+    556: Maassluis
+    569: Nieuwkoop
+    575: Noordwijk
+    576: Noordwijkerhout
+    579: Oegstgeest
+    584: Oud-Beijerland
+    585: Binnenmaas
+    588: Korendijk
+    589: Oudewater
+    590: Papendrecht
+    597: Ridderkerk
+    599: Rotterdam
+    603: Rijswijk
+    606: Schiedam
+    610: Sliedrecht
+    611: Cromstrijen
+    613: Albrandswaard
+    614: Westvoorne
+    617: Strijen
+    620: Vianen
+    622: Vlaardingen
+    626: Voorschoten
+    627: Waddinxveen
+    629: Wassenaar
+    632: Woerden
+    637: Zoetermeer
+    638: Zoeterwoude
+    642: Zwijndrecht
+    654: Borsele
+    664: Goes
+    668: West Maas en Waal
+    677: Hulst
+    678: Kapelle
+    687: Middelburg
+    689: Giessenlanden
+    703: Reimerswaal
+    707: Zederik
+    715: Terneuzen
+    716: Tholen
+    717: Veere
+    718: Vlissingen
+    733: Lingewaal
+    736: De Ronde Venen
+    737: Tytsjerksteradiel
+    738: Aalburg
+    743: Asten
+    744: Baarle-Nassau
+    748: Bergen op Zoom
+    753: Best
+    755: Boekel
+    756: Boxmeer
+    757: Boxtel
+    758: Breda
+    762: Deurne
+    765: Pekela
+    766: Dongen
+    770: Eersel
+    772: Eindhoven
+    777: Etten-Leur
+    779: Geertruidenberg
+    784: Gilze en Rijen
+    785: Goirle
+    786: Grave
+    788: Haaren
+    794: Helmond
+    796: s-Hertogenbosch
+    797: Heusden
+    798: Hilvarenbeek
+    809: Loon op Zand
+    815: Mill en Sint Hubert
+    820: Nuenen, Gerwen en Nederwetten
+    823: Oirschot
+    824: Oisterwijk
+    826: Oosterhout
+    828: Oss
+    840: Rucphen
+    845: Sint-Michielsgestel
+    847: Someren
+    848: Son en Breugel
+    851: Steenbergen
+    852: Waterland
+    855: Tilburg
+    856: Uden
+    858: Valkenswaard
+    861: Veldhoven
+    865: Vught
+    866: Waalre
+    867: Waalwijk
+    870: Werkendam
+    873: Woensdrecht
+    874: Woudrichem
+    879: Zundert
+    880: Wormerland
+    881: Onderbanken
+    882: Landgraaf
+    888: Beek
+    889: Beesel
+    893: Bergen (L.)
+    899: Brunssum
+    907: Gennep
+    917: Heerlen
+    928: Kerkrade
+    935: Maastricht
+    938: Meerssen
+    944: Mook en Middelaar
+    946: Nederweert
+    951: Nuth
+    957: Roermond
+    962: Schinnen
+    965: Simpelveld
+    971: Stein
+    981: Vaals
+    983: Venlo
+    984: Venray
+    986: Voerendaal
+    988: Weert
+    994: Valkenburg aan de Geul
+    995: Lelystad
+    1507: Horst aan de Maas
+    1509: Oude IJsselstreek
+    1525: Teylingen
+    1581: Utrechtse Heuvelrug
+    1586: Oost Gelre
+    1598: Koggenland
+    1621: Lansingerland
+    1640: Leudal
+    1641: Maasgouw
+    1651: Eemsmond
+    1652: Gemert-Bakel
+    1655: Halderberge
+    1658: Heeze-Leende
+    1659: Laarbeek
+    1663: De Marne
+    1667: Reusel-De Mierden
+    1669: Roerdalen
+    1674: Roosendaal
+    1676: Schouwen-Duiveland
+    1680: Aa en Hunze
+    1681: Borger-Odoorn
+    1684: Cuijk
+    1685: Landerd
+    1690: De Wolden
+    1695: Noord-Beveland
+    1696: Wijdemeren
+    1699: Noordenveld
+    1700: Twenterand
+    1701: Westerveld
+    1702: Sint Anthonis
+    1705: Lingewaard
+    1706: Cranendonck
+    1708: Steenwijkerland
+    1709: Moerdijk
+    1711: Echt-Susteren
+    1714: Sluis
+    1719: Drimmelen
+    1721: Bernheze
+    1722: Ferwerderadiel
+    1723: Alphen-Chaam
+    1724: Bergeijk
+    1728: Bladel
+    1729: Gulpen-Wittem
+    1730: Tynaarlo
+    1731: Midden-Drenthe
+    1734: Overbetuwe
+    1735: Hof van Twente
+    1740: Neder-Betuwe
+    1742: Rijssen-Holten
+    1771: Geldrop-Mierlo
+    1773: Olst-Wijhe
+    1774: Dinkelland
+    1783: Westland
+    1842: Midden-Delfland
+    1859: Berkelland
+    1876: Bronckhorst
+    1883: Sittard-Geleen
+    1884: Kaag en Braassem
+    1891: Dantumadiel
+    1892: Zuidplas
+    1894: Peel aan de Maas
+    1895: Oldambt
+    1896: Zwartewaterland
+    1900: Súdwest Fryslân
+    1901: Bodegraven-Reeuwijk
+    1903: Eijsden-Margraten
+    1904: Stichtse Vecht
+    1911: Hollands Kroon
+    1916: Leidschendam-Voorburg
+    1924: Goeree-Overflakkee
+    1926: Pijnacker-Nootdorp
+    1927: Molenwaard
+    1930: Nissewaard
+    1931: Krimpenerwaard
+    1940: De Fryske Marren
+    1942: Gooise Meren
+    1945: Berg en Dal
+    1948: Meierijstad
+    1949: Waadhoeke
+    1950: Westerwolde
+    1952: Midden-Groningen
+    1955: Montferland
+  region : Region [4]
+    1: Noord-Nederland
+    2: Oost-Nederland
+    3: West-Nederland
+    4: Zuid-Nederland
+  province : Province [12]
+    20: Groningen
+    21: Friesland
+    22: Drenthe
+    23: Overijssel
+    24: Flevoland
+    25: Gelderland
+    26: Utrecht
+    27: Noord-Holland
+    28: Zuid-Holland
+    29: Zeeland
+    30: Noord-Brabant
+    31: Limburg
+  urbanity : Urbanity [5]
+    1: Very strongly urban
+    2: Strongly urban
+    3: Moderately urban
+    4: Less strongly urban
+    5: Not urban
+  corop : COROP region [40]
+    1: Oost-Groningen
+    2: Delfzijl en omgeving
+    3: Overig Groningen
+    4: Noord-Friesland
+    5: Zuidwest-Friesland
+    6: Zuidoost-Friesland
+    7: Noord-Drenthe
+    8: Zuidoost-Drenthe
+    9: Zuidwest-Drenthe
+    10: Noord-Overijssel
+    11: Zuidwest-Overijssel
+    12: Twente
+    13: Veluwe
+    14: Achterhoek
+    15: Arnhem/Nijmegen
+    16: Zuidwest-Gelderland
+    17: Utrecht
+    18: Kop van Noord-Holland
+    19: Alkmaar en omgeving
+    20: IJmond
+    21: Agglomeratie Haarlem
+    22: Zaanstreek
+    23: Groot-Amsterdam
+    24: Het Gooi en Vechtstreek
+    25: Agglomeratie Leiden en Bollenstreek
+    26: Agglomeratie  s-Gravenhage
+    27: Delft en Westland
+    28: Oost-Zuid-Holland
+    29: Groot-Rijnmond
+    30: Zuidoost-Zuid-Holland
+    31: Zeeuwsch-Vlaanderen
+    32: Overig Zeeland
+    33: West-Noord-Brabant
+    34: Midden-Noord-Brabant
+    35: Noordoost-Noord-Brabant
+    36: Zuidoost-Noord-Brabant
+    37: Noord-Limburg
+    38: Midden-Limburg
+    39: Zuid-Limburg
+    40: Flevoland
+  INPSECJ : Socioeconomic category on annual basis (2016 DEF)
+    11: Employee
+    12: Large shareholder
+    13: Self-employed entrepreneur
+    14: Other self-employed
+    15: Assisting family member
+    21: Receives unemployment benefit
+    22: Receives social welfare ("bijstand")
+    23: Receives other social security benefits
+    24: Receives sickness/disability benefits
+    25: Receives pension
+    26: Student with income
+    31: Student without income
+    32: Other without income
+    99: Belongs to household with no perceived income
+  age : Age on survey date
+  age_categories : Age categories
+    1: 18-24
+    2: 25-35
+    3: 36-45
+    4: 46-55
+    5: 56-65
+  sex : Sex
+    1: Man
+    2: Woman
+  education_level : Education level [3]
+    1: Low
+    2: Middle
+    3: High
+  origin : Origin in three categories
+    1: Dutch background
+    2: Western migration background
+    3: Non-Western migration background
+  income_quintile : Household income quintile
+    1: First quintile (lowest income)
+    2: Second quintile
+    3: Third quintile
+    4: Fourth quintile
+    5: Fifth quintile (highest income)
+    9: Unknown
+  household_type : Type of household
+    1: Single-person household
+    2: Unmarried couple without children
+    3: Married couple without children
+    4: Unmarried couple with children
+    5: Married couple with children
+    6: Single parent household
+    7: Other or unknown household
+  emp_status : Employment status
+    1: Working with paid work
+    2: Jobseeker
+    3: Volunteer
+    4: Incapacitated
+    5: School student or student
+    6: Househusband / housewife
+    7: Retired or with early retirement
+    8: None of these
+  marital_status : Marital status
+    1: Married/ Registered partnership
+    2: Separated
+    3: Widow
+    4: Never married
+  phq9_sum : PHQ9 Total score
+  phq9_level : Depression severity derivation: sum of 9 items
+    1: No depression
+    2: Mild depression
+    3: Moderate depression
+    4: Moderate to severe depression
+    5: Severe depression
+  pss_sum : Derivation of level of perceived stress: sum score 10 items
+  PA_normal : Number of physically active days (>30min)(average)
+    8: Refusal
+  PA_7days : Number of physically active days (>30min)(last 7 days)
+    8: Refusal
+  working_hours : Number of hours worked per week
+    1: Less than 10 hours
+    2: 10 to 20 hours
+    3: 20 to 30 hours
+    4: 30 to 40 hours
+    5: 40 hours or more
+    8: Refusal
+  work_location : Work location
+    1: At own home
+    2: At another fixed address
+    3: At different locations
+    8: Refusal
+  length_home : Length of time at current address
+    1: Shorter than 1 year
+    2: 1 to 2 years
+    3: 2 to 5 years
+    4: 5 to 10 years
+    5: 10 to 15 years
+    6: 15 years or longer
+    8: Refusal
+  noise : Tense or stressed due to noise
+    1: No, not at all
+    2: Yes, a little
+    3: Yes, reasonably so
+    4: Yes, very much
+    8: Refusal
+  traffic : Traffic in neighborhood in last 6 months
+    1: Very busy / congestion
+    2: Fairly busy
+    3: Fairly quiet
+    4: Very quiet
+  traveltime : Travel time between home and work/ study
+    1: Less than 15 minutes
+    2: 15 to 30 minutes
+    3: 30 minutes to 1 hour
+    4: 1 hour to 1.5 hours
+    5: 1.5 hours or longer
+    8: Refusal
+  dist_green : Green space within 300m
+    1: Yes
+  dist_blue : Blue space within 300m
+    1: Yes
+  social_cohesion_total : Social cohesion total score
+  alpha1 : Pleasant environment for walking/ cycling
+    1: Totally agree
+    2: Agree
+    3: Disagree
+    4: Totally disagree
+  alpha2 : Graffiti/ waste in street
+    1: Totally agree
+    2: Agree
+    3: Disagree
+    4: Totally disagree
+  alpha3 : Trees along streets
+    1: Totally agree
+    2: Agree
+    3: Disagree
+    4: Totally disagree
+  alpha4 : Poorly maintained, empty or ugly buildings
+    1: Totally agree
+    2: Agree
+    3: Disagree
+    4: Totally disagree
+  alpha5 : Well-maintained playgrounds, playing fields and parks
+    1: Totally agree
+    2: Agree
+    3: Disagree
+    4: Totally disagree
+  alpha6 : Unsafe to leave a bicycle locked
+    1: Totally agree
+    2: Agree
+    3: Disagree
+    4: Totally disagree
+  alpha7 : Too few safe crossings on busy roads
+    1: Totally agree
+    2: Agree
+    3: Disagree
+    4: Totally disagree
+  alpha8 : Unsafe walking due to traffic
+    1: Totally agree
+    2: Agree
+    3: Disagree
+    4: Totally disagree
+  alpha9 : Unsafe cycling due to traffic
+    1: Totally agree
+    2: Agree
+    3: Disagree
+    4: Totally disagree
+  alpha10 : Unsafe due to crime during day
+    1: Totally agree
+    2: Agree
+    3: Disagree
+    4: Totally disagree
+  alpha11 : Unsafe due to crime during evening
+    1: Totally agree
+    2: Agree
+    3: Disagree
+    4: Totally disagree
+  social_cohesion1 : People around here are willing to help their neighbours
+    1: Totally disagree
+    2: Disagree
+    3: Neither agree nor disagree
+    4: Agree
+    5: Totally agree
+  social_cohesion2 : I live in a cozy neighborhood
+    1: Totally disagree
+    2: Disagree
+    3: Neither agree nor disagree
+    4: Agree
+    5: Totally agree
+  social_cohesion3 : People in this neighborhood can be trusted.
+    1: Totally disagree
+    2: Disagree
+    3: Neither agree nor disagree
+    4: Agree
+    5: Totally agree
+  social_cohesion4 : People in this neighborhood generally can not get along so well
+    1: Totally disagree
+    2: Disagree
+    3: Neither agree nor disagree
+    4: Agree
+    5: Totally agree
+  social_cohesion4_rev : q4 reverse
+  social_cohesion5 : People in this neighborhood do not share the same values
+    1: Totally disagree
+    2: Disagree
+    3: Neither agree nor disagree
+    4: Agree
+    5: Totally agree
+  social_cohesion5_rev : q5 reverse
+  noise_inside : Noise in the home in past 6 months
+    1: Not noticeable at all
+    2: A litte noticeable
+    3: Reasonably noticeable
+    4: Very noticeable
+    8: Refusal
+  noise_outside : Noise outside the home in past 6 months
+    1: Not noticeable at all
+    2: A little noticeable
+    3: Reasonably noticeable
+    4: Very noticeable
+  dist_park : Distance to nearest park
+    1: Less than 300m
+    2: 300m to 1km
+    3: 1 to 5km
+    4: 5km or more
+    8: Refusal
+  dist_play : Distance to nearest play area
+    1: Less than 300m
+    2: 300m to 1km
+    3: 1 to 5km
+    4: 5km or more
+    8: Refusal
+  dist_sport : Distance to nearest play or sports field
+    1: Less than 300m
+    2: 300m to 1km
+    3: 1 to 5km
+    4: 5 km or more
+    8: Refusal
+  dist_forest : Distance to nearest forest
+    1: Less than 300m
+    2: 300m to 1km
+    3: 1 to 5km
+    4: 5 km or more
+    8: Refusal
+  dist_river : Distance to nearest river, stream or canal
+    1: Less than 300m
+    2: 300m to 1km
+    3: 1 tot 5 km
+    4: 5 km of meer
+    8: Refusal
+  dist_lake : Distance to nearest lake or pond
+    1: Less than 300m
+    2: 300 meter tot 1 km
+    3: 1 tot 5 km
+    4: 5 km of meer
+    8: Refusal
+  dist_beach : Distance to nearest beach
+    1: Less than 300m
+    2: 300m to 1km
+    3: 1 to 5 km
+    4: 5 km or more
+    8: Refusal
+  pss1 : Were you upset because of something that happened unexpectedly? (last 4 weeks)
+    0: Never
+    1: Almost never
+    2: Sometimes
+    3: Fairly often
+    4: Very often
+  pss2 : Did you feel that you were not able to control the important things in your life
+    0: Never
+    1: Almost never
+    2: Sometimes
+    3: Fairly often
+    4: Very often
+  pss3 : Did you feel nervous and "stressed"? (last 4 weeks)
+    0: Never
+    1: Almost never
+    2: Sometimes
+    3: Fairly often
+    4: Very often
+  pss4 : Did you feel confident about your ability to deal with personal problems? (last 
+    0: Never
+    1: Almost never
+    2: Sometimes
+    3: Fairly often
+    4: Very often
+  pss5 : Did you feel that things were going as you wanted? (last 4 weeks)
+    0: Never
+    1: Almost never
+    2: Sometimes
+    3: Fairly often
+    4: Very often
+  pss6 : Did you feel that you could not deal with (or could cope with) all the things yo
+    0: Never
+    1: Almost never
+    2: Sometimes
+    3: Fairly often
+    4: Very often
+  pss7 : Could you keep your irritations in your life under control? (last 4 weeks)
+    0: Never
+    1: Almost never
+    2: Sometimes
+    3: Fairly often
+    4: Very often
+  pss8 : Did you feel that you had a grip on things? (last 4 weeks)
+    0: Never
+    1: Almost never
+    2: Sometimes
+    3: Fairly often
+    4: Very often
+  pss9 : Were you angry because things were out of your control? (last 4 weeks)
+    0: Never
+    1: Almost never
+    2: Sometimes
+    3: Fairly often
+    4: Very often
+  pss10 : Did you feel that difficulties accumulated so high that you could not overcome t
+    0: Never
+    1: Almost never
+    2: Sometimes
+    3: Fairly often
+    4: Very often
+  phq9_1 : Did you have little interest or pleasure in activities? (last 2 weeks)
+    0: Not at all
+    1: Several days
+    2: More than half the days
+    3: Nearly every day
+  phq9_2 : Did you feel dejected, depressed or hopeless? (last 2 weeks)
+    0: Not at all
+    1: Several days
+    2: More than half the days
+    3: Nearly every day
+  phq9_3 : Was it difficult for you to fall asleep, sleep through or sleep too much? (last 
+    0: Not at all
+    1: Several days
+    2: More than half the days
+    3: Nearly every day
+  phq9_4 : You felt tired or had a lack of energy? (last 2 weeks)
+    0: Not at all
+    1: Several days
+    2: More than half the days
+    3: Nearly every day
+  phq9_5 : You had little appetite or ate too much? (last 2 weeks)
+    0: Not at all
+    1: Several days
+    2: More than half the days
+    3: Nearly every day
+  phq9_6 : You had a bad feeling about yourself, you felt like a failure, or thought you we
+    0: Not at all
+    1: Several days
+    2: More than half the days
+    3: Nearly every day
+  phq9_7 : Did you have trouble concentrating, for example to read the newspaper or watch T
+    0: Not at all
+    1: Several days
+    2: More than half the days
+    3: Nearly every day
+  phq9_8 : Did you move so slowly or slowly said that others might have noticed? / Or the o
+    0: Not at all
+    1: Several days
+    2: More than half the days
+    3: Nearly every day
+  phq9_9 : You thought you could be better dead or thinking about hurting yourself in a cer
+    0: Not at all
+    1: Several days
+    2: More than half the days
+    3: Nearly every day
+  alpha1rev : RECODE of alpha1 (Pleasant environment for walking/ cycling)
+  alpha3rev : RECODE of alpha3 (Trees along streets)
+  pleasantness : Pleasantness score
+  safety : Safety score
+  dist_blue300 : Blue within 300m
+    0: No
+    1: Yes
+  dist_blue1000 : Blue within 1km
+    0: No
+    1: Yes
+  dist_green300 : Green within 300m
+    0: No
+    1: Yes
+  dist_green1000 : Green within 1km
+    0: No
+    1: Yes
+  frag16 : Social fragmentation
+  depri16 : Deprivation
+  area_ha : Area (hectares)
+  adr_dec18 : Number of addresses
+  address_density : Address density
+  trafficrev : RECODE of traffic (Traffic in neighborhood in last 6 months)
+ 
+Data:
+  File is U:\Data\sem_data.dat ;
+Variable:
+  Names are 
+     WE_ID weighting idpc4i municipality region province urbanity corop
+     INPSECJ age age_categories sex education_level origin income_quintile
+     household_type emp_status marital_status phq9_sum phq9_level pss_sum
+     PA_normal PA_7days working_hours work_location length_home noise traffic
+     traveltime dist_green dist_blue social_cohesion_total alpha1 alpha2
+     alpha3 alpha4 alpha5 alpha6 alpha7 alpha8 alpha9 alpha10 alpha11 social_cohesion1
+     social_cohesion2 social_cohesion3 social_cohesion4 social_cohesion4_rev
+     social_cohesion5 social_cohesion5_rev noise_inside noise_outside dist_park
+     dist_play dist_sport dist_forest dist_river dist_lake dist_beach pss1
+     pss2 pss3 pss4 pss5 pss6 pss7 pss8 pss9 pss10 phq9_1 phq9_2 phq9_3
+     phq9_4 phq9_5 phq9_6 phq9_7 phq9_8 phq9_9 alpha1rev alpha3rev pleasantness
+     safety dist_blue300 dist_blue1000 dist_green300 dist_green1000 frag16
+     depri16 area_ha adr_dec18 address_density trafficrev;
+  Missing are all (-9999) ; 
+Analysis: 
+  Type = basic ;

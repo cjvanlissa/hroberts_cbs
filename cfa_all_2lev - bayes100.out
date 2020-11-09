@@ -1,0 +1,716 @@
+Mplus VERSION 8
+MUTHEN & MUTHEN
+07/31/2019   9:38 AM
+
+INPUT INSTRUCTIONS
+
+  DATA:
+  FILE = "cfa_all_2lev_1e56bc11b1435036401fac42690cb0b5.dat";
+
+  VARIABLE:
+  NAMES = coh1 coh2 coh3 coh4 coh5 pss1 pss2 pss3 pss4 pss5 pss6 pss7 pss8 pss9 pss10
+       phq1 phq2 phq3 phq4 phq5 phq6 phq7 phq8 phq9 alpha1 alpha2 alpha3 alpha4 alpha6
+       alpha7 alpha8 alpha9 alpha10 alpha11 park play sport forest river lake beach
+       traffic noise inside outside clus;
+   MISSING=.;
+
+   WITHIN =
+  coh1 coh2 coh3 coh4 coh5 pss1 pss2 pss3 pss4 pss5 pss6 pss7 pss8 pss9
+  pss10 phq1 phq2 phq3 phq4 phq5 phq6 phq7 phq8 phq9 alpha1 alpha2
+  alpha3 alpha4 alpha6 alpha7 alpha8 alpha9 alpha10 alpha11 park play
+  sport forest river lake beach traffic noise inside outside;
+  CLUSTER = clus;
+  ANALYSIS:
+  TYPE = TWOLEVEL;
+  ESTIMATOR = BAYES;
+  FBITERATIONS = 100;
+
+  MODEL:
+  %WITHIN%
+  cohw BY coh1;
+  cohw BY  coh2 ;
+  cohw BY  coh3 ;
+  cohw BY  coh4 ;
+  cohw BY  coh5 ;
+
+
+
+
+  pssw BY pss1;
+  pssw BY  pss2 ;
+  pssw BY  pss3 ;
+  pssw BY  pss4 ;
+  pssw BY  pss5 ;
+  pssw BY  pss6 ;
+  pssw BY  pss7 ;
+  pssw BY  pss8 ;
+  pssw BY  pss9 ;
+  pssw BY  pss10 ;
+
+
+
+
+  phqw BY phq1;
+  phqw BY  phq2 ;
+  phqw BY  phq3 ;
+  phqw BY  phq4 ;
+  phqw BY  phq5 ;
+  phqw BY  phq6 ;
+  phqw BY  phq7 ;
+  phqw BY  phq8 ;
+  phqw BY  phq9 ;
+
+
+
+
+  pleaw BY alpha1;
+  pleaw BY  alpha2 ;
+  pleaw BY  alpha3 ;
+  pleaw BY  alpha4 ;
+
+
+
+
+  safew BY alpha6;
+  safew BY  alpha7 ;
+  safew BY  alpha8 ;
+  safew BY  alpha9 ;
+  safew BY  alpha10 ;
+  safew BY  alpha11 ;
+
+
+
+
+  greenw BY park;
+  greenw BY  play ;
+  greenw BY  sport ;
+  greenw BY  forest ;
+
+
+
+
+  bluew BY river;
+  bluew BY  lake ;
+  bluew BY  beach ;
+
+
+
+
+  noiw BY traffic;
+  noiw BY  noise ;
+  noiw BY  inside ;
+  noiw BY  outside ;
+
+
+
+  	%BETWEEN%
+
+  cohb BY coh1;
+  cohb BY  coh2 ;
+  cohb BY  coh3 ;
+  cohb BY  coh4 ;
+  cohb BY  coh5 ;
+
+
+
+
+  pssb BY pss1;
+  pssb BY  pss2 ;
+  pssb BY  pss3 ;
+  pssb BY  pss4 ;
+  pssb BY  pss5 ;
+  pssb BY  pss6 ;
+  pssb BY  pss7 ;
+  pssb BY  pss8 ;
+  pssb BY  pss9 ;
+  pssb BY  pss10 ;
+
+
+
+
+  phqb BY phq1;
+  phqb BY  phq2 ;
+  phqb BY  phq3 ;
+  phqb BY  phq4 ;
+  phqb BY  phq5 ;
+  phqb BY  phq6 ;
+  phqb BY  phq7 ;
+  phqb BY  phq8 ;
+  phqb BY  phq9 ;
+
+
+
+
+  pleab BY alpha1;
+  pleab BY  alpha2 ;
+  pleab BY  alpha3 ;
+  pleab BY  alpha4 ;
+
+
+
+
+  safeb BY alpha6;
+  safeb BY  alpha7 ;
+  safeb BY  alpha8 ;
+  safeb BY  alpha9 ;
+  safeb BY  alpha10 ;
+  safeb BY  alpha11 ;
+
+
+
+
+  greenb BY park;
+  greenb BY  play ;
+  greenb BY  sport ;
+  greenb BY  forest ;
+
+
+
+
+  blueb BY river;
+  blueb BY  lake ;
+  blueb BY  beach ;
+
+
+
+
+  noib BY traffic;
+  noib BY  noise ;
+  noib BY  inside ;
+  noib BY  outside ;
+
+  coh1@0;
+  coh2@0;
+  coh3@0;
+  coh4@0;
+  coh5@0;
+  pss1@0;
+  pss2@0;
+  pss3@0;
+  pss4@0;
+  pss5@0;
+  pss6@0;
+  pss7@0;
+  pss8@0;
+  pss9@0;
+  pss10@0;
+  phq1@0;
+  phq2@0;
+  phq3@0;
+  phq4@0;
+  phq5@0;
+  phq6@0;
+  phq7@0;
+  phq8@0;
+  phq9@0;
+  alpha1@0;
+  alpha2@0;
+  alpha3@0;
+  alpha4@0;
+  alpha6@0;
+  alpha7@0;
+  alpha8@0;
+  alpha9@0;
+  alpha10@0;
+  alpha11@0;
+  park@0;
+  play@0;
+  sport@0;
+  forest@0;
+  river@0;
+  lake@0;
+  beach@0;
+  traffic@0;
+  noise@0;
+  inside@0;
+  outside@0;
+
+  OUTPUT:
+  standardized tech4 modindices;
+
+*** WARNING
+  One or more individual-level variables have no variation within a
+  cluster for the following clusters.
+
+     Variable   Cluster IDs with no within-cluster variation
+
+      COH1        2262 6436 5398 3633 6833 5465 5472 7136 3832 2172 9991 3826 2935 1613 2042 7327
+                  7421 3273 2181 5583
+      COH2        2262 5462 5465 5472 1606 2172 3601 6438 2957 5662 7421 7532 4715 3124
+      COH3        2465 6247 5398 6833 5462 5465 5472 7136 7535 3832 1606 4744 2172 6438 8303 2042
+                  5662 4321 7327 3273 2718 1446 4715 5583 3521 2587 5463 6031
+      COH4        6235 6247 5398 5462 5465 6987 7136 7535 4416 3832 1606 6438 3826 8172 2957 8931
+                  7211 7327 7532 4535 9671 1687 4281 4931
+      COH5        1976 2465 6235 7732 6247 6436 5398 6833 5462 7136 7535 4416 9991 7901 8172 2042
+                  7532 2355 9603 2591 5975 1508
+      PSS1        2592 6247 6436 5462 6987 5507 7535 4416 4744 9717 2935 2925 3021
+      PSS2        6247 5472 7535 4416 9717 1613 8715 4321 7211 1446 5975 1012 1071
+      PSS3        6247 5398 5462 7045 5472 7136 3743 4416 3832 4744 2982 1613 8715 7534 5975 2964
+                  1012
+      PSS4        3615 3633 7045 7136 5507 5737 4416 3832 1606 4744 2982 8303 2042 8931 7211 9603
+                  5091 2591 2925 2181
+      PSS5        6436 3633 8301 5507 3743 3832 1606 9717 3601 6438 7901 1613 4321 8931 7211 5913
+                  1679 9603 5091 7534 2964 3039 6881
+      PSS6        6247 6436 5398 6987 7045 5472 5507 3743 4416 9673 9717 1613 8715 7495 5913 2925
+                  2551
+      PSS7        6247 6436 6833 7136 7535 5737 3743 4416 3832 1606 4744 9717 2172 6438 3826 2042
+                  7327 7532 5451 3021
+      PSS8        6247 6436 5398 3633 6833 7045 5472 5507 7535 3743 4416 1606 4744 7901 2042 7211
+                  5913 1679 9603 1687 2925 7534 3039 5583 1071 2551
+      PSS9        7876 3633 6833 5507 3832 4744 9717 6438 7532 5913 2925 1508 1071
+      PSS10       3615 8231 3633 8301 5462 5465 6987 4416 4744 2982 1623 1446 5975 2643 2551
+      PHQ1        6436 8301 6833 5465 6987 7045 7136 5507 4416 2172 3601 2935 2982 1613 7327 4567
+                  5091 2925 1446 3039
+      PHQ2        7876 6247 5398 3633 6833 5465 6987 7136 5507 7535 3743 3832 1606 4744 9673 9717
+                  2172 3601 6438 2982 2042 4321 2925 1446 7534 1508 3607
+      PHQ3        7876 6247 6436 5398 3633 5472 5507 3743 4416 9717 2172 3601 7327 7495 7532 5975
+                  4281 5583
+      PHQ4        7876 6436 3633 5462 6987 7045 5472 7136 3743 4416 4744 2172 6438 8303 8311 7327
+                  2163 3451 4931 5464 6931
+      PHQ5        4206 7876 6436 5398 3633 5465 7045 7136 5507 4416 9717 2172 7901 8311 7495 2355
+                  9603 5091 1446 5975 5583 5464 2496 5501
+      PHQ6        6247 5398 3633 6833 5465 7045 5472 7136 5507 3832 4744 9717 2172 3601 6438 3826
+                  2982 8303 2042 7327 5913 5091 2163 1446 7534 1508 2911 3247 3521 7521 2496 5912
+                  2224
+      PHQ7        5398 3633 5465 6987 5472 7136 5507 4416 3832 4744 2172 3601 6438 4321 7211 5913
+                  2355 2718 1446 2181 3039 3043 3247 5527
+      PHQ8        6247 5398 3633 8301 6833 5465 6987 7045 5472 5507 7535 4416 3832 1606 4744 9717
+                  2172 3601 2935 2982 2042 4321 7211 3273 7495 5913 2355 1687 5091 2163 2718 2925
+                  7534 5971 5975 3833 5451 3039 8061 1861 4281 5583 6903 2911 1060 3247 5993 1713
+                  5527 3451 9561 6413 4931 6663 2587 2496 6881 5501 7776 6515 5912 1057 4194 3343
+                  7741 7772 3607 3817 1506 5961
+      PHQ9        3193 6235 7876 6247 6436 5398 3633 8301 6833 5462 5465 6987 7045 5472 7136 5507
+                  7535 5737 3743 4416 3832 1606 4744 9673 9717 2172 3601 6438 3826 2935 2982 8303
+                  8311 2042 8715 4321 7211 7327 7421 7495 5913 1679 2355 4535 1687 5091 2163 2718
+                  1446 7534 5971 5975 4715 2181 2964 1508 3833 5451 3039 8061 3043 1861 4281 5552
+                  5583 2643 6903 8913 2911 1060 3247 2105 5527 3451 8242 9404 9561 3521 6441 1781
+                  1071 5625 2587 1053 5464 7521 2496 3206 5501 7711 2551 4847 8012 2583 6931 6515
+                  9104 5912 1213 4001 1057 1072 4194 1814 5508 2224 2612 7741 5051 3607 7481 3317
+                  7325 3112 3314 4814 3817 1185 2993 1506 5961 3068 3992 1056 3994
+      ALPHA1      6247 6436 5398 3633 5465 6987 7045 5472 7136 5507 7535 5737 3832 4744 9673 2935
+                  2957 1059 2042 8931 7327 1025 5091 2101 2718 5971 5975 4715 5451 1861 5583 3451
+                  2587 6881 1213
+      ALPHA2      6247 3633 5465 5472 7136 5507 5737 3743 3832 1606 9673 9717 2172 9991 3601 6438
+                  2935 2982 5662 8715 4321 4535 5091 5975 5451 4281 5583 3247
+      ALPHA3      6247 6436 5398 6833 5465 7045 5472 5507 5737 4416 3832 9673 2172 9991 2935 1613
+                  7495 4535 9603 9671 5971 5975 2181 3833 5451 5583 5622 7776 1213
+      ALPHA4      5398 8301 6833 5465 7045 7136 7535 9244 3832 1606 2172 3601 6438 2982 5662 8715
+                  7532 1687 5091 2718 1446 5975 4715 3833 5451 1861 5583 5993 5527 9404 4007 6663
+                  6515 1213 7772
+      ALPHA6      7693 6247 6436 3633 7136 7535 5737 3743 4416 3832 1606 8715 4321 5091
+      ALPHA7      1793 8765 6247 6436 6833 7136 7535 3743 9244 3832 1606 2172 3601 7901 3826 8172
+                  1059 8715 9603 9671 1025 2591 2718 5583 2105 1713 3451 4007 3332 7621
+      ALPHA8      1976 5398 8301 5465 7045 7136 5507 7535 5737 3743 3832 1606 4744 3601 8172 8303
+                  1613 5662 9603 2718 2911 3247 2105 3521 2315
+      ALPHA9      6444 7876 5398 5465 7045 7136 5507 7535 5737 9244 3832 1606 4744 9673 3601 8172
+                  1613 7211 7421 2911 3247 3521 2315
+      ALPHA10     6247 6436 5398 3633 8301 5462 5465 5472 7136 5507 5737 4416 3832 1606 4744 9717
+                  2172 7901 3826 2935 8303 2042 5662 8715 4321 7327 1623 2355 1687 1023 5091 2101
+                  2163 2181 5451 8061 4281 5622 2643 2911 2105 8242 9404 4931 1062 4847 6515
+      ALPHA11     6436 3633 6833 5465 7045 5472 7136 5737 4416 3832 1606 9717 2172 7901 2935 1059
+                  2982 2042 5662 8715 2355 1687 5091 5583 2643 2105 4931 5912
+      PARK        2262 6436 6833 5462 7136 5507 7535 3743 4416 1606 9991 7901 1059 8931 7327 3273
+                  1446 3833 4281 5552 1071
+      PLAY        2262 5398 6833 5462 5507 7535 3743 4416 3832 1606 9673 9991 7901 3826 2042 5662
+                  7107 8931 7327 7532 5913 4535 1687 2101 2163 1446 2181 1508 3039 4281 4931 2273
+                  3335 7325 3112 3992
+      SPORT       2262 6436 5398 5462 6987 7136 7535 4416 9673 2172 8931 3273 7495 9671 1508 3043
+                  1861 5993 2273
+      FOREST      6436 5398 3633 6987 5472 4416 9244 4744 9673 2172 3601 6438 7901 2042 8715 8931
+                  7211 3273 2101 2964 1012 3043 5622 1060 9404 5501 2211
+      RIVER       6247 6436 6833 6987 5472 3743 4416 1606 4321 7495 1679 1687 3833 2643
+      LAKE        5465 6987 7535 3743 9717 3601 8172
+      BEACH       6247 6436 5398 8301 6833 5462 7045 5472 7136 5507 7535 5737 3743 9244 3832 4744
+                  9673 9717 3601 3826 2957 8311 5662 7107 8931 7211 7327 7421 3273 7495 1623 5913
+                  1679 2355 4535 9671 4567 1687 5091 2101 2526 2718 7534 5971 5975 4715 3833 1012
+                  3893 3025 3039 8061 3043 5552 5622 2643 6903 2911 1060 5993 7206 1713 5527 9404
+                  9561 3521 4931 1781 1071 5625 2587 1053 7316 3132 3206 6881 5501 6951 3328 7776
+                  4847 7621 8171 6931 6031 5912 3124 1852 2492 1072 4194 3343 7772 2211 5051 2315
+                  7325 3112 3817 1185 1056 2134
+      TRAFFIC     7547 6247 2262 6833 6987 7045 5507 5737 4416 3832 9673 2982 1613 5662 8931 7532
+                  1687 4281 2911 2105
+      NOISE       1028 1946 2965 3615 3849 4002 5133 5445 5752 5987 6214 7106 7693 7732 7754 7826
+                  7871 7884 8064 8166 8231 8713 9064 9114 9131 9141 9241 9289 9992 6247 2262 3633
+                  5465 6987 7045 5472 7136 5507 5737 4416 1606 2172 7901 8172 2982 8303 2042 8715
+                  7327 7495 1623 5913 1023 5091 2526 2591 5971 4715 2181 1508 8061 4281 1060 3247
+                  1713 5527 3451 9561 1781 7621 6931 5912 4702
+      INSIDE      6247 2262 3633 8301 5462 5465 6987 7045 5472 7136 5507 5737 4416 2172 8303 1613
+                  8715 4321 7495 5913 9603 1687 1023 5091 8061 1861 4281 2643 2628
+      OUTSIDE     6247 3633 6833 5465 6987 7045 5472 7136 5507 5737 4416 1606 4744 9673 2172 3601
+                  7901 8172 8303 8715 7495 5913 1679 3833 4281 5527 3451 6663 5625 5912
+
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  COH1
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  COH2
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  COH3
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  COH4
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  COH5
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PSS1
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PSS2
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PSS3
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PSS4
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PSS5
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PSS6
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PSS7
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PSS8
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PSS9
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PSS10
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PHQ1
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PHQ2
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PHQ3
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PHQ4
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PHQ5
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PHQ6
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PHQ7
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PHQ8
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PHQ9
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  ALPHA1
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  ALPHA2
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  ALPHA3
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  ALPHA4
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  ALPHA6
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  ALPHA7
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  ALPHA8
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  ALPHA9
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  ALPHA10
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  ALPHA11
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PARK
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PLAY
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  SPORT
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  FOREST
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  RIVER
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  LAKE
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  BEACH
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  TRAFFIC
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  NOISE
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  INSIDE
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  OUTSIDE
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  COH1
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  COH2
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  COH3
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  COH4
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  COH5
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PSS1
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PSS2
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PSS3
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PSS4
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PSS5
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PSS6
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PSS7
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PSS8
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PSS9
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PSS10
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PHQ1
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PHQ2
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PHQ3
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PHQ4
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PHQ5
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PHQ6
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PHQ7
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PHQ8
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PHQ9
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  ALPHA1
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  ALPHA2
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  ALPHA3
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  ALPHA4
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  ALPHA6
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  ALPHA7
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  ALPHA8
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  ALPHA9
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  ALPHA10
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  ALPHA11
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PARK
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  PLAY
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  SPORT
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  FOREST
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  RIVER
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  LAKE
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  BEACH
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  TRAFFIC
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  NOISE
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  INSIDE
+*** ERROR in MODEL command
+  Within-level variables cannot be used on the between level.
+  Within-level variable used:  OUTSIDE
+*** ERROR
+  The following MODEL statements are ignored:
+  * Statements in the BETWEEN level:
+    COH1
+    COH2
+    COH3
+    COH4
+    COH5
+    PSS1
+    PSS2
+    PSS3
+    PSS4
+    PSS5
+    PSS6
+    PSS7
+    PSS8
+    PSS9
+    PSS10
+    PHQ1
+    PHQ2
+    PHQ3
+    PHQ4
+    PHQ5
+    PHQ6
+    PHQ7
+    PHQ8
+    PHQ9
+    ALPHA1
+    ALPHA2
+    ALPHA3
+    ALPHA4
+    ALPHA6
+    ALPHA7
+    ALPHA8
+    ALPHA9
+    ALPHA10
+    ALPHA11
+    PARK
+    PLAY
+    SPORT
+    FOREST
+    RIVER
+    LAKE
+    BEACH
+    TRAFFIC
+    NOISE
+    INSIDE
+    OUTSIDE
+    COHB BY COH1
+    COHB BY COH2
+    COHB BY COH3
+    COHB BY COH4
+    COHB BY COH5
+    PSSB BY PSS1
+    PSSB BY PSS2
+    PSSB BY PSS3
+    PSSB BY PSS4
+    PSSB BY PSS5
+    PSSB BY PSS6
+    PSSB BY PSS7
+    PSSB BY PSS8
+    PSSB BY PSS9
+    PSSB BY PSS10
+    PHQB BY PHQ1
+    PHQB BY PHQ2
+    PHQB BY PHQ3
+    PHQB BY PHQ4
+    PHQB BY PHQ5
+    PHQB BY PHQ6
+    PHQB BY PHQ7
+    PHQB BY PHQ8
+    PHQB BY PHQ9
+    PLEAB BY ALPHA1
+    PLEAB BY ALPHA2
+    PLEAB BY ALPHA3
+    PLEAB BY ALPHA4
+    SAFEB BY ALPHA6
+    SAFEB BY ALPHA7
+    SAFEB BY ALPHA8
+    SAFEB BY ALPHA9
+    SAFEB BY ALPHA10
+    SAFEB BY ALPHA11
+    GREENB BY PARK
+    GREENB BY PLAY
+    GREENB BY SPORT
+    GREENB BY FOREST
+    BLUEB BY RIVER
+    BLUEB BY LAKE
+    BLUEB BY BEACH
+    NOIB BY TRAFFIC
+    NOIB BY NOISE
+    NOIB BY INSIDE
+    NOIB BY OUTSIDE
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2017 Muthen & Muthen

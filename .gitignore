@@ -1,0 +1,9 @@
+*.pdf
+*.dat
+*.docx
+*.xlsx
+*.xls
+*.dta
+*.dgm
+.Rproj.user
+*.RData

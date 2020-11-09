@@ -1,0 +1,808 @@
+Mplus VERSION 8
+MUTHEN & MUTHEN
+07/30/2019   3:01 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Your title goes here
+  DATA: FILE = "try.dat";
+  VARIABLE:
+  NAMES = we_id weighting clus municipality region province urbanity corop inpsecj
+       age age_categories sex education_level origin income_quintile household_type
+       emp_status marital_status phqsum phqlevel pss_sum pa_normal pa_7days
+       working_hours work_location length_home noise traffic traveltime green blue
+       coh_total alpha1 alpha2 alpha3 alpha4 alpha5 alpha6 alpha7 alpha8 alpha9
+       alpha10 alpha11 coh1 coh2 coh3 coh4 coh4_rev coh5 coh5_rev inside outside park
+       play sport forest river lake beach pss1 pss2 pss3 pss4 pss5 pss6 pss7 pss8 pss9
+       pss10 phq1 phq2 phq3 phq4 phq5 phq6 phq7 phq8 phq9 alpha1rev alpha3rev
+       pleasantness safety blue300 blue1000 green300 green1000 frag16 depri16 area_ha
+       adr_dec18 address_density trafficrev;
+  MISSING=.;
+  USEVARIABLES = phq1 phq2 phq3 phq4 phq5 phq6 phq7 phq8 phq9 clus;
+  CATEGORICAL = phq1 phq2 phq3 phq4 phq5 phq6 phq7 phq8 phq9 ;
+  CLUSTER = clus;
+
+  ANALYSIS:	TYPE = TWOLEVEL;
+
+  MODEL:
+  %WITHIN%
+  phq BY phq1-phq9;	
+    	!fw ON x1 x2;
+  %BETWEEN%
+  fb BY phq1-phq9;	
+
+  OUTPUT:	TECH1 TECH8;
+
+
+
+*** WARNING
+  One or more individual-level variables have no variation within a
+  cluster for the following clusters.
+
+     Variable   Cluster IDs with no within-cluster variation
+
+      PHQ2        1851 2343
+      PHQ7        1851 1132
+      PHQ8        1689 1851 2343 5961 2011 1132 2135
+      PHQ9        1851 2343 3068 5961 2011 8081 1132 3992 5706 2135 1056 3994
+
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  3
+   2 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Your title goes here
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         554
+
+Number of dependent variables                                    9
+Number of independent variables                                  0
+Number of continuous latent variables                            2
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   PHQ1        PHQ2        PHQ3        PHQ4        PHQ5        PHQ6
+   PHQ7        PHQ8        PHQ9
+
+Continuous latent variables
+   PHQ         FB
+
+Variables with special functions
+
+  Cluster variable      CLUS
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                    STANDARD
+  Number of integration points                                  15
+  Dimensions of numerical integration                            2
+  Adaptive quadrature                                           ON
+Link                                                         LOGIT
+Cholesky                                                        ON
+
+Input data file(s)
+  try.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns            10
+     Number of y missing data patterns           0
+     Number of u missing data patterns          10
+     Number of clusters                         42
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR U
+
+
+           Covariance Coverage
+              PHQ1          PHQ2          PHQ3          PHQ4          PHQ5
+              ________      ________      ________      ________      ________
+ PHQ1           0.995
+ PHQ2           0.991         0.995
+ PHQ3           0.993         0.993         0.996
+ PHQ4           0.995         0.993         0.996         0.998
+ PHQ5           0.987         0.987         0.989         0.991         0.991
+ PHQ6           0.993         0.993         0.996         0.996         0.989
+ PHQ7           0.995         0.993         0.996         0.998         0.991
+ PHQ8           0.989         0.989         0.993         0.993         0.986
+ PHQ9           0.986         0.986         0.987         0.989         0.984
+
+
+           Covariance Coverage
+              PHQ6          PHQ7          PHQ8          PHQ9
+              ________      ________      ________      ________
+ PHQ6           0.996
+ PHQ7           0.996         0.998
+ PHQ8           0.993         0.993         0.993
+ PHQ9           0.987         0.989         0.986         0.989
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    PHQ1
+      Category 1    0.490          270.000
+      Category 2    0.423          233.000
+      Category 3    0.060           33.000
+      Category 4    0.027           15.000
+    PHQ2
+      Category 1    0.646          356.000
+      Category 2    0.290          160.000
+      Category 3    0.047           26.000
+      Category 4    0.016            9.000
+    PHQ3
+      Category 1    0.366          202.000
+      Category 2    0.417          230.000
+      Category 3    0.132           73.000
+      Category 4    0.085           47.000
+    PHQ4
+      Category 1    0.235          130.000
+      Category 2    0.515          285.000
+      Category 3    0.166           92.000
+      Category 4    0.083           46.000
+    PHQ5
+      Category 1    0.588          323.000
+      Category 2    0.288          158.000
+      Category 3    0.080           44.000
+      Category 4    0.044           24.000
+    PHQ6
+      Category 1    0.681          376.000
+      Category 2    0.246          136.000
+      Category 3    0.051           28.000
+      Category 4    0.022           12.000
+    PHQ7
+      Category 1    0.617          341.000
+      Category 2    0.288          159.000
+      Category 3    0.060           33.000
+      Category 4    0.036           20.000
+    PHQ8
+      Category 1    0.862          474.000
+      Category 2    0.096           53.000
+      Category 3    0.033           18.000
+      Category 4    0.009            5.000
+    PHQ9
+      Category 1    0.920          504.000
+      Category 2    0.071           39.000
+      Category 3    0.007            4.000
+      Category 4    0.002            1.000
+
+
+     THE STANDARD ERRORS OF THE MODEL PARAMETER ESTIMATES MAY NOT BE
+     TRUSTWORTHY FOR SOME PARAMETERS DUE TO A NON-POSITIVE DEFINITE
+     FIRST-ORDER DERIVATIVE PRODUCT MATRIX.  THIS MAY BE DUE TO THE STARTING
+     VALUES BUT MAY ALSO BE AN INDICATION OF MODEL NONIDENTIFICATION.  THE
+     CONDITION NUMBER IS      -0.217D-16.  PROBLEM INVOLVING THE FOLLOWING PARAMETER:
+     Parameter 43, %BETWEEN%: [ PHQ9$1 ]
+
+     THE NONIDENTIFICATION IS MOST LIKELY DUE TO HAVING MORE PARAMETERS THAN THE
+     NUMBER OF CLUSTERS. REDUCE THE NUMBER OF PARAMETERS.
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       45
+
+Loglikelihood
+
+          H0 Value                       -3610.286
+          H0 Scaling Correction Factor      0.9546
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    7310.572
+          Bayesian (BIC)                  7504.845
+          Sample-Size Adjusted BIC        7361.994
+            (n* = (n + 2) / 24)
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ PHQ      BY
+    PHQ1               1.000      0.000    999.000    999.000
+    PHQ2               1.892      0.239      7.901      0.000
+    PHQ3               0.852      0.100      8.554      0.000
+    PHQ4               1.204      0.158      7.601      0.000
+    PHQ5               1.002      0.117      8.546      0.000
+    PHQ6               1.432      0.196      7.321      0.000
+    PHQ7               0.974      0.117      8.349      0.000
+    PHQ8               1.074      0.180      5.963      0.000
+    PHQ9               1.103      0.212      5.192      0.000
+
+ Variances
+    PHQ                3.161      0.560      5.640      0.000
+
+Between Level
+
+ FB       BY
+    PHQ1               1.000      0.000    999.000    999.000
+    PHQ2               1.496      0.642      2.332      0.020
+    PHQ3               0.432      0.301      1.436      0.151
+    PHQ4               1.270      0.329      3.856      0.000
+    PHQ5               0.693      0.401      1.731      0.084
+    PHQ6               0.301      0.394      0.764      0.445
+    PHQ7               1.433      0.529      2.711      0.007
+    PHQ8               1.194      0.547      2.181      0.029
+    PHQ9               0.955      0.501      1.908      0.056
+
+ Thresholds
+    PHQ1$1            -0.054      0.167     -0.322      0.748
+    PHQ1$2             3.485      0.224     15.564      0.000
+    PHQ1$3             5.060      0.364     13.886      0.000
+    PHQ2$1             1.449      0.298      4.861      0.000
+    PHQ2$2             5.950      0.598      9.953      0.000
+    PHQ2$3             8.420      0.742     11.352      0.000
+    PHQ3$1            -0.808      0.144     -5.629      0.000
+    PHQ3$2             1.746      0.134     13.049      0.000
+    PHQ3$3             3.200      0.213     15.018      0.000
+    PHQ4$1            -2.032      0.230     -8.841      0.000
+    PHQ4$2             1.941      0.221      8.800      0.000
+    PHQ4$3             3.978      0.326     12.197      0.000
+    PHQ5$1             0.524      0.159      3.291      0.001
+    PHQ5$2             2.843      0.231     12.324      0.000
+    PHQ5$3             4.335      0.275     15.740      0.000
+    PHQ6$1             1.408      0.223      6.328      0.000
+    PHQ6$2             4.497      0.381     11.796      0.000
+    PHQ6$3             6.442      0.599     10.747      0.000
+    PHQ7$1             0.764      0.230      3.315      0.001
+    PHQ7$2             3.371      0.285     11.823      0.000
+    PHQ7$3             4.712      0.363     12.966      0.000
+    PHQ8$1             2.861      0.280     10.204      0.000
+    PHQ8$2             4.639      0.382     12.138      0.000
+    PHQ8$3             6.545      0.571     11.467      0.000
+    PHQ9$1             3.746      0.392      9.551      0.000
+    PHQ9$2             6.429      0.542     11.870      0.000
+    PHQ9$3             8.282      0.899      9.214      0.000
+
+ Variances
+    FB                 0.352      0.225      1.565      0.117
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix             -0.217E-16
+       (ratio of smallest to largest eigenvalue)
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR WITHIN
+
+
+           TAU
+              PHQ1$1        PHQ1$2        PHQ1$3        PHQ2$1        PHQ2$2
+              ________      ________      ________      ________      ________
+                    0             0             0             0             0
+
+
+           TAU
+              PHQ2$3        PHQ3$1        PHQ3$2        PHQ3$3        PHQ4$1
+              ________      ________      ________      ________      ________
+                    0             0             0             0             0
+
+
+           TAU
+              PHQ4$2        PHQ4$3        PHQ5$1        PHQ5$2        PHQ5$3
+              ________      ________      ________      ________      ________
+                    0             0             0             0             0
+
+
+           TAU
+              PHQ6$1        PHQ6$2        PHQ6$3        PHQ7$1        PHQ7$2
+              ________      ________      ________      ________      ________
+                    0             0             0             0             0
+
+
+           TAU
+              PHQ7$3        PHQ8$1        PHQ8$2        PHQ8$3        PHQ9$1
+              ________      ________      ________      ________      ________
+                    0             0             0             0             0
+
+
+           TAU
+              PHQ9$2        PHQ9$3
+              ________      ________
+                    0             0
+
+
+           NU
+              PHQ1          PHQ2          PHQ3          PHQ4          PHQ5
+              ________      ________      ________      ________      ________
+                    0             0             0             0             0
+
+
+           NU
+              PHQ6          PHQ7          PHQ8          PHQ9
+              ________      ________      ________      ________
+                    0             0             0             0
+
+
+           LAMBDA
+              PHQ
+              ________
+ PHQ1               0
+ PHQ2               1
+ PHQ3               2
+ PHQ4               3
+ PHQ5               4
+ PHQ6               5
+ PHQ7               6
+ PHQ8               7
+ PHQ9               8
+
+
+           THETA
+              PHQ1          PHQ2          PHQ3          PHQ4          PHQ5
+              ________      ________      ________      ________      ________
+ PHQ1               0
+ PHQ2               0             0
+ PHQ3               0             0             0
+ PHQ4               0             0             0             0
+ PHQ5               0             0             0             0             0
+ PHQ6               0             0             0             0             0
+ PHQ7               0             0             0             0             0
+ PHQ8               0             0             0             0             0
+ PHQ9               0             0             0             0             0
+
+
+           THETA
+              PHQ6          PHQ7          PHQ8          PHQ9
+              ________      ________      ________      ________
+ PHQ6               0
+ PHQ7               0             0
+ PHQ8               0             0             0
+ PHQ9               0             0             0             0
+
+
+           ALPHA
+              PHQ
+              ________
+                    0
+
+
+           BETA
+              PHQ
+              ________
+ PHQ                0
+
+
+           PSI
+              PHQ
+              ________
+ PHQ                9
+
+
+     PARAMETER SPECIFICATION FOR BETWEEN
+
+
+           TAU
+              PHQ1$1        PHQ1$2        PHQ1$3        PHQ2$1        PHQ2$2
+              ________      ________      ________      ________      ________
+                   19            20            21            22            23
+
+
+           TAU
+              PHQ2$3        PHQ3$1        PHQ3$2        PHQ3$3        PHQ4$1
+              ________      ________      ________      ________      ________
+                   24            25            26            27            28
+
+
+           TAU
+              PHQ4$2        PHQ4$3        PHQ5$1        PHQ5$2        PHQ5$3
+              ________      ________      ________      ________      ________
+                   29            30            31            32            33
+
+
+           TAU
+              PHQ6$1        PHQ6$2        PHQ6$3        PHQ7$1        PHQ7$2
+              ________      ________      ________      ________      ________
+                   34            35            36            37            38
+
+
+           TAU
+              PHQ7$3        PHQ8$1        PHQ8$2        PHQ8$3        PHQ9$1
+              ________      ________      ________      ________      ________
+                   39            40            41            42            43
+
+
+           TAU
+              PHQ9$2        PHQ9$3
+              ________      ________
+                   44            45
+
+
+           NU
+              PHQ1          PHQ2          PHQ3          PHQ4          PHQ5
+              ________      ________      ________      ________      ________
+                    0             0             0             0             0
+
+
+           NU
+              PHQ6          PHQ7          PHQ8          PHQ9
+              ________      ________      ________      ________
+                    0             0             0             0
+
+
+           LAMBDA
+              FB
+              ________
+ PHQ1               0
+ PHQ2              10
+ PHQ3              11
+ PHQ4              12
+ PHQ5              13
+ PHQ6              14
+ PHQ7              15
+ PHQ8              16
+ PHQ9              17
+
+
+           THETA
+              PHQ1          PHQ2          PHQ3          PHQ4          PHQ5
+              ________      ________      ________      ________      ________
+ PHQ1               0
+ PHQ2               0             0
+ PHQ3               0             0             0
+ PHQ4               0             0             0             0
+ PHQ5               0             0             0             0             0
+ PHQ6               0             0             0             0             0
+ PHQ7               0             0             0             0             0
+ PHQ8               0             0             0             0             0
+ PHQ9               0             0             0             0             0
+
+
+           THETA
+              PHQ6          PHQ7          PHQ8          PHQ9
+              ________      ________      ________      ________
+ PHQ6               0
+ PHQ7               0             0
+ PHQ8               0             0             0
+ PHQ9               0             0             0             0
+
+
+           ALPHA
+              FB
+              ________
+                    0
+
+
+           BETA
+              FB
+              ________
+ FB                 0
+
+
+           PSI
+              FB
+              ________
+ FB                18
+
+
+     STARTING VALUES FOR WITHIN
+
+
+           TAU
+              PHQ1$1        PHQ1$2        PHQ1$3        PHQ2$1        PHQ2$2
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           TAU
+              PHQ2$3        PHQ3$1        PHQ3$2        PHQ3$3        PHQ4$1
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           TAU
+              PHQ4$2        PHQ4$3        PHQ5$1        PHQ5$2        PHQ5$3
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           TAU
+              PHQ6$1        PHQ6$2        PHQ6$3        PHQ7$1        PHQ7$2
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           TAU
+              PHQ7$3        PHQ8$1        PHQ8$2        PHQ8$3        PHQ9$1
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           TAU
+              PHQ9$2        PHQ9$3
+              ________      ________
+                0.000         0.000
+
+
+           NU
+              PHQ1          PHQ2          PHQ3          PHQ4          PHQ5
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           NU
+              PHQ6          PHQ7          PHQ8          PHQ9
+              ________      ________      ________      ________
+                0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              PHQ
+              ________
+ PHQ1           1.000
+ PHQ2           1.000
+ PHQ3           1.000
+ PHQ4           1.000
+ PHQ5           1.000
+ PHQ6           1.000
+ PHQ7           1.000
+ PHQ8           1.000
+ PHQ9           1.000
+
+
+           THETA
+              PHQ1          PHQ2          PHQ3          PHQ4          PHQ5
+              ________      ________      ________      ________      ________
+ PHQ1           1.000
+ PHQ2           0.000         1.000
+ PHQ3           0.000         0.000         1.000
+ PHQ4           0.000         0.000         0.000         1.000
+ PHQ5           0.000         0.000         0.000         0.000         1.000
+ PHQ6           0.000         0.000         0.000         0.000         0.000
+ PHQ7           0.000         0.000         0.000         0.000         0.000
+ PHQ8           0.000         0.000         0.000         0.000         0.000
+ PHQ9           0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              PHQ6          PHQ7          PHQ8          PHQ9
+              ________      ________      ________      ________
+ PHQ6           1.000
+ PHQ7           0.000         1.000
+ PHQ8           0.000         0.000         1.000
+ PHQ9           0.000         0.000         0.000         1.000
+
+
+           ALPHA
+              PHQ
+              ________
+                0.000
+
+
+           BETA
+              PHQ
+              ________
+ PHQ            0.000
+
+
+           PSI
+              PHQ
+              ________
+ PHQ            0.050
+
+
+     STARTING VALUES FOR BETWEEN
+
+
+           TAU
+              PHQ1$1        PHQ1$2        PHQ1$3        PHQ2$1        PHQ2$2
+              ________      ________      ________      ________      ________
+               -0.040         2.349         3.576         0.602         2.691
+
+
+           TAU
+              PHQ2$3        PHQ3$1        PHQ3$2        PHQ3$3        PHQ4$1
+              ________      ________      ________      ________      ________
+                4.098        -0.550         1.281         2.374        -1.180
+
+
+           TAU
+              PHQ4$2        PHQ4$3        PHQ5$1        PHQ5$2        PHQ5$3
+              ________      ________      ________      ________      ________
+                1.101         2.400         0.357         1.956         3.085
+
+
+           TAU
+              PHQ6$1        PHQ6$2        PHQ6$3        PHQ7$1        PHQ7$2
+              ________      ________      ________      ________      ________
+                0.759         2.549         3.807         0.475         2.244
+
+
+           TAU
+              PHQ7$3        PHQ8$1        PHQ8$2        PHQ8$3        PHQ9$1
+              ________      ________      ________      ________      ________
+                3.283         1.830         3.132         4.691         2.438
+
+
+           TAU
+              PHQ9$2        PHQ9$3
+              ________      ________
+                4.688         6.304
+
+
+           NU
+              PHQ1          PHQ2          PHQ3          PHQ4          PHQ5
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           NU
+              PHQ6          PHQ7          PHQ8          PHQ9
+              ________      ________      ________      ________
+                0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              FB
+              ________
+ PHQ1           1.000
+ PHQ2           1.000
+ PHQ3           1.000
+ PHQ4           1.000
+ PHQ5           1.000
+ PHQ6           1.000
+ PHQ7           1.000
+ PHQ8           1.000
+ PHQ9           1.000
+
+
+           THETA
+              PHQ1          PHQ2          PHQ3          PHQ4          PHQ5
+              ________      ________      ________      ________      ________
+ PHQ1           0.000
+ PHQ2           0.000         0.000
+ PHQ3           0.000         0.000         0.000
+ PHQ4           0.000         0.000         0.000         0.000
+ PHQ5           0.000         0.000         0.000         0.000         0.000
+ PHQ6           0.000         0.000         0.000         0.000         0.000
+ PHQ7           0.000         0.000         0.000         0.000         0.000
+ PHQ8           0.000         0.000         0.000         0.000         0.000
+ PHQ9           0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              PHQ6          PHQ7          PHQ8          PHQ9
+              ________      ________      ________      ________
+ PHQ6           0.000
+ PHQ7           0.000         0.000
+ PHQ8           0.000         0.000         0.000
+ PHQ9           0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              FB
+              ________
+                0.000
+
+
+           BETA
+              FB
+              ________
+ FB             0.000
+
+
+           PSI
+              FB
+              ________
+ FB             0.050
+
+
+TECHNICAL 8 OUTPUT
+
+
+   E STEP  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE  ALGORITHM
+              1 -0.42014744D+04    0.0000000    0.0000000  EM
+              2 -0.38721478D+04  329.3266092    0.0783836  EM
+              3 -0.36668648D+04  205.2829345    0.0530153  EM
+              4 -0.36343673D+04   32.4975418    0.0088625  EM
+              5 -0.36233554D+04   11.0118955    0.0030299  EM
+              6 -0.36178059D+04    5.5495296    0.0015316  EM
+              7 -0.36146277D+04    3.1781425    0.0008785  EM
+              8 -0.36127984D+04    1.8292956    0.0005061  EM
+              9 -0.36117621D+04    1.0363798    0.0002869  EM
+             10 -0.36111784D+04    0.5836163    0.0001616  EM
+             11 -0.36108468D+04    0.3316421    0.0000918  EM
+             12 -0.36106543D+04    0.1924559    0.0000533  EM
+             13 -0.36105394D+04    0.1149344    0.0000318  EM
+             14 -0.36104684D+04    0.0710241    0.0000197  EM
+             15 -0.36104227D+04    0.0456386    0.0000126  EM
+             16 -0.36103921D+04    0.0306226    0.0000085  EM
+             17 -0.36103706D+04    0.0215016    0.0000060  EM
+             18 -0.36103548D+04    0.0157829    0.0000044  EM
+             19 -0.36103428D+04    0.0120607    0.0000033  EM
+             20 -0.36103332D+04    0.0095339    0.0000026  EM
+             21 -0.36103255D+04    0.0077409    0.0000021  EM
+             22 -0.36103191D+04    0.0064127    0.0000018  EM
+             23 -0.36103137D+04    0.0053902    0.0000015  EM
+             24 -0.36103091D+04    0.0045772    0.0000013  EM
+             25 -0.36103052D+04    0.0039143    0.0000011  EM
+             26 -0.36103018D+04    0.0033636    0.0000009  EM
+             27 -0.36102989D+04    0.0028997    0.0000008  EM
+             28 -0.36102964D+04    0.0025052    0.0000007  EM
+             29 -0.36102943D+04    0.0021677    0.0000006  EM
+             30 -0.36102924D+04    0.0018774    0.0000005  EM
+             31 -0.36102908D+04    0.0016272    0.0000005  EM
+             32 -0.36102894D+04    0.0014110    0.0000004  EM
+             33 -0.36102881D+04    0.0012239    0.0000003  EM
+             34 -0.36102871D+04    0.0010619    0.0000003  EM
+             35 -0.36102861D+04    0.0009215    0.0000003  EM
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  15:01:46
+        Ending Time:  15:01:59
+       Elapsed Time:  00:00:13
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2017 Muthen & Muthen

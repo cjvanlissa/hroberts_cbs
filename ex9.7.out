@@ -1,0 +1,537 @@
+Mplus VERSION 8
+MUTHEN & MUTHEN
+07/30/2019   2:57 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE:	this is an example of a two-level CFA with
+  	categorical factor indicators, a random intercept
+      factor, and covariates
+  DATA:	FILE IS ex9.7.dat;
+  VARIABLE:	NAMES ARE u1-u4 x1 x2 w clus;
+  	CATEGORICAL = u1-u4;
+  	WITHIN = x1 x2;
+  	BETWEEN = w;
+  	CLUSTER = clus;
+  	MISSING = ALL (999);
+  ANALYSIS:	TYPE = TWOLEVEL;
+  MODEL:
+  	%WITHIN%
+  	fw BY u1-u4;	
+  	fw ON x1 x2;
+  	%BETWEEN%
+  	fb BY u1-u4; 	
+  	fb ON w;
+  OUTPUT:	TECH1 TECH8;
+
+
+
+*** WARNING
+  One or more individual-level variables have no variation within a
+  cluster for the following clusters.
+
+     Variable   Cluster IDs with no within-cluster variation
+
+      U1          15 18
+      U2          64
+      U3          10 12
+      U4          14 31 33 82
+
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+this is an example of a two-level CFA with
+categorical factor indicators, a random intercept
+factor, and covariates
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        1000
+
+Number of dependent variables                                    4
+Number of independent variables                                  3
+Number of continuous latent variables                            2
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   U1          U2          U3          U4
+
+Observed independent variables
+   X1          X2          W
+
+Continuous latent variables
+   FW          FB
+
+Variables with special functions
+
+  Cluster variable      CLUS
+
+  Within variables
+   X1          X2
+
+  Between variables
+   W
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                    STANDARD
+  Number of integration points                                  15
+  Dimensions of numerical integration                            2
+  Adaptive quadrature                                           ON
+Link                                                         LOGIT
+Cholesky                                                        ON
+
+Input data file(s)
+  ex9.7.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             1
+     Number of y missing data patterns           0
+     Number of u missing data patterns           1
+     Number of clusters                        110
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    U1
+      Category 1    0.508          508.000
+      Category 2    0.492          492.000
+    U2
+      Category 1    0.532          532.000
+      Category 2    0.468          468.000
+    U3
+      Category 1    0.518          518.000
+      Category 2    0.482          482.000
+    U4
+      Category 1    0.507          507.000
+      Category 2    0.493          493.000
+
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     X1                    0.021      -0.009      -2.794    0.10%      -0.852     -0.244      0.010
+            1000.000       0.952      -0.331       2.962    0.10%       0.284      0.901
+     X2                   -0.007      -0.036      -2.866    0.10%      -0.892     -0.266      0.006
+            1000.000       1.088      -0.203       2.939    0.10%       0.279      0.846
+     W                    -0.152      -0.048      -2.105    0.91%      -0.908     -0.351     -0.168
+             110.000       0.594      -0.357       1.892    0.91%       0.112      0.525
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       15
+
+Loglikelihood
+
+          H0 Value                       -2352.334
+          H0 Scaling Correction Factor      1.0521
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    4734.669
+          Bayesian (BIC)                  4808.285
+          Sample-Size Adjusted BIC        4760.644
+            (n* = (n + 2) / 24)
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ FW       BY
+    U1                 1.000      0.000    999.000    999.000
+    U2                 1.234      0.177      6.980      0.000
+    U3                 1.308      0.170      7.676      0.000
+    U4                 1.296      0.167      7.741      0.000
+
+ FW         ON
+    X1                 0.834      0.089      9.379      0.000
+    X2                 0.387      0.047      8.220      0.000
+
+ Residual Variances
+    FW                 0.660      0.135      4.886      0.000
+
+Between Level
+
+ FB       BY
+    U1                 1.000      0.000    999.000    999.000
+    U2                 1.563      0.596      2.621      0.009
+    U3                 1.368      0.422      3.242      0.001
+    U4                 1.714      0.592      2.894      0.004
+
+ FB         ON
+    W                  0.242      0.082      2.944      0.003
+
+ Thresholds
+    U1$1               0.011      0.087      0.132      0.895
+    U2$1               0.136      0.096      1.418      0.156
+    U3$1               0.065      0.094      0.689      0.491
+    U4$1              -0.015      0.111     -0.137      0.891
+
+ Residual Variances
+    FB                 0.110      0.061      1.796      0.073
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.160E-02
+       (ratio of smallest to largest eigenvalue)
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR WITHIN
+
+
+           TAU
+              U1$1          U2$1          U3$1          U4$1
+              ________      ________      ________      ________
+                    0             0             0             0
+
+
+           NU
+              U1            U2            U3            U4            X1
+              ________      ________      ________      ________      ________
+                    0             0             0             0             0
+
+
+           NU
+              X2
+              ________
+                    0
+
+
+           LAMBDA
+              FW            X1            X2
+              ________      ________      ________
+ U1                 0             0             0
+ U2                 1             0             0
+ U3                 2             0             0
+ U4                 3             0             0
+ X1                 0             0             0
+ X2                 0             0             0
+
+
+           THETA
+              U1            U2            U3            U4            X1
+              ________      ________      ________      ________      ________
+ U1                 0
+ U2                 0             0
+ U3                 0             0             0
+ U4                 0             0             0             0
+ X1                 0             0             0             0             0
+ X2                 0             0             0             0             0
+
+
+           THETA
+              X2
+              ________
+ X2                 0
+
+
+           ALPHA
+              FW            X1            X2
+              ________      ________      ________
+                    0             0             0
+
+
+           BETA
+              FW            X1            X2
+              ________      ________      ________
+ FW                 0             4             5
+ X1                 0             0             0
+ X2                 0             0             0
+
+
+           PSI
+              FW            X1            X2
+              ________      ________      ________
+ FW                 6
+ X1                 0             0
+ X2                 0             0             0
+
+
+     PARAMETER SPECIFICATION FOR BETWEEN
+
+
+           TAU
+              U1$1          U2$1          U3$1          U4$1
+              ________      ________      ________      ________
+                   12            13            14            15
+
+
+           NU
+              U1            U2            U3            U4            W
+              ________      ________      ________      ________      ________
+                    0             0             0             0             0
+
+
+           LAMBDA
+              FB            W
+              ________      ________
+ U1                 0             0
+ U2                 7             0
+ U3                 8             0
+ U4                 9             0
+ W                  0             0
+
+
+           THETA
+              U1            U2            U3            U4            W
+              ________      ________      ________      ________      ________
+ U1                 0
+ U2                 0             0
+ U3                 0             0             0
+ U4                 0             0             0             0
+ W                  0             0             0             0             0
+
+
+           ALPHA
+              FB            W
+              ________      ________
+                    0             0
+
+
+           BETA
+              FB            W
+              ________      ________
+ FB                 0            10
+ W                  0             0
+
+
+           PSI
+              FB            W
+              ________      ________
+ FB                11
+ W                  0             0
+
+
+     STARTING VALUES FOR WITHIN
+
+
+           TAU
+              U1$1          U2$1          U3$1          U4$1
+              ________      ________      ________      ________
+                0.000         0.000         0.000         0.000
+
+
+           NU
+              U1            U2            U3            U4            X1
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           NU
+              X2
+              ________
+                0.000
+
+
+           LAMBDA
+              FW            X1            X2
+              ________      ________      ________
+ U1             1.000         0.000         0.000
+ U2             1.000         0.000         0.000
+ U3             1.000         0.000         0.000
+ U4             1.000         0.000         0.000
+ X1             0.000         1.000         0.000
+ X2             0.000         0.000         1.000
+
+
+           THETA
+              U1            U2            U3            U4            X1
+              ________      ________      ________      ________      ________
+ U1             1.000
+ U2             0.000         1.000
+ U3             0.000         0.000         1.000
+ U4             0.000         0.000         0.000         1.000
+ X1             0.000         0.000         0.000         0.000         0.000
+ X2             0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              X2
+              ________
+ X2             0.000
+
+
+           ALPHA
+              FW            X1            X2
+              ________      ________      ________
+                0.000         0.000         0.000
+
+
+           BETA
+              FW            X1            X2
+              ________      ________      ________
+ FW             0.000         0.000         0.000
+ X1             0.000         0.000         0.000
+ X2             0.000         0.000         0.000
+
+
+           PSI
+              FW            X1            X2
+              ________      ________      ________
+ FW             0.050
+ X1             0.000         0.476
+ X2             0.000         0.000         0.544
+
+
+     STARTING VALUES FOR BETWEEN
+
+
+           TAU
+              U1$1          U2$1          U3$1          U4$1
+              ________      ________      ________      ________
+                0.032         0.128         0.072         0.028
+
+
+           NU
+              U1            U2            U3            U4            W
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              FB            W
+              ________      ________
+ U1             1.000         0.000
+ U2             1.000         0.000
+ U3             1.000         0.000
+ U4             1.000         0.000
+ W              0.000         1.000
+
+
+           THETA
+              U1            U2            U3            U4            W
+              ________      ________      ________      ________      ________
+ U1             0.000
+ U2             0.000         0.000
+ U3             0.000         0.000         0.000
+ U4             0.000         0.000         0.000         0.000
+ W              0.000         0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              FB            W
+              ________      ________
+                0.000         0.000
+
+
+           BETA
+              FB            W
+              ________      ________
+ FB             0.000         0.000
+ W              0.000         0.000
+
+
+           PSI
+              FB            W
+              ________      ________
+ FB             0.050
+ W              0.000         0.308
+
+
+TECHNICAL 8 OUTPUT
+
+
+   E STEP  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE  ALGORITHM
+              1 -0.27181127D+04    0.0000000    0.0000000  EM
+              2 -0.26423047D+04   75.8080890    0.0278900  EM
+              3 -0.23792705D+04  263.0341739    0.0995473  EM
+              4 -0.23598525D+04   19.4179878    0.0081613  EM
+              5 -0.23556237D+04    4.2287706    0.0017920  EM
+              6 -0.23538034D+04    1.8203093    0.0007728  EM
+              7 -0.23529855D+04    0.8179035    0.0003475  EM
+              8 -0.23526243D+04    0.3612025    0.0001535  EM
+              9 -0.23524659D+04    0.1583870    0.0000673  EM
+             10 -0.23523957D+04    0.0702196    0.0000298  EM
+             11 -0.23523638D+04    0.0319116    0.0000136  EM
+             12 -0.23523488D+04    0.0149795    0.0000064  EM
+             13 -0.23523415D+04    0.0072796    0.0000031  EM
+             14 -0.23523379D+04    0.0036567    0.0000016  EM
+             15 -0.23523360D+04    0.0018911    0.0000008  EM
+             16 -0.23523350D+04    0.0010017    0.0000004  EM
+             17 -0.23523344D+04    0.0005407    0.0000002  EM
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  14:57:14
+        Ending Time:  14:57:24
+       Elapsed Time:  00:00:10
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2017 Muthen & Muthen

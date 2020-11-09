@@ -1,0 +1,2003 @@
+Mplus VERSION 8
+MUTHEN & MUTHEN
+10/04/2019   4:59 PM
+
+INPUT INSTRUCTIONS
+
+  DATA:
+  FILE = "cfa_reg_update_e6eb20f564962e46e2968cb2757462b8.dat";
+
+  VARIABLE:
+  NAMES = Pcoh1 Pcoh2 Pcoh3 Ppss1 Ppss2 Ppss3 Ppss4 Ppss5 Pphq1 Pphq2 Pphq3 Pphq4
+       Pphq5 Pplea1 Pplea2 Psafe1 Psafe2 Psafe3 Pgreen1 Pgreen2 river lake beach
+       traffic inside outside phys clus;
+   MISSING=.;
+   CLUSTER = clus;
+
+  ANALYSIS:
+  TYPE = COMPLEX;
+
+  MODEL:
+  coh BY Pcoh1*;
+
+  coh BY Pcoh2;
+
+  coh BY Pcoh3;
+
+  [coh@0];
+
+  coh@1;
+
+  pss BY Ppss1*;
+
+  pss BY Ppss2;
+
+  pss BY Ppss3;
+
+  pss BY Ppss4;
+
+  pss BY Ppss5;
+
+  [pss@0];
+
+  pss@1;
+
+  phq BY Pphq1*;
+
+  phq BY Pphq2;
+
+  phq BY Pphq3;
+
+  phq BY Pphq4;
+
+  phq BY Pphq5;
+
+  [phq@0];
+
+  phq@1;
+
+  plea BY Pplea1*;
+
+  plea BY Pplea2;
+
+  [plea@0];
+
+  plea@1;
+
+  safe BY Psafe1*;
+
+  safe BY Psafe2;
+
+  safe BY Psafe3;
+
+  [safe@0];
+
+  safe@1;
+
+  green BY Pgreen1*;
+
+  green BY Pgreen2;
+
+  [green@0];
+
+  green@1;
+
+  blue BY river*;
+
+  blue BY lake;
+
+  blue BY beach;
+
+  [blue@0];
+
+  blue@1;
+
+  noi BY traffic*;
+
+  noi BY inside;
+
+  noi BY outside;
+
+  [noi@0];
+
+  noi@1;
+
+  phq ON noi;
+  phq ON plea;
+  phq ON safe;
+  phq ON coh;
+  phq ON green;
+  phq ON blue;
+  pss ON noi;
+  pss ON plea;
+  pss ON safe;
+  pss ON coh;
+  pss ON green;
+  pss ON blue;
+  phys ON noi;
+  phys ON plea;
+  phys ON safe;
+  phys ON coh;
+  phys ON green;
+  phys ON blue;
+
+  phq ON pss;
+  phq ON phys;
+
+  MODEL INDIRECT:
+
+
+  phq IND pss noi;
+  phq IND pss plea;
+  phq IND pss safe;
+  phq IND pss coh;
+  phq IND pss green;
+  phq IND pss blue;
+
+  phq IND phys noi;
+  phq IND phys plea;
+  phq IND phys safe;
+  phq IND phys coh;
+  phq IND phys green;
+  phq IND phys blue;
+
+  OUTPUT:
+  standardized tech4 modindices;
+
+
+
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  8
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        5867
+
+Number of dependent variables                                   27
+Number of independent variables                                  0
+Number of continuous latent variables                            8
+
+Observed dependent variables
+
+  Continuous
+   PCOH1       PCOH2       PCOH3       PPSS1       PPSS2       PPSS3
+   PPSS4       PPSS5       PPHQ1       PPHQ2       PPHQ3       PPHQ4
+   PPHQ5       PPLEA1      PPLEA2      PSAFE1      PSAFE2      PSAFE3
+   PGREEN1     PGREEN2     RIVER       LAKE        BEACH       TRAFFIC
+   INSIDE      OUTSIDE     PHYS
+
+Continuous latent variables
+   COH         PSS         PHQ         PLEA        SAFE        GREEN
+   BLUE        NOI
+
+Variables with special functions
+
+  Cluster variable      CLUS
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+
+Input data file(s)
+  cfa_reg_update_e6eb20f564962e46e2968cb2757462b8.dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns           236
+     Number of clusters        1387
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              PCOH1         PCOH2         PCOH3         PPSS1         PPSS2
+              ________      ________      ________      ________      ________
+ PCOH1          0.978
+ PCOH2          0.976         0.990
+ PCOH3          0.961         0.968         0.970
+ PPSS1          0.969         0.979         0.960         0.987
+ PPSS2          0.970         0.982         0.962         0.986         0.990
+ PPSS3          0.969         0.980         0.961         0.986         0.987
+ PPSS4          0.972         0.983         0.963         0.987         0.989
+ PPSS5          0.972         0.983         0.963         0.987         0.990
+ PPHQ1          0.972         0.983         0.964         0.984         0.987
+ PPHQ2          0.970         0.981         0.962         0.983         0.986
+ PPHQ3          0.972         0.983         0.963         0.984         0.987
+ PPHQ4          0.972         0.983         0.963         0.984         0.987
+ PPHQ5          0.968         0.979         0.960         0.980         0.983
+ PPLEA1         0.977         0.988         0.968         0.985         0.988
+ PPLEA2         0.977         0.988         0.968         0.985         0.988
+ PSAFE1         0.975         0.986         0.966         0.983         0.986
+ PSAFE2         0.975         0.987         0.967         0.984         0.986
+ PSAFE3         0.972         0.983         0.963         0.980         0.982
+ PGREEN1        0.972         0.983         0.964         0.980         0.983
+ PGREEN2        0.969         0.981         0.961         0.978         0.980
+ RIVER          0.934         0.944         0.925         0.941         0.944
+ LAKE           0.929         0.939         0.920         0.937         0.938
+ BEACH          0.934         0.944         0.925         0.942         0.944
+ TRAFFIC        0.971         0.982         0.963         0.980         0.983
+ INSIDE         0.973         0.984         0.965         0.982         0.984
+ OUTSIDE        0.971         0.982         0.963         0.979         0.982
+ PHYS           0.931         0.942         0.923         0.942         0.944
+
+
+           Covariance Coverage
+              PPSS3         PPSS4         PPSS5         PPHQ1         PPHQ2
+              ________      ________      ________      ________      ________
+ PPSS3          0.988
+ PPSS4          0.988         0.991
+ PPSS5          0.988         0.990         0.991
+ PPHQ1          0.986         0.988         0.988         0.992
+ PPHQ2          0.985         0.986         0.987         0.989         0.990
+ PPHQ3          0.986         0.988         0.988         0.991         0.989
+ PPHQ4          0.986         0.988         0.988         0.991         0.989
+ PPHQ5          0.982         0.983         0.983         0.987         0.985
+ PPLEA1         0.987         0.989         0.989         0.990         0.988
+ PPLEA2         0.987         0.989         0.989         0.990         0.988
+ PSAFE1         0.984         0.987         0.987         0.988         0.986
+ PSAFE2         0.985         0.987         0.988         0.988         0.986
+ PSAFE3         0.981         0.983         0.984         0.984         0.982
+ PGREEN1        0.981         0.984         0.984         0.984         0.982
+ PGREEN2        0.979         0.981         0.981         0.982         0.980
+ RIVER          0.943         0.944         0.945         0.945         0.944
+ LAKE           0.937         0.939         0.939         0.940         0.939
+ BEACH          0.943         0.945         0.945         0.946         0.945
+ TRAFFIC        0.981         0.983         0.984         0.984         0.982
+ INSIDE         0.983         0.985         0.986         0.986         0.984
+ OUTSIDE        0.981         0.983         0.983         0.984         0.982
+ PHYS           0.943         0.945         0.945         0.946         0.945
+
+
+           Covariance Coverage
+              PPHQ3         PPHQ4         PPHQ5         PPLEA1        PPLEA2
+              ________      ________      ________      ________      ________
+ PPHQ3          0.991
+ PPHQ4          0.991         0.991
+ PPHQ5          0.986         0.986         0.987
+ PPLEA1         0.989         0.989         0.985         0.997
+ PPLEA2         0.989         0.989         0.985         0.996         0.997
+ PSAFE1         0.987         0.987         0.983         0.993         0.993
+ PSAFE2         0.988         0.988         0.984         0.994         0.994
+ PSAFE3         0.983         0.983         0.979         0.989         0.989
+ PGREEN1        0.984         0.984         0.980         0.989         0.989
+ PGREEN2        0.981         0.981         0.977         0.986         0.987
+ RIVER          0.945         0.945         0.941         0.949         0.949
+ LAKE           0.939         0.939         0.936         0.943         0.944
+ BEACH          0.945         0.945         0.942         0.950         0.950
+ TRAFFIC        0.984         0.984         0.980         0.989         0.989
+ INSIDE         0.986         0.986         0.981         0.990         0.990
+ OUTSIDE        0.983         0.983         0.979         0.988         0.988
+ PHYS           0.946         0.946         0.943         0.948         0.948
+
+
+           Covariance Coverage
+              PSAFE1        PSAFE2        PSAFE3        PGREEN1       PGREEN2
+              ________      ________      ________      ________      ________
+ PSAFE1         0.994
+ PSAFE2         0.993         0.995
+ PSAFE3         0.988         0.989         0.990
+ PGREEN1        0.987         0.988         0.983         0.991
+ PGREEN2        0.984         0.985         0.981         0.986         0.988
+ RIVER          0.948         0.948         0.945         0.949         0.948
+ LAKE           0.942         0.943         0.939         0.944         0.943
+ BEACH          0.948         0.949         0.946         0.949         0.948
+ TRAFFIC        0.987         0.987         0.983         0.983         0.981
+ INSIDE         0.988         0.988         0.984         0.985         0.982
+ OUTSIDE        0.986         0.986         0.982         0.983         0.980
+ PHYS           0.946         0.946         0.943         0.943         0.941
+
+
+           Covariance Coverage
+              RIVER         LAKE          BEACH         TRAFFIC       INSIDE
+              ________      ________      ________      ________      ________
+ RIVER          0.951
+ LAKE           0.927         0.945
+ BEACH          0.920         0.918         0.951
+ TRAFFIC        0.944         0.938         0.945         0.992
+ INSIDE         0.945         0.939         0.946         0.985         0.993
+ OUTSIDE        0.943         0.938         0.944         0.983         0.988
+ PHYS           0.908         0.903         0.908         0.944         0.944
+
+
+           Covariance Coverage
+              OUTSIDE       PHYS
+              ________      ________
+ OUTSIDE        0.991
+ PHYS           0.942         0.950
+
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     PCOH1                 3.720      -0.607       1.000    0.68%       3.000      3.500      4.000
+            5739.000       0.591       0.626       5.000    8.59%       4.000      4.500
+     PCOH2                 3.862      -0.586       1.000    0.36%       3.500      4.000      4.000
+            5808.000       0.534       0.626       5.000   11.90%       4.000      4.500
+     PCOH3                 4.047      -0.902       1.000    1.02%       4.000      4.000      4.000
+            5689.000       0.618       1.546       5.000   27.74%       4.000      5.000
+     PPSS1                 1.628       0.596       0.000    0.62%       1.000      1.500      1.500
+            5791.000       0.687      -0.054       5.000    0.02%       1.500      2.500
+     PPSS2                 1.646       0.529       0.000    0.36%       1.000      1.500      1.500
+            5808.000       0.600       0.029       4.500    0.22%       2.000      2.500
+     PPSS3                 1.839       0.337       0.000    0.22%       1.000      1.500      2.000
+            5799.000       0.562       0.085       5.000    0.02%       2.000      2.500
+     PPSS4                 2.057       0.288       0.000    0.09%       1.500      2.000      2.000
+            5813.000       0.587      -0.085       4.500    0.36%       2.000      2.500
+     PPSS5                 1.302       0.367       0.000   12.33%       0.500      1.000      1.000
+            5816.000       0.727      -0.249       4.000    0.52%       1.500      2.000
+     PPHQ1                 0.297       2.499       0.000   63.83%       0.000      0.000      0.000
+            5819.000       0.272       7.424       3.000    0.74%       0.000      0.500
+     PPHQ2                 0.338       2.166       0.000   63.91%       0.000      0.000      0.000
+            5807.000       0.338       4.967       3.000    0.90%       0.000      0.500
+     PPHQ3                 0.988       0.859       0.000   18.88%       0.500      0.500      1.000
+            5815.000       0.657       0.158       3.000    5.26%       1.000      1.500
+     PPHQ4                 0.573       1.422       0.000   45.14%       0.000      0.000      0.500
+            5815.000       0.512       1.602       3.000    1.77%       0.500      1.000
+     PPHQ5                 0.661       1.173       0.000   48.17%       0.000      0.000      1.000
+            5790.000       0.586       1.246       3.000    3.83%       1.000      1.000
+     PPLEA1                3.377      -0.833       1.000    0.34%       3.000      3.500      3.500
+            5849.000       0.320       0.677       4.000   30.91%       3.500      4.000
+     PPLEA2                3.333      -0.921       1.000    0.58%       3.000      3.500      3.500
+            5850.000       0.369       0.818       4.000   29.23%       3.500      4.000
+     PSAFE1                3.168      -0.436       1.000    0.51%       2.500      3.000      3.000
+            5833.000       0.380       0.009       4.000   21.74%       3.500      4.000
+     PSAFE2                3.234      -0.540       1.000    0.60%       3.000      3.000      3.000
+            5836.000       0.355       0.439       4.000   24.97%       3.500      4.000
+     PSAFE3                3.482      -1.061       1.000    0.60%       3.000      3.500      3.500
+            5810.000       0.324       1.484       4.000   44.91%       4.000      4.000
+     PGREEN1               2.216       0.301       1.000    6.23%       1.500      2.000      2.000
+            5813.000       0.398       0.237       4.000    2.05%       2.500      2.500
+     PGREEN2               1.997       0.426       1.000   15.71%       1.500      2.000      2.000
+            5798.000       0.481      -0.312       4.000    1.12%       2.000      2.500
+     RIVER                 2.765      -0.348       1.000   13.52%       2.000      3.000      3.000
+            5577.000       0.985      -0.923       4.000   26.75%       3.000      4.000
+     LAKE                  2.813      -0.396       1.000   12.66%       2.000      3.000      3.000
+            5543.000       0.985      -0.896       4.000   28.96%       3.000      4.000
+     BEACH                 3.809      -3.099       1.000    0.99%       4.000      4.000      4.000
+            5580.000       0.272      10.135       4.000   85.77%       4.000      4.000
+     TRAFFIC               2.173       0.086       1.000   21.28%       1.000      2.000      2.000
+            5818.000       0.638      -0.698       4.000    3.45%       2.000      3.000
+     INSIDE                1.555       1.293       1.000   55.02%       1.000      1.000      1.000
+            5827.000       0.505       1.630       4.000    2.44%       2.000      2.000
+     OUTSIDE               1.732       0.888       1.000   40.28%       1.000      1.000      2.000
+            5812.000       0.521       0.864       4.000    2.74%       2.000      2.000
+     PHYS                  5.123      -0.181       1.000    5.71%       3.000      4.000      5.000
+            5571.000       4.805      -1.119       8.000   22.04%       6.000      8.000
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                      115
+
+Loglikelihood
+
+          H0 Value                     -142575.115
+          H0 Scaling Correction Factor      1.5228
+            for MLR
+          H1 Value                     -140964.776
+          H1 Scaling Correction Factor      1.2347
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                  285380.230
+          Bayesian (BIC)                286148.097
+          Sample-Size Adjusted BIC      285782.660
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                           2874.303*
+          Degrees of Freedom                   290
+          P-Value                           0.0000
+          Scaling Correction Factor         1.1205
+            for MLR
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.039
+          90 Percent C.I.                    0.038  0.040
+          Probability RMSEA <= .05           1.000
+
+CFI/TLI
+
+          CFI                                0.953
+          TLI                                0.944
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                          55843.687
+          Degrees of Freedom                   351
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.036
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ COH      BY
+    PCOH1              0.635      0.012     54.257      0.000
+    PCOH2              0.634      0.010     63.495      0.000
+    PCOH3              0.557      0.012     46.620      0.000
+
+ PSS      BY
+    PPSS1              0.615      0.010     64.225      0.000
+    PPSS2              0.599      0.009     69.866      0.000
+    PPSS3              0.568      0.009     66.394      0.000
+    PPSS4              0.606      0.008     76.243      0.000
+    PPSS5              0.636      0.009     68.555      0.000
+
+ PHQ      BY
+    PPHQ1              0.254      0.007     37.818      0.000
+    PPHQ2              0.281      0.007     39.857      0.000
+    PPHQ3              0.348      0.007     48.746      0.000
+    PPHQ4              0.331      0.008     42.664      0.000
+    PPHQ5              0.307      0.008     39.609      0.000
+
+ PLEA     BY
+    PPLEA1             0.335      0.009     37.040      0.000
+    PPLEA2             0.484      0.011     43.681      0.000
+
+ SAFE     BY
+    PSAFE1             0.529      0.009     61.244      0.000
+    PSAFE2             0.432      0.008     51.532      0.000
+    PSAFE3             0.395      0.010     41.515      0.000
+
+ GREEN    BY
+    PGREEN1            0.437      0.017     25.484      0.000
+    PGREEN2            0.407      0.017     23.307      0.000
+
+ BLUE     BY
+    RIVER              0.464      0.022     21.014      0.000
+    LAKE               0.704      0.027     26.407      0.000
+    BEACH              0.107      0.012      8.909      0.000
+
+ NOI      BY
+    TRAFFIC            0.244      0.014     17.464      0.000
+    INSIDE             0.585      0.013     44.968      0.000
+    OUTSIDE            0.553      0.012     45.513      0.000
+
+ PHQ      ON
+    NOI                0.121      0.025      4.859      0.000
+    PLEA              -0.034      0.040     -0.862      0.389
+    SAFE               0.119      0.033      3.642      0.000
+    COH               -0.095      0.030     -3.194      0.001
+    GREEN              0.014      0.031      0.459      0.646
+    BLUE              -0.057      0.030     -1.894      0.058
+    PSS                1.247      0.033     37.890      0.000
+
+ PSS      ON
+    NOI                0.122      0.022      5.525      0.000
+    PLEA               0.052      0.032      1.638      0.101
+    SAFE              -0.138      0.026     -5.397      0.000
+    COH               -0.246      0.025    -10.053      0.000
+    GREEN              0.028      0.026      1.067      0.286
+    BLUE              -0.017      0.026     -0.681      0.496
+
+ PHQ      ON
+    PHYS              -0.039      0.008     -4.637      0.000
+
+ PHYS     ON
+    NOI                0.112      0.043      2.583      0.010
+    PLEA               0.080      0.068      1.175      0.240
+    SAFE              -0.096      0.050     -1.906      0.057
+    COH                0.118      0.048      2.458      0.014
+    GREEN             -0.045      0.053     -0.853      0.394
+    BLUE              -0.155      0.053     -2.931      0.003
+
+ PLEA     WITH
+    COH                0.608      0.016     36.895      0.000
+
+ SAFE     WITH
+    COH                0.440      0.016     27.807      0.000
+    PLEA               0.645      0.016     39.892      0.000
+
+ GREEN    WITH
+    COH               -0.094      0.021     -4.602      0.000
+    PLEA              -0.170      0.024     -7.092      0.000
+    SAFE              -0.137      0.020     -6.901      0.000
+
+ BLUE     WITH
+    COH               -0.027      0.020     -1.330      0.183
+    PLEA              -0.077      0.023     -3.312      0.001
+    SAFE              -0.076      0.020     -3.732      0.000
+    GREEN              0.507      0.027     19.029      0.000
+
+ NOI      WITH
+    COH               -0.438      0.017    -26.307      0.000
+    PLEA              -0.473      0.018    -25.567      0.000
+    SAFE              -0.393      0.018    -21.425      0.000
+    GREEN              0.054      0.022      2.430      0.015
+    BLUE               0.029      0.021      1.367      0.172
+
+ Means
+    COH                0.000      0.000    999.000    999.000
+    PLEA               0.000      0.000    999.000    999.000
+    SAFE               0.000      0.000    999.000    999.000
+    GREEN              0.000      0.000    999.000    999.000
+    BLUE               0.000      0.000    999.000    999.000
+    NOI                0.000      0.000    999.000    999.000
+
+ Intercepts
+    PCOH1              3.714      0.012    297.140      0.000
+    PCOH2              3.860      0.011    347.647      0.000
+    PCOH3              4.039      0.012    339.990      0.000
+    PPSS1              1.628      0.011    146.847      0.000
+    PPSS2              1.646      0.010    159.397      0.000
+    PPSS3              1.838      0.010    180.083      0.000
+    PPSS4              2.056      0.010    197.669      0.000
+    PPSS5              1.302      0.012    110.734      0.000
+    PPHQ1              0.349      0.013     26.276      0.000
+    PPHQ2              0.396      0.015     27.156      0.000
+    PPHQ3              1.059      0.019     57.112      0.000
+    PPHQ4              0.640      0.017     36.641      0.000
+    PPHQ5              0.724      0.017     42.739      0.000
+    PPLEA1             3.376      0.009    357.606      0.000
+    PPLEA2             3.332      0.012    283.385      0.000
+    PSAFE1             3.167      0.010    315.214      0.000
+    PSAFE2             3.233      0.009    376.355      0.000
+    PSAFE3             3.480      0.009    367.628      0.000
+    PGREEN1            2.216      0.011    197.086      0.000
+    PGREEN2            1.997      0.011    187.355      0.000
+    RIVER              2.764      0.019    145.516      0.000
+    LAKE               2.811      0.016    176.429      0.000
+    BEACH              3.809      0.012    313.564      0.000
+    TRAFFIC            2.174      0.013    171.564      0.000
+    INSIDE             1.556      0.011    143.048      0.000
+    OUTSIDE            1.735      0.011    164.802      0.000
+    PHYS               5.122      0.028    181.148      0.000
+    PSS                0.000      0.000    999.000    999.000
+    PHQ                0.000      0.000    999.000    999.000
+
+ Variances
+    COH                1.000      0.000    999.000    999.000
+    PLEA               1.000      0.000    999.000    999.000
+    SAFE               1.000      0.000    999.000    999.000
+    GREEN              1.000      0.000    999.000    999.000
+    BLUE               1.000      0.000    999.000    999.000
+    NOI                1.000      0.000    999.000    999.000
+
+ Residual Variances
+    PCOH1              0.192      0.007     25.988      0.000
+    PCOH2              0.132      0.007     19.101      0.000
+    PCOH3              0.312      0.011     29.661      0.000
+    PPSS1              0.257      0.008     33.451      0.000
+    PPSS2              0.191      0.007     29.069      0.000
+    PPSS3              0.195      0.005     38.374      0.000
+    PPSS4              0.169      0.005     35.400      0.000
+    PPSS5              0.267      0.007     37.607      0.000
+    PPHQ1              0.083      0.003     23.846      0.000
+    PPHQ2              0.108      0.004     26.416      0.000
+    PPHQ3              0.304      0.008     39.974      0.000
+    PPHQ4              0.194      0.006     30.936      0.000
+    PPHQ5              0.311      0.011     29.269      0.000
+    PPLEA1             0.209      0.007     31.699      0.000
+    PPLEA2             0.135      0.007     18.206      0.000
+    PSAFE1             0.100      0.005     18.569      0.000
+    PSAFE2             0.168      0.006     29.461      0.000
+    PSAFE3             0.170      0.006     26.240      0.000
+    PGREEN1            0.207      0.014     14.475      0.000
+    PGREEN2            0.316      0.014     23.040      0.000
+    RIVER              0.770      0.024     32.641      0.000
+    LAKE               0.489      0.038     13.037      0.000
+    BEACH              0.260      0.020     12.934      0.000
+    TRAFFIC            0.578      0.010     58.867      0.000
+    INSIDE             0.164      0.010     17.091      0.000
+    OUTSIDE            0.217      0.009     25.074      0.000
+    PHYS               4.750      0.063     75.213      0.000
+    PSS                1.000      0.000    999.000    999.000
+    PHQ                1.000      0.000    999.000    999.000
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ COH      BY
+    PCOH1              0.823      0.008     99.430      0.000
+    PCOH2              0.867      0.008    114.365      0.000
+    PCOH3              0.706      0.010     70.242      0.000
+
+ PSS      BY
+    PPSS1              0.792      0.007    108.465      0.000
+    PPSS2              0.825      0.007    123.681      0.000
+    PPSS3              0.809      0.006    132.605      0.000
+    PPSS4              0.844      0.005    165.672      0.000
+    PPSS5              0.796      0.006    122.907      0.000
+
+ PHQ      BY
+    PPHQ1              0.833      0.007    120.098      0.000
+    PPHQ2              0.825      0.007    113.089      0.000
+    PPHQ3              0.732      0.008     92.746      0.000
+    PPHQ4              0.788      0.008     97.496      0.000
+    PPHQ5              0.685      0.012     58.816      0.000
+
+ PLEA     BY
+    PPLEA1             0.591      0.013     43.910      0.000
+    PPLEA2             0.796      0.013     62.983      0.000
+
+ SAFE     BY
+    PSAFE1             0.858      0.009     98.560      0.000
+    PSAFE2             0.726      0.010     72.007      0.000
+    PSAFE3             0.692      0.012     56.982      0.000
+
+ GREEN    BY
+    PGREEN1            0.692      0.025     27.162      0.000
+    PGREEN2            0.586      0.024     24.740      0.000
+
+ BLUE     BY
+    RIVER              0.468      0.022     21.402      0.000
+    LAKE               0.710      0.026     26.999      0.000
+    BEACH              0.206      0.022      9.505      0.000
+
+ NOI      BY
+    TRAFFIC            0.306      0.017     18.172      0.000
+    INSIDE             0.823      0.012     69.321      0.000
+    OUTSIDE            0.765      0.012     66.181      0.000
+
+ PHQ      ON
+    NOI                0.071      0.015      4.890      0.000
+    PLEA              -0.020      0.023     -0.863      0.388
+    SAFE               0.070      0.019      3.669      0.000
+    COH               -0.056      0.017     -3.202      0.001
+    GREEN              0.008      0.018      0.460      0.646
+    BLUE              -0.033      0.018     -1.898      0.058
+    PSS                0.780      0.009     87.501      0.000
+
+ PSS      ON
+    NOI                0.115      0.021      5.575      0.000
+    PLEA               0.049      0.030      1.641      0.101
+    SAFE              -0.129      0.024     -5.444      0.000
+    COH               -0.231      0.022    -10.384      0.000
+    GREEN              0.026      0.025      1.067      0.286
+    BLUE              -0.016      0.024     -0.681      0.496
+
+ PHQ      ON
+    PHYS              -0.050      0.011     -4.622      0.000
+
+ PHYS     ON
+    NOI                0.051      0.020      2.585      0.010
+    PLEA               0.036      0.031      1.175      0.240
+    SAFE              -0.044      0.023     -1.905      0.057
+    COH                0.054      0.022      2.461      0.014
+    GREEN             -0.021      0.024     -0.853      0.394
+    BLUE              -0.071      0.024     -2.935      0.003
+
+ PLEA     WITH
+    COH                0.608      0.016     36.895      0.000
+
+ SAFE     WITH
+    COH                0.440      0.016     27.807      0.000
+    PLEA               0.645      0.016     39.892      0.000
+
+ GREEN    WITH
+    COH               -0.094      0.021     -4.602      0.000
+    PLEA              -0.170      0.024     -7.092      0.000
+    SAFE              -0.137      0.020     -6.901      0.000
+
+ BLUE     WITH
+    COH               -0.027      0.020     -1.330      0.183
+    PLEA              -0.077      0.023     -3.312      0.001
+    SAFE              -0.076      0.020     -3.732      0.000
+    GREEN              0.507      0.027     19.029      0.000
+
+ NOI      WITH
+    COH               -0.438      0.017    -26.307      0.000
+    PLEA              -0.473      0.018    -25.567      0.000
+    SAFE              -0.393      0.018    -21.425      0.000
+    GREEN              0.054      0.022      2.430      0.015
+    BLUE               0.029      0.021      1.367      0.172
+
+ Means
+    COH                0.000      0.000    999.000    999.000
+    PLEA               0.000      0.000    999.000    999.000
+    SAFE               0.000      0.000    999.000    999.000
+    GREEN              0.000      0.000    999.000    999.000
+    BLUE               0.000      0.000    999.000    999.000
+    NOI                0.000      0.000    999.000    999.000
+
+ Intercepts
+    PCOH1              4.813      0.066     73.157      0.000
+    PCOH2              5.277      0.066     79.954      0.000
+    PCOH3              5.120      0.076     67.802      0.000
+    PPSS1              1.962      0.017    114.186      0.000
+    PPSS2              2.125      0.019    111.430      0.000
+    PPSS3              2.452      0.024    100.236      0.000
+    PPSS4              2.686      0.025    106.257      0.000
+    PPSS5              1.527      0.016     96.700      0.000
+    PPHQ1              0.670      0.023     29.394      0.000
+    PPHQ2              0.682      0.022     30.407      0.000
+    PPHQ3              1.307      0.022     60.681      0.000
+    PPHQ4              0.895      0.022     41.112      0.000
+    PPHQ5              0.945      0.020     47.541      0.000
+    PPLEA1             5.962      0.080     74.077      0.000
+    PPLEA2             5.484      0.086     63.914      0.000
+    PSAFE1             5.134      0.060     86.040      0.000
+    PSAFE2             5.425      0.066     82.220      0.000
+    PSAFE3             6.102      0.094     64.671      0.000
+    PGREEN1            3.512      0.040     88.700      0.000
+    PGREEN2            2.879      0.025    115.960      0.000
+    RIVER              2.784      0.034     81.627      0.000
+    LAKE               2.832      0.032     88.388      0.000
+    BEACH              7.305      0.302     24.160      0.000
+    TRAFFIC            2.721      0.024    111.847      0.000
+    INSIDE             2.188      0.021    103.372      0.000
+    OUTSIDE            2.400      0.022    110.058      0.000
+    PHYS               2.336      0.021    109.873      0.000
+    PSS                0.000      0.000    999.000    999.000
+    PHQ                0.000      0.000    999.000    999.000
+
+ Variances
+    COH                1.000      0.000    999.000    999.000
+    PLEA               1.000      0.000    999.000    999.000
+    SAFE               1.000      0.000    999.000    999.000
+    GREEN              1.000      0.000    999.000    999.000
+    BLUE               1.000      0.000    999.000    999.000
+    NOI                1.000      0.000    999.000    999.000
+
+ Residual Variances
+    PCOH1              0.322      0.014     23.630      0.000
+    PCOH2              0.248      0.013     18.815      0.000
+    PCOH3              0.502      0.014     35.377      0.000
+    PPSS1              0.374      0.012     32.335      0.000
+    PPSS2              0.319      0.011     28.935      0.000
+    PPSS3              0.346      0.010     35.110      0.000
+    PPSS4              0.288      0.009     33.456      0.000
+    PPSS5              0.367      0.010     35.623      0.000
+    PPHQ1              0.306      0.012     26.454      0.000
+    PPHQ2              0.320      0.012     26.578      0.000
+    PPHQ3              0.464      0.012     40.095      0.000
+    PPHQ4              0.378      0.013     29.674      0.000
+    PPHQ5              0.531      0.016     33.284      0.000
+    PPLEA1             0.650      0.016     40.849      0.000
+    PPLEA2             0.366      0.020     18.163      0.000
+    PSAFE1             0.264      0.015     17.646      0.000
+    PSAFE2             0.473      0.015     32.352      0.000
+    PSAFE3             0.521      0.017     31.023      0.000
+    PGREEN1            0.521      0.035     14.758      0.000
+    PGREEN2            0.656      0.028     23.630      0.000
+    RIVER              0.781      0.020     38.247      0.000
+    LAKE               0.496      0.037     13.303      0.000
+    BEACH              0.958      0.009    107.684      0.000
+    TRAFFIC            0.907      0.010     88.101      0.000
+    INSIDE             0.323      0.020     16.567      0.000
+    OUTSIDE            0.415      0.018     23.496      0.000
+    PHYS               0.988      0.004    272.326      0.000
+    PSS                0.879      0.010     84.046      0.000
+    PHQ                0.344      0.011     30.298      0.000
+
+
+STDY Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ COH      BY
+    PCOH1              0.823      0.008     99.430      0.000
+    PCOH2              0.867      0.008    114.365      0.000
+    PCOH3              0.706      0.010     70.242      0.000
+
+ PSS      BY
+    PPSS1              0.792      0.007    108.465      0.000
+    PPSS2              0.825      0.007    123.681      0.000
+    PPSS3              0.809      0.006    132.605      0.000
+    PPSS4              0.844      0.005    165.672      0.000
+    PPSS5              0.796      0.006    122.907      0.000
+
+ PHQ      BY
+    PPHQ1              0.833      0.007    120.098      0.000
+    PPHQ2              0.825      0.007    113.089      0.000
+    PPHQ3              0.732      0.008     92.746      0.000
+    PPHQ4              0.788      0.008     97.496      0.000
+    PPHQ5              0.685      0.012     58.816      0.000
+
+ PLEA     BY
+    PPLEA1             0.591      0.013     43.910      0.000
+    PPLEA2             0.796      0.013     62.983      0.000
+
+ SAFE     BY
+    PSAFE1             0.858      0.009     98.560      0.000
+    PSAFE2             0.726      0.010     72.007      0.000
+    PSAFE3             0.692      0.012     56.982      0.000
+
+ GREEN    BY
+    PGREEN1            0.692      0.025     27.162      0.000
+    PGREEN2            0.586      0.024     24.740      0.000
+
+ BLUE     BY
+    RIVER              0.468      0.022     21.402      0.000
+    LAKE               0.710      0.026     26.999      0.000
+    BEACH              0.206      0.022      9.505      0.000
+
+ NOI      BY
+    TRAFFIC            0.306      0.017     18.172      0.000
+    INSIDE             0.823      0.012     69.321      0.000
+    OUTSIDE            0.765      0.012     66.181      0.000
+
+ PHQ      ON
+    NOI                0.071      0.015      4.890      0.000
+    PLEA              -0.020      0.023     -0.863      0.388
+    SAFE               0.070      0.019      3.669      0.000
+    COH               -0.056      0.017     -3.202      0.001
+    GREEN              0.008      0.018      0.460      0.646
+    BLUE              -0.033      0.018     -1.898      0.058
+    PSS                0.780      0.009     87.501      0.000
+
+ PSS      ON
+    NOI                0.115      0.021      5.575      0.000
+    PLEA               0.049      0.030      1.641      0.101
+    SAFE              -0.129      0.024     -5.444      0.000
+    COH               -0.231      0.022    -10.384      0.000
+    GREEN              0.026      0.025      1.067      0.286
+    BLUE              -0.016      0.024     -0.681      0.496
+
+ PHQ      ON
+    PHYS              -0.050      0.011     -4.622      0.000
+
+ PHYS     ON
+    NOI                0.051      0.020      2.585      0.010
+    PLEA               0.036      0.031      1.175      0.240
+    SAFE              -0.044      0.023     -1.905      0.057
+    COH                0.054      0.022      2.461      0.014
+    GREEN             -0.021      0.024     -0.853      0.394
+    BLUE              -0.071      0.024     -2.935      0.003
+
+ PLEA     WITH
+    COH                0.608      0.016     36.895      0.000
+
+ SAFE     WITH
+    COH                0.440      0.016     27.807      0.000
+    PLEA               0.645      0.016     39.892      0.000
+
+ GREEN    WITH
+    COH               -0.094      0.021     -4.602      0.000
+    PLEA              -0.170      0.024     -7.092      0.000
+    SAFE              -0.137      0.020     -6.901      0.000
+
+ BLUE     WITH
+    COH               -0.027      0.020     -1.330      0.183
+    PLEA              -0.077      0.023     -3.312      0.001
+    SAFE              -0.076      0.020     -3.732      0.000
+    GREEN              0.507      0.027     19.029      0.000
+
+ NOI      WITH
+    COH               -0.438      0.017    -26.307      0.000
+    PLEA              -0.473      0.018    -25.567      0.000
+    SAFE              -0.393      0.018    -21.425      0.000
+    GREEN              0.054      0.022      2.430      0.015
+    BLUE               0.029      0.021      1.367      0.172
+
+ Means
+    COH                0.000      0.000    999.000    999.000
+    PLEA               0.000      0.000    999.000    999.000
+    SAFE               0.000      0.000    999.000    999.000
+    GREEN              0.000      0.000    999.000    999.000
+    BLUE               0.000      0.000    999.000    999.000
+    NOI                0.000      0.000    999.000    999.000
+
+ Intercepts
+    PCOH1              4.813      0.066     73.157      0.000
+    PCOH2              5.277      0.066     79.954      0.000
+    PCOH3              5.120      0.076     67.802      0.000
+    PPSS1              1.962      0.017    114.186      0.000
+    PPSS2              2.125      0.019    111.430      0.000
+    PPSS3              2.452      0.024    100.236      0.000
+    PPSS4              2.686      0.025    106.257      0.000
+    PPSS5              1.527      0.016     96.700      0.000
+    PPHQ1              0.670      0.023     29.394      0.000
+    PPHQ2              0.682      0.022     30.407      0.000
+    PPHQ3              1.307      0.022     60.681      0.000
+    PPHQ4              0.895      0.022     41.112      0.000
+    PPHQ5              0.945      0.020     47.541      0.000
+    PPLEA1             5.962      0.080     74.077      0.000
+    PPLEA2             5.484      0.086     63.914      0.000
+    PSAFE1             5.134      0.060     86.040      0.000
+    PSAFE2             5.425      0.066     82.220      0.000
+    PSAFE3             6.102      0.094     64.671      0.000
+    PGREEN1            3.512      0.040     88.700      0.000
+    PGREEN2            2.879      0.025    115.960      0.000
+    RIVER              2.784      0.034     81.627      0.000
+    LAKE               2.832      0.032     88.388      0.000
+    BEACH              7.305      0.302     24.160      0.000
+    TRAFFIC            2.721      0.024    111.847      0.000
+    INSIDE             2.188      0.021    103.372      0.000
+    OUTSIDE            2.400      0.022    110.058      0.000
+    PHYS               2.336      0.021    109.873      0.000
+    PSS                0.000      0.000    999.000    999.000
+    PHQ                0.000      0.000    999.000    999.000
+
+ Variances
+    COH                1.000      0.000    999.000    999.000
+    PLEA               1.000      0.000    999.000    999.000
+    SAFE               1.000      0.000    999.000    999.000
+    GREEN              1.000      0.000    999.000    999.000
+    BLUE               1.000      0.000    999.000    999.000
+    NOI                1.000      0.000    999.000    999.000
+
+ Residual Variances
+    PCOH1              0.322      0.014     23.630      0.000
+    PCOH2              0.248      0.013     18.815      0.000
+    PCOH3              0.502      0.014     35.377      0.000
+    PPSS1              0.374      0.012     32.335      0.000
+    PPSS2              0.319      0.011     28.935      0.000
+    PPSS3              0.346      0.010     35.110      0.000
+    PPSS4              0.288      0.009     33.456      0.000
+    PPSS5              0.367      0.010     35.623      0.000
+    PPHQ1              0.306      0.012     26.454      0.000
+    PPHQ2              0.320      0.012     26.578      0.000
+    PPHQ3              0.464      0.012     40.095      0.000
+    PPHQ4              0.378      0.013     29.674      0.000
+    PPHQ5              0.531      0.016     33.284      0.000
+    PPLEA1             0.650      0.016     40.849      0.000
+    PPLEA2             0.366      0.020     18.163      0.000
+    PSAFE1             0.264      0.015     17.646      0.000
+    PSAFE2             0.473      0.015     32.352      0.000
+    PSAFE3             0.521      0.017     31.023      0.000
+    PGREEN1            0.521      0.035     14.758      0.000
+    PGREEN2            0.656      0.028     23.630      0.000
+    RIVER              0.781      0.020     38.247      0.000
+    LAKE               0.496      0.037     13.303      0.000
+    BEACH              0.958      0.009    107.684      0.000
+    TRAFFIC            0.907      0.010     88.101      0.000
+    INSIDE             0.323      0.020     16.567      0.000
+    OUTSIDE            0.415      0.018     23.496      0.000
+    PHYS               0.988      0.004    272.326      0.000
+    PSS                0.879      0.010     84.046      0.000
+    PHQ                0.344      0.011     30.298      0.000
+
+
+STD Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ COH      BY
+    PCOH1              0.635      0.012     54.257      0.000
+    PCOH2              0.634      0.010     63.495      0.000
+    PCOH3              0.557      0.012     46.620      0.000
+
+ PSS      BY
+    PPSS1              0.657      0.010     66.701      0.000
+    PPSS2              0.639      0.009     71.180      0.000
+    PPSS3              0.606      0.009     68.169      0.000
+    PPSS4              0.646      0.008     78.709      0.000
+    PPSS5              0.679      0.009     71.723      0.000
+
+ PHQ      BY
+    PPHQ1              0.434      0.011     41.017      0.000
+    PPHQ2              0.479      0.011     44.381      0.000
+    PPHQ3              0.593      0.010     58.536      0.000
+    PPHQ4              0.564      0.011     51.461      0.000
+    PPHQ5              0.524      0.012     44.563      0.000
+
+ PLEA     BY
+    PPLEA1             0.335      0.009     37.040      0.000
+    PPLEA2             0.484      0.011     43.681      0.000
+
+ SAFE     BY
+    PSAFE1             0.529      0.009     61.244      0.000
+    PSAFE2             0.432      0.008     51.532      0.000
+    PSAFE3             0.395      0.010     41.515      0.000
+
+ GREEN    BY
+    PGREEN1            0.437      0.017     25.484      0.000
+    PGREEN2            0.407      0.017     23.307      0.000
+
+ BLUE     BY
+    RIVER              0.464      0.022     21.014      0.000
+    LAKE               0.704      0.027     26.407      0.000
+    BEACH              0.107      0.012      8.909      0.000
+
+ NOI      BY
+    TRAFFIC            0.244      0.014     17.464      0.000
+    INSIDE             0.585      0.013     44.968      0.000
+    OUTSIDE            0.553      0.012     45.513      0.000
+
+ PHQ      ON
+    NOI                0.071      0.015      4.890      0.000
+    PLEA              -0.020      0.023     -0.863      0.388
+    SAFE               0.070      0.019      3.669      0.000
+    COH               -0.056      0.017     -3.202      0.001
+    GREEN              0.008      0.018      0.460      0.646
+    BLUE              -0.033      0.018     -1.898      0.058
+    PSS                0.780      0.009     87.501      0.000
+
+ PSS      ON
+    NOI                0.115      0.021      5.575      0.000
+    PLEA               0.049      0.030      1.641      0.101
+    SAFE              -0.129      0.024     -5.444      0.000
+    COH               -0.231      0.022    -10.384      0.000
+    GREEN              0.026      0.025      1.067      0.286
+    BLUE              -0.016      0.024     -0.681      0.496
+
+ PHQ      ON
+    PHYS              -0.023      0.005     -4.637      0.000
+
+ PHYS     ON
+    NOI                0.112      0.043      2.583      0.010
+    PLEA               0.080      0.068      1.175      0.240
+    SAFE              -0.096      0.050     -1.906      0.057
+    COH                0.118      0.048      2.458      0.014
+    GREEN             -0.045      0.053     -0.853      0.394
+    BLUE              -0.155      0.053     -2.931      0.003
+
+ PLEA     WITH
+    COH                0.608      0.016     36.895      0.000
+
+ SAFE     WITH
+    COH                0.440      0.016     27.807      0.000
+    PLEA               0.645      0.016     39.892      0.000
+
+ GREEN    WITH
+    COH               -0.094      0.021     -4.602      0.000
+    PLEA              -0.170      0.024     -7.092      0.000
+    SAFE              -0.137      0.020     -6.901      0.000
+
+ BLUE     WITH
+    COH               -0.027      0.020     -1.330      0.183
+    PLEA              -0.077      0.023     -3.312      0.001
+    SAFE              -0.076      0.020     -3.732      0.000
+    GREEN              0.507      0.027     19.029      0.000
+
+ NOI      WITH
+    COH               -0.438      0.017    -26.307      0.000
+    PLEA              -0.473      0.018    -25.567      0.000
+    SAFE              -0.393      0.018    -21.425      0.000
+    GREEN              0.054      0.022      2.430      0.015
+    BLUE               0.029      0.021      1.367      0.172
+
+ Means
+    COH                0.000      0.000    999.000    999.000
+    PLEA               0.000      0.000    999.000    999.000
+    SAFE               0.000      0.000    999.000    999.000
+    GREEN              0.000      0.000    999.000    999.000
+    BLUE               0.000      0.000    999.000    999.000
+    NOI                0.000      0.000    999.000    999.000
+
+ Intercepts
+    PCOH1              3.714      0.012    297.140      0.000
+    PCOH2              3.860      0.011    347.647      0.000
+    PCOH3              4.039      0.012    339.990      0.000
+    PPSS1              1.628      0.011    146.847      0.000
+    PPSS2              1.646      0.010    159.397      0.000
+    PPSS3              1.838      0.010    180.083      0.000
+    PPSS4              2.056      0.010    197.669      0.000
+    PPSS5              1.302      0.012    110.734      0.000
+    PPHQ1              0.349      0.013     26.276      0.000
+    PPHQ2              0.396      0.015     27.156      0.000
+    PPHQ3              1.059      0.019     57.112      0.000
+    PPHQ4              0.640      0.017     36.641      0.000
+    PPHQ5              0.724      0.017     42.739      0.000
+    PPLEA1             3.376      0.009    357.606      0.000
+    PPLEA2             3.332      0.012    283.385      0.000
+    PSAFE1             3.167      0.010    315.214      0.000
+    PSAFE2             3.233      0.009    376.355      0.000
+    PSAFE3             3.480      0.009    367.628      0.000
+    PGREEN1            2.216      0.011    197.086      0.000
+    PGREEN2            1.997      0.011    187.355      0.000
+    RIVER              2.764      0.019    145.516      0.000
+    LAKE               2.811      0.016    176.429      0.000
+    BEACH              3.809      0.012    313.564      0.000
+    TRAFFIC            2.174      0.013    171.564      0.000
+    INSIDE             1.556      0.011    143.048      0.000
+    OUTSIDE            1.735      0.011    164.802      0.000
+    PHYS               5.122      0.028    181.148      0.000
+    PSS                0.000      0.000    999.000    999.000
+    PHQ                0.000      0.000    999.000    999.000
+
+ Variances
+    COH                1.000      0.000    999.000    999.000
+    PLEA               1.000      0.000    999.000    999.000
+    SAFE               1.000      0.000    999.000    999.000
+    GREEN              1.000      0.000    999.000    999.000
+    BLUE               1.000      0.000    999.000    999.000
+    NOI                1.000      0.000    999.000    999.000
+
+ Residual Variances
+    PCOH1              0.192      0.007     25.988      0.000
+    PCOH2              0.132      0.007     19.101      0.000
+    PCOH3              0.312      0.011     29.661      0.000
+    PPSS1              0.257      0.008     33.451      0.000
+    PPSS2              0.191      0.007     29.069      0.000
+    PPSS3              0.195      0.005     38.374      0.000
+    PPSS4              0.169      0.005     35.400      0.000
+    PPSS5              0.267      0.007     37.607      0.000
+    PPHQ1              0.083      0.003     23.846      0.000
+    PPHQ2              0.108      0.004     26.416      0.000
+    PPHQ3              0.304      0.008     39.974      0.000
+    PPHQ4              0.194      0.006     30.936      0.000
+    PPHQ5              0.311      0.011     29.269      0.000
+    PPLEA1             0.209      0.007     31.699      0.000
+    PPLEA2             0.135      0.007     18.206      0.000
+    PSAFE1             0.100      0.005     18.569      0.000
+    PSAFE2             0.168      0.006     29.461      0.000
+    PSAFE3             0.170      0.006     26.240      0.000
+    PGREEN1            0.207      0.014     14.475      0.000
+    PGREEN2            0.316      0.014     23.040      0.000
+    RIVER              0.770      0.024     32.641      0.000
+    LAKE               0.489      0.038     13.037      0.000
+    BEACH              0.260      0.020     12.934      0.000
+    TRAFFIC            0.578      0.010     58.867      0.000
+    INSIDE             0.164      0.010     17.091      0.000
+    OUTSIDE            0.217      0.009     25.074      0.000
+    PHYS               4.750      0.063     75.213      0.000
+    PSS                0.879      0.010     84.046      0.000
+    PHQ                0.344      0.011     30.298      0.000
+
+
+R-SQUARE
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    PCOH1              0.678      0.014     49.715      0.000
+    PCOH2              0.752      0.013     57.182      0.000
+    PCOH3              0.498      0.014     35.121      0.000
+    PPSS1              0.626      0.012     54.232      0.000
+    PPSS2              0.681      0.011     61.840      0.000
+    PPSS3              0.654      0.010     66.303      0.000
+    PPSS4              0.712      0.009     82.836      0.000
+    PPSS5              0.633      0.010     61.453      0.000
+    PPHQ1              0.694      0.012     60.049      0.000
+    PPHQ2              0.680      0.012     56.544      0.000
+    PPHQ3              0.536      0.012     46.373      0.000
+    PPHQ4              0.622      0.013     48.748      0.000
+    PPHQ5              0.469      0.016     29.408      0.000
+    PPLEA1             0.350      0.016     21.955      0.000
+    PPLEA2             0.634      0.020     31.492      0.000
+    PSAFE1             0.736      0.015     49.280      0.000
+    PSAFE2             0.527      0.015     36.004      0.000
+    PSAFE3             0.479      0.017     28.491      0.000
+    PGREEN1            0.479      0.035     13.581      0.000
+    PGREEN2            0.344      0.028     12.370      0.000
+    RIVER              0.219      0.020     10.701      0.000
+    LAKE               0.504      0.037     13.499      0.000
+    BEACH              0.042      0.009      4.752      0.000
+    TRAFFIC            0.093      0.010      9.086      0.000
+    INSIDE             0.677      0.020     34.660      0.000
+    OUTSIDE            0.585      0.018     33.090      0.000
+    PHYS               0.012      0.004      3.171      0.002
+
+     Latent                                         Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    PSS                0.121      0.010     11.597      0.000
+    PHQ                0.656      0.011     57.872      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.561E-03
+       (ratio of smallest to largest eigenvalue)
+
+
+TOTAL, TOTAL INDIRECT, SPECIFIC INDIRECT, AND DIRECT EFFECTS
+
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Effects from NOI to PHQ
+
+  Sum of indirect      0.148      0.028      5.275      0.000
+
+  Specific indirect
+
+    PHQ
+    PSS
+    NOI                0.152      0.028      5.487      0.000
+
+    PHQ
+    PHYS
+    NOI               -0.004      0.002     -2.169      0.030
+
+
+Effects from PLEA to PHQ
+
+  Sum of indirect      0.062      0.041      1.539      0.124
+
+  Specific indirect
+
+    PHQ
+    PSS
+    PLEA               0.065      0.040      1.635      0.102
+
+    PHQ
+    PHYS
+    PLEA              -0.003      0.003     -1.152      0.249
+
+
+Effects from SAFE to PHQ
+
+  Sum of indirect     -0.168      0.032     -5.187      0.000
+
+  Specific indirect
+
+    PHQ
+    PSS
+    SAFE              -0.172      0.032     -5.339      0.000
+
+    PHQ
+    PHYS
+    SAFE               0.004      0.002      1.778      0.075
+
+
+Effects from COH to PHQ
+
+  Sum of indirect     -0.312      0.031     -9.923      0.000
+
+  Specific indirect
+
+    PHQ
+    PSS
+    COH               -0.307      0.031     -9.889      0.000
+
+    PHQ
+    PHYS
+    COH               -0.005      0.002     -2.110      0.035
+
+
+Effects from GREEN to PHQ
+
+  Sum of indirect      0.037      0.033      1.105      0.269
+
+  Specific indirect
+
+    PHQ
+    PSS
+    GREEN              0.035      0.033      1.068      0.285
+
+    PHQ
+    PHYS
+    GREEN              0.002      0.002      0.838      0.402
+
+
+Effects from BLUE to PHQ
+
+  Sum of indirect     -0.016      0.032     -0.485      0.628
+
+  Specific indirect
+
+    PHQ
+    PSS
+    BLUE              -0.022      0.032     -0.682      0.495
+
+    PHQ
+    PHYS
+    BLUE               0.006      0.002      2.451      0.014
+
+
+
+STANDARDIZED TOTAL, TOTAL INDIRECT, SPECIFIC INDIRECT, AND DIRECT EFFECTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Effects from NOI to PHQ
+
+  Sum of indirect      0.087      0.016      5.364      0.000
+
+  Specific indirect
+
+    PHQ
+    PSS
+    NOI                0.089      0.016      5.585      0.000
+
+    PHQ
+    PHYS
+    NOI               -0.003      0.001     -2.171      0.030
+
+
+Effects from PLEA to PHQ
+
+  Sum of indirect      0.037      0.024      1.541      0.123
+
+  Specific indirect
+
+    PHQ
+    PSS
+    PLEA               0.038      0.023      1.638      0.101
+
+    PHQ
+    PHYS
+    PLEA              -0.002      0.002     -1.153      0.249
+
+
+Effects from SAFE to PHQ
+
+  Sum of indirect     -0.098      0.019     -5.229      0.000
+
+  Specific indirect
+
+    PHQ
+    PSS
+    SAFE              -0.101      0.019     -5.386      0.000
+
+    PHQ
+    PHYS
+    SAFE               0.002      0.001      1.781      0.075
+
+
+Effects from COH to PHQ
+
+  Sum of indirect     -0.183      0.018    -10.342      0.000
+
+  Specific indirect
+
+    PHQ
+    PSS
+    COH               -0.180      0.017    -10.310      0.000
+
+    PHQ
+    PHYS
+    COH               -0.003      0.001     -2.111      0.035
+
+
+Effects from GREEN to PHQ
+
+  Sum of indirect      0.022      0.020      1.105      0.269
+
+  Specific indirect
+
+    PHQ
+    PSS
+    GREEN              0.021      0.019      1.068      0.285
+
+    PHQ
+    PHYS
+    GREEN              0.001      0.001      0.838      0.402
+
+
+Effects from BLUE to PHQ
+
+  Sum of indirect     -0.009      0.019     -0.485      0.628
+
+  Specific indirect
+
+    PHQ
+    PSS
+    BLUE              -0.013      0.019     -0.682      0.495
+
+    PHQ
+    PHYS
+    BLUE               0.004      0.001      2.452      0.014
+
+
+
+STDY Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Effects from NOI to PHQ
+
+  Sum of indirect      0.087      0.016      5.364      0.000
+
+  Specific indirect
+
+    PHQ
+    PSS
+    NOI                0.089      0.016      5.585      0.000
+
+    PHQ
+    PHYS
+    NOI               -0.003      0.001     -2.171      0.030
+
+
+Effects from PLEA to PHQ
+
+  Sum of indirect      0.037      0.024      1.541      0.123
+
+  Specific indirect
+
+    PHQ
+    PSS
+    PLEA               0.038      0.023      1.638      0.101
+
+    PHQ
+    PHYS
+    PLEA              -0.002      0.002     -1.153      0.249
+
+
+Effects from SAFE to PHQ
+
+  Sum of indirect     -0.098      0.019     -5.229      0.000
+
+  Specific indirect
+
+    PHQ
+    PSS
+    SAFE              -0.101      0.019     -5.386      0.000
+
+    PHQ
+    PHYS
+    SAFE               0.002      0.001      1.781      0.075
+
+
+Effects from COH to PHQ
+
+  Sum of indirect     -0.183      0.018    -10.342      0.000
+
+  Specific indirect
+
+    PHQ
+    PSS
+    COH               -0.180      0.017    -10.310      0.000
+
+    PHQ
+    PHYS
+    COH               -0.003      0.001     -2.111      0.035
+
+
+Effects from GREEN to PHQ
+
+  Sum of indirect      0.022      0.020      1.105      0.269
+
+  Specific indirect
+
+    PHQ
+    PSS
+    GREEN              0.021      0.019      1.068      0.285
+
+    PHQ
+    PHYS
+    GREEN              0.001      0.001      0.838      0.402
+
+
+Effects from BLUE to PHQ
+
+  Sum of indirect     -0.009      0.019     -0.485      0.628
+
+  Specific indirect
+
+    PHQ
+    PSS
+    BLUE              -0.013      0.019     -0.682      0.495
+
+    PHQ
+    PHYS
+    BLUE               0.004      0.001      2.452      0.014
+
+
+
+STD Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Effects from NOI to PHQ
+
+  Sum of indirect      0.087      0.016      5.364      0.000
+
+  Specific indirect
+
+    PHQ
+    PSS
+    NOI                0.089      0.016      5.585      0.000
+
+    PHQ
+    PHYS
+    NOI               -0.003      0.001     -2.171      0.030
+
+
+Effects from PLEA to PHQ
+
+  Sum of indirect      0.037      0.024      1.541      0.123
+
+  Specific indirect
+
+    PHQ
+    PSS
+    PLEA               0.038      0.023      1.638      0.101
+
+    PHQ
+    PHYS
+    PLEA              -0.002      0.002     -1.153      0.249
+
+
+Effects from SAFE to PHQ
+
+  Sum of indirect     -0.098      0.019     -5.229      0.000
+
+  Specific indirect
+
+    PHQ
+    PSS
+    SAFE              -0.101      0.019     -5.386      0.000
+
+    PHQ
+    PHYS
+    SAFE               0.002      0.001      1.781      0.075
+
+
+Effects from COH to PHQ
+
+  Sum of indirect     -0.183      0.018    -10.342      0.000
+
+  Specific indirect
+
+    PHQ
+    PSS
+    COH               -0.180      0.017    -10.310      0.000
+
+    PHQ
+    PHYS
+    COH               -0.003      0.001     -2.111      0.035
+
+
+Effects from GREEN to PHQ
+
+  Sum of indirect      0.022      0.020      1.105      0.269
+
+  Specific indirect
+
+    PHQ
+    PSS
+    GREEN              0.021      0.019      1.068      0.285
+
+    PHQ
+    PHYS
+    GREEN              0.001      0.001      0.838      0.402
+
+
+Effects from BLUE to PHQ
+
+  Sum of indirect     -0.009      0.019     -0.485      0.628
+
+  Specific indirect
+
+    PHQ
+    PSS
+    BLUE              -0.013      0.019     -0.682      0.495
+
+    PHQ
+    PHYS
+    BLUE               0.004      0.001      2.452      0.014
+
+
+
+
+MODEL MODIFICATION INDICES
+
+NOTE:  Modification indices for direct effects of observed dependent variables
+regressed on covariates may not be included.  To include these, request
+MODINDICES (ALL).
+
+Minimum M.I. value for printing the modification index    10.000
+
+                                   M.I.     E.P.C.  Std E.P.C.  StdYX E.P.C.
+
+BY Statements
+
+COH      BY PPHQ5                 10.486    -0.031     -0.031       -0.040
+COH      BY PSAFE2                81.405    -0.076     -0.076       -0.128
+COH      BY PSAFE3               165.787     0.106      0.106        0.185
+COH      BY PGREEN1               18.665    -0.050     -0.050       -0.080
+COH      BY PGREEN2               18.665     0.047      0.047        0.068
+COH      BY TRAFFIC               65.759    -0.110     -0.110       -0.137
+COH      BY OUTSIDE               16.165     0.057      0.057        0.079
+PSS      BY PCOH1                 10.181    -0.026     -0.027       -0.036
+PSS      BY PPHQ4                 13.407    -0.051     -0.054       -0.076
+PSS      BY PSAFE2                11.451     0.023      0.024        0.040
+PSS      BY PSAFE3                10.995    -0.022     -0.023       -0.041
+PSS      BY TRAFFIC               40.203     0.070      0.074        0.093
+PHQ      BY PPSS2                 25.302    -0.044     -0.074       -0.096
+PHQ      BY PPSS3                 41.502    -0.055     -0.094       -0.126
+PHQ      BY PPSS4                 54.373     0.062      0.105        0.138
+PHQ      BY PSAFE2                23.327     0.020      0.034        0.057
+PHQ      BY PSAFE3                11.985    -0.014     -0.024       -0.042
+PHQ      BY TRAFFIC               14.346     0.026      0.045        0.056
+PLEA     BY PCOH1                 97.105     0.135      0.135        0.174
+PLEA     BY PCOH2                 42.729    -0.087     -0.087       -0.118
+PLEA     BY PCOH3                 13.990    -0.054     -0.054       -0.068
+PLEA     BY PSAFE1                60.502    -0.112     -0.112       -0.181
+PLEA     BY PSAFE2                60.247    -0.097     -0.097       -0.163
+PLEA     BY PSAFE3               280.630     0.200      0.200        0.351
+PLEA     BY PGREEN1               52.053    -0.094     -0.094       -0.149
+PLEA     BY PGREEN2               52.054     0.088      0.088        0.126
+PLEA     BY TRAFFIC              417.205    -0.309     -0.309       -0.386
+PLEA     BY INSIDE                12.313     0.064      0.064        0.090
+PLEA     BY OUTSIDE               45.028     0.115      0.115        0.159
+SAFE     BY PCOH1                 51.904     0.073      0.073        0.094
+SAFE     BY PCOH3                 25.781    -0.056     -0.056       -0.071
+SAFE     BY PPSS3                 11.890    -0.027     -0.027       -0.036
+SAFE     BY PGREEN1               17.179    -0.051     -0.051       -0.080
+SAFE     BY PGREEN2               17.179     0.047      0.047        0.068
+SAFE     BY TRAFFIC              624.032    -0.332     -0.332       -0.416
+SAFE     BY INSIDE                58.978     0.104      0.104        0.146
+GREEN    BY PSAFE2                24.528    -0.042     -0.042       -0.070
+GREEN    BY TRAFFIC               92.317     0.132      0.132        0.165
+BLUE     BY PSAFE2                20.877    -0.039     -0.039       -0.065
+BLUE     BY PGREEN1               35.223    -0.275     -0.275       -0.436
+BLUE     BY PGREEN2               35.223     0.256      0.256        0.370
+BLUE     BY TRAFFIC               25.852     0.071      0.071        0.089
+NOI      BY PCOH1                 60.396    -0.081     -0.081       -0.105
+NOI      BY PCOH2                 32.303     0.057      0.057        0.077
+NOI      BY PPSS1                 24.157    -0.045     -0.045       -0.054
+NOI      BY PPHQ1                 16.175    -0.022     -0.022       -0.043
+NOI      BY PPHQ2                 10.359    -0.020     -0.020       -0.035
+NOI      BY PPHQ3                 38.700     0.061      0.061        0.075
+NOI      BY PPLEA1                27.684     0.058      0.058        0.103
+NOI      BY PPLEA2                27.689    -0.084     -0.084       -0.139
+NOI      BY PSAFE2                10.425     0.027      0.027        0.046
+NOI      BY PSAFE3                24.422    -0.041     -0.041       -0.072
+NOI      BY PGREEN1               24.864     0.060      0.060        0.094
+NOI      BY PGREEN2               24.864    -0.055     -0.055       -0.080
+
+ON/BY Statements
+
+PHYS     ON PSS      /
+PSS      BY PHYS                  15.929    -0.132     -0.141       -0.064
+PHYS     ON PHQ      /
+PHQ      BY PHYS                  15.929    -0.106     -0.181       -0.082
+PSS      ON PHQ      /
+PHQ      BY PSS                   15.885     0.709      1.133        1.133
+
+ON Statements
+
+PSS      ON PHYS                  15.929    -0.028     -0.026       -0.057
+
+WITH Statements
+
+PCOH2    WITH PCOH1               13.356    -0.033     -0.033       -0.206
+PCOH3    WITH PCOH1               64.852    -0.054     -0.054       -0.220
+PCOH3    WITH PCOH2              130.347     0.078      0.078        0.381
+PPSS3    WITH PPSS1               31.798     0.022      0.022        0.099
+PPSS3    WITH PPSS2               50.094     0.025      0.025        0.131
+PPSS4    WITH PPSS2               30.518    -0.020     -0.020       -0.109
+PPSS4    WITH PPSS3               14.628    -0.013     -0.013       -0.073
+PPSS5    WITH PPSS1               45.499    -0.031     -0.031       -0.117
+PPSS5    WITH PPSS2               26.785     0.021      0.021        0.094
+PPSS5    WITH PPSS3               13.718    -0.015     -0.015       -0.066
+PPHQ1    WITH PCOH3               10.584    -0.009     -0.009       -0.056
+PPHQ1    WITH PPSS1               51.878     0.018      0.018        0.123
+PPHQ2    WITH PPSS1               23.123     0.014      0.014        0.081
+PPHQ2    WITH PPHQ1              241.616     0.031      0.031        0.331
+PPHQ3    WITH PPSS1               40.606    -0.028     -0.028       -0.102
+PPHQ3    WITH PPSS4               68.106     0.031      0.031        0.137
+PPHQ3    WITH PPHQ1               84.614    -0.027     -0.027       -0.169
+PPHQ3    WITH PPHQ2              134.038    -0.038     -0.038       -0.210
+PPHQ4    WITH PPSS1               21.674    -0.017     -0.017       -0.076
+PPHQ4    WITH PPSS3               10.860    -0.011     -0.011       -0.055
+PPHQ4    WITH PPHQ1              131.241    -0.029     -0.029       -0.226
+PPHQ4    WITH PPHQ3              284.755     0.070      0.070        0.290
+PPHQ5    WITH PPHQ1               19.011     0.012      0.012        0.077
+PPHQ5    WITH PPHQ2               57.085    -0.024     -0.024       -0.132
+PPLEA2   WITH PCOH1               12.570     0.013      0.013        0.080
+PPLEA2   WITH PCOH2               19.128    -0.015     -0.015       -0.111
+PPLEA2   WITH PPLEA1              15.373    -5.012     -5.012      -29.868
+PSAFE1   WITH PPLEA1              10.168    -0.010     -0.010       -0.067
+PSAFE1   WITH PPLEA2              14.235    -0.012     -0.012       -0.105
+PSAFE2   WITH PCOH1               19.292    -0.014     -0.014       -0.080
+PSAFE2   WITH PCOH3               10.227    -0.012     -0.012       -0.053
+PSAFE2   WITH PPLEA2              23.641    -0.015     -0.015       -0.101
+PSAFE2   WITH PSAFE1             264.410     0.093      0.093        0.718
+PSAFE3   WITH PCOH1               41.976     0.021      0.021        0.116
+PSAFE3   WITH PPLEA2              93.943     0.030      0.030        0.196
+PSAFE3   WITH PSAFE1              57.993    -0.038     -0.038       -0.294
+PSAFE3   WITH PSAFE2              59.192    -0.030     -0.030       -0.179
+PGREEN1  WITH PPLEA2              18.242    -0.019     -0.019       -0.112
+PGREEN2  WITH PPLEA2              43.706     0.030      0.030        0.144
+PGREEN2  WITH PSAFE2              26.658    -0.021     -0.021       -0.089
+PGREEN2  WITH PSAFE3              10.498     0.013      0.013        0.055
+PGREEN2  WITH PGREEN1             15.999    18.466     18.466       72.125
+LAKE     WITH PSAFE2              10.208    -0.019     -0.019       -0.066
+LAKE     WITH PGREEN1             29.294    -0.069     -0.069       -0.217
+LAKE     WITH PGREEN2             17.003     0.052      0.052        0.131
+TRAFFIC  WITH PCOH2               12.552     0.018      0.018        0.064
+TRAFFIC  WITH PPLEA2              37.715    -0.031     -0.031       -0.112
+TRAFFIC  WITH PSAFE1              32.233    -0.026     -0.026       -0.107
+TRAFFIC  WITH PSAFE2             178.473    -0.065     -0.065       -0.207
+TRAFFIC  WITH PGREEN1             26.855     0.031      0.031        0.091
+INSIDE   WITH PSAFE2              33.984     0.020      0.020        0.119
+INSIDE   WITH TRAFFIC             64.362    -0.058     -0.058       -0.188
+OUTSIDE  WITH PPHQ3               13.238     0.016      0.016        0.064
+OUTSIDE  WITH PPLEA1              22.488     0.018      0.018        0.085
+OUTSIDE  WITH TRAFFIC             19.973    -0.031     -0.031       -0.088
+OUTSIDE  WITH INSIDE             369.747     0.490      0.490        2.599
+PHYS     WITH PSS                 15.929    -0.132     -0.132       -0.061
+
+
+TECHNICAL 4 OUTPUT
+
+
+     ESTIMATES DERIVED FROM THE MODEL
+
+
+           ESTIMATED MEANS FOR THE LATENT VARIABLES
+              COH           PSS           PHQ           PLEA          SAFE
+              ________      ________      ________      ________      ________
+                0.000         0.000        -0.201         0.000         0.000
+
+
+           ESTIMATED MEANS FOR THE LATENT VARIABLES
+              GREEN         BLUE          NOI           PHYS
+              ________      ________      ________      ________
+                0.000         0.000         0.000         5.122
+
+
+           S.E. FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              COH           PSS           PHQ           PLEA          SAFE
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.043         0.000         0.000
+
+
+           S.E. FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              GREEN         BLUE          NOI           PHYS
+              ________      ________      ________      ________
+                0.000         0.000         0.000         0.028
+
+
+           EST./S.E. FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              COH           PSS           PHQ           PLEA          SAFE
+              ________      ________      ________      ________      ________
+                0.000         0.000        -4.643         0.000         0.000
+
+
+           EST./S.E. FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              GREEN         BLUE          NOI           PHYS
+              ________      ________      ________      ________
+                0.000         0.000         0.000       181.148
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              COH           PSS           PHQ           PLEA          SAFE
+              ________      ________      ________      ________      ________
+                1.000         1.000         0.000         1.000         1.000
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED MEANS FOR THE LATENT VARIABLES
+              GREEN         BLUE          NOI           PHYS
+              ________      ________      ________      ________
+                1.000         1.000         1.000         0.000
+
+
+           ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              COH           PSS           PHQ           PLEA          SAFE
+              ________      ________      ________      ________      ________
+ COH            1.000
+ PSS           -0.331         1.138
+ PHQ           -0.532         1.459         2.910
+ PLEA           0.608        -0.247        -0.381         1.000
+ SAFE           0.440        -0.263        -0.317         0.645         1.000
+ GREEN         -0.094         0.059         0.069        -0.170        -0.137
+ BLUE          -0.027         0.013        -0.026        -0.077        -0.076
+ NOI           -0.438         0.261         0.454        -0.473        -0.393
+ PHYS           0.083        -0.009        -0.197         0.056        -0.019
+
+
+           ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              GREEN         BLUE          NOI           PHYS
+              ________      ________      ________      ________
+ GREEN          1.000
+ BLUE           0.507         1.000
+ NOI            0.054         0.029         1.000
+ PHYS          -0.129        -0.177         0.054         4.806
+
+
+           S.E. FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              COH           PSS           PHQ           PLEA          SAFE
+              ________      ________      ________      ________      ________
+ COH            0.000
+ PSS            0.019         0.014
+ PHQ            0.032         0.039         0.096
+ PLEA           0.016         0.019         0.032         0.000
+ SAFE           0.016         0.018         0.030         0.016         0.000
+ GREEN          0.021         0.020         0.034         0.024         0.020
+ BLUE           0.020         0.020         0.033         0.023         0.020
+ NOI            0.017         0.019         0.032         0.018         0.018
+ PHYS           0.032         0.013         0.044         0.036         0.033
+
+
+           S.E. FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              GREEN         BLUE          NOI           PHYS
+              ________      ________      ________      ________
+ GREEN          0.000
+ BLUE           0.027         0.000
+ NOI            0.022         0.021         0.000
+ PHYS           0.039         0.040         0.035         0.062
+
+
+           EST./S.E. FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              COH           PSS           PHQ           PLEA          SAFE
+              ________      ________      ________      ________      ________
+ COH      ***********
+ PSS          -17.763        84.046
+ PHQ          -16.612        37.285        30.298
+ PLEA          36.895       -13.261       -11.912   ***********
+ SAFE          27.807       -14.944       -10.601        39.892   ***********
+ GREEN         -4.602         2.996         2.069        -7.092        -6.901
+ BLUE          -1.330         0.662        -0.804        -3.312        -3.732
+ NOI          -26.307        13.888        13.965       -25.567       -21.425
+ PHYS           2.570        -0.712        -4.430         1.558        -0.561
+
+
+           EST./S.E. FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              GREEN         BLUE          NOI           PHYS
+              ________      ________      ________      ________
+ GREEN    ***********
+ BLUE          19.029   ***********
+ NOI            2.430         1.367   ***********
+ PHYS          -3.277        -4.376         1.520        77.569
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              COH           PSS           PHQ           PLEA          SAFE
+              ________      ________      ________      ________      ________
+ COH            0.000
+ PSS            0.000         0.000
+ PHQ            0.000         0.000         0.000
+ PLEA           0.000         0.000         0.000         0.000
+ SAFE           0.000         0.000         0.000         0.000         0.000
+ GREEN          0.000         0.003         0.039         0.000         0.000
+ BLUE           0.183         0.508         0.421         0.001         0.000
+ NOI            0.000         0.000         0.000         0.000         0.000
+ PHYS           0.010         0.476         0.000         0.119         0.575
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED COVARIANCE MATRIX FOR THE LATENT VARIABLES
+              GREEN         BLUE          NOI           PHYS
+              ________      ________      ________      ________
+ GREEN          0.000
+ BLUE           0.000         0.000
+ NOI            0.015         0.172         0.000
+ PHYS           0.001         0.000         0.129         0.000
+
+
+           ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              COH           PSS           PHQ           PLEA          SAFE
+              ________      ________      ________      ________      ________
+ COH            1.000
+ PSS           -0.310         1.000
+ PHQ           -0.312         0.802         1.000
+ PLEA           0.608        -0.232        -0.223         1.000
+ SAFE           0.440        -0.246        -0.186         0.645         1.000
+ GREEN         -0.094         0.055         0.041        -0.170        -0.137
+ BLUE          -0.027         0.013        -0.015        -0.077        -0.076
+ NOI           -0.438         0.244         0.266        -0.473        -0.393
+ PHYS           0.038        -0.004        -0.053         0.026        -0.009
+
+
+           ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              GREEN         BLUE          NOI           PHYS
+              ________      ________      ________      ________
+ GREEN          1.000
+ BLUE           0.507         1.000
+ NOI            0.054         0.029         1.000
+ PHYS          -0.059        -0.081         0.024         1.000
+
+
+           S.E. FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              COH           PSS           PHQ           PLEA          SAFE
+              ________      ________      ________      ________      ________
+ COH            0.000
+ PSS            0.016         0.000
+ PHQ            0.017         0.007         0.000
+ PLEA           0.016         0.017         0.018         0.000
+ SAFE           0.016         0.015         0.017         0.016         0.000
+ GREEN          0.021         0.018         0.020         0.024         0.020
+ BLUE           0.020         0.019         0.019         0.023         0.020
+ NOI            0.017         0.017         0.018         0.018         0.018
+ PHYS           0.015         0.005         0.012         0.016         0.015
+
+
+           S.E. FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              GREEN         BLUE          NOI           PHYS
+              ________      ________      ________      ________
+ GREEN          0.000
+ BLUE           0.027         0.000
+ NOI            0.022         0.021         0.000
+ PHYS           0.018         0.018         0.016         0.000
+
+
+           EST./S.E. FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              COH           PSS           PHQ           PLEA          SAFE
+              ________      ________      ________      ________      ________
+ COH          999.000
+ PSS          -19.563       999.000
+ PHQ          -18.435       111.642       999.000
+ PLEA          36.895       -13.853       -12.444       999.000
+ SAFE          27.807       -15.903       -10.934        39.892       999.000
+ GREEN         -4.602         3.002         2.071        -7.092        -6.901
+ BLUE          -1.330         0.662        -0.805        -3.312        -3.732
+ NOI          -26.307        14.715        15.120       -25.567       -21.425
+ PHYS           2.574        -0.713        -4.448         1.558        -0.561
+
+
+           EST./S.E. FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              GREEN         BLUE          NOI           PHYS
+              ________      ________      ________      ________
+ GREEN        999.000
+ BLUE          19.029       999.000
+ NOI            2.430         1.367       999.000
+ PHYS          -3.273        -4.381         1.520       999.000
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              COH           PSS           PHQ           PLEA          SAFE
+              ________      ________      ________      ________      ________
+ COH            0.000
+ PSS            0.000         0.000
+ PHQ            0.000         0.000         0.000
+ PLEA           0.000         0.000         0.000         0.000
+ SAFE           0.000         0.000         0.000         0.000         0.000
+ GREEN          0.000         0.003         0.038         0.000         0.000
+ BLUE           0.183         0.508         0.421         0.001         0.000
+ NOI            0.000         0.000         0.000         0.000         0.000
+ PHYS           0.010         0.476         0.000         0.119         0.575
+
+
+           TWO-TAILED P-VALUE FOR ESTIMATED CORRELATION MATRIX FOR THE LATENT VARIABLES
+              GREEN         BLUE          NOI           PHYS
+              ________      ________      ________      ________
+ GREEN          0.000
+ BLUE           0.000         0.000
+ NOI            0.015         0.172         0.000
+ PHYS           0.001         0.000         0.129         0.000
+
+
+     Beginning Time:  16:59:16
+        Ending Time:  16:59:32
+       Elapsed Time:  00:00:16
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2017 Muthen & Muthen

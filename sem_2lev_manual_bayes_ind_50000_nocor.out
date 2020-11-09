@@ -1,0 +1,2680 @@
+Mplus VERSION 8
+MUTHEN & MUTHEN
+07/31/2019  11:44 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Your title goes here
+  DATA: FILE = "try.dat";
+  VARIABLE:
+  NAMES = we_id weighting clus municipality region province urbanity corop inpsecj
+       age age_categories sex education_level origin income_quintile household_type
+       emp_status marital_status phqsum phqlevel pss_sum pa_normal pa_7days
+       working_hours work_location length_home noise traffic traveltime green blue
+       coh_total alpha1 alpha2 alpha3 alpha4 alpha5 alpha6 alpha7 alpha8 alpha9
+       alpha10 alpha11 coh1 coh2 coh3 coh4 coh4_rev coh5 coh5_rev inside outside park
+       play sport forest river lake beach pss1 pss2 pss3 pss4 pss5 pss6 pss7 pss8 pss9
+       pss10 phq1 phq2 phq3 phq4 phq5 phq6 phq7 phq8 phq9 alpha1rev alpha3rev
+       pleasantness safety blue300 blue1000 green300 green1000 frag16 depri16 area_ha
+       adr_dec18 address_density trafficrev;
+  MISSING=.;
+
+  USEVARIABLES = coh1 coh2 coh3 coh4 coh5 pss1 pss2 pss3 pss4 pss5 pss6 pss7 pss8 pss9 pss10
+       phq1 phq2 phq3 phq4 phq5 phq6 phq7 phq8 phq9 alpha1 alpha2 alpha3 alpha4 alpha6
+       alpha7 alpha8 alpha9 alpha10 alpha11 park play sport forest river lake beach
+       traffic noise inside outside clus;
+
+  CATEGORICAL =
+  coh1 coh2 coh3 coh4 coh5 pss1 pss2 pss3 pss4 pss5 pss6 pss7 pss8 pss9
+  pss10 phq1 phq2 phq3 phq4 phq5 phq6 phq7 phq8 phq9 alpha1 alpha2
+  alpha3 alpha4 alpha6 alpha7 alpha8 alpha9 alpha10 alpha11 park play
+  sport forest river lake beach traffic noise inside outside;
+
+  CLUSTER = clus;
+  ANALYSIS:
+  TYPE = TWOLEVEL RANDOM;
+  ESTIMATOR = BAYES;
+  PROCESSORS = 2;
+
+  MODEL:
+  %WITHIN%
+  coh BY coh1;
+  coh BY  coh2 ;
+  coh BY  coh3 ;
+  coh BY  coh4 ;
+  coh BY  coh5 ;
+
+  pss BY pss1;
+  pss BY  pss2 ;
+  pss BY  pss3 ;
+  pss BY  pss4 ;
+  pss BY  pss5 ;
+  pss BY  pss6 ;
+  pss BY  pss7 ;
+  pss BY  pss8 ;
+  pss BY  pss9 ;
+  pss BY  pss10 ;
+
+  phq BY phq1;
+  phq BY  phq2 ;
+  phq BY  phq3 ;
+  phq BY  phq4 ;
+  phq BY  phq5 ;
+  phq BY  phq6 ;
+  phq BY  phq7 ;
+  phq BY  phq8 ;
+  phq BY  phq9 ;
+
+  plea BY alpha1;
+  plea BY  alpha2 ;
+  plea BY  alpha3 ;
+  plea BY  alpha4 ;
+
+  safe BY alpha6;
+  safe BY  alpha7 ;
+  safe BY  alpha8 ;
+  safe BY  alpha9 ;
+  safe BY  alpha10 ;
+  safe BY  alpha11 ;
+
+  green BY park;
+  green BY  play ;
+  green BY  sport ;
+  green BY  forest ;
+
+  blue BY river;
+  blue BY  lake ;
+  blue BY  beach ;
+
+  noi BY traffic;
+  noi BY  noise ;
+  noi BY  inside ;
+  noi BY  outside ;
+
+  sphqonpss | phq ON pss;
+
+  sphqonnoi | phq ON noi;
+  sphqonplea | phq ON plea;
+  sphqonsafe | phq ON safe;
+  sphqoncoh | phq ON coh;
+  sphqongreen | phq ON green;
+  sphqonblue | phq ON blue;
+
+  spssonnoi | pss ON noi;
+  spssonplea | pss ON plea;
+  spssonsafe | pss ON safe;
+  spssoncoh | pss ON coh;
+  spssongreen | pss ON green;
+  spssonblue | pss ON blue;
+
+  !%BETWEEN%
+
+  !%WITHIN% ! Model for Within effects follows
+  !sa | m ON x; ! regress m on x, call the random slope "sa"
+  !sb | y ON m; ! regress y on m, call the random slope "sb"
+  !sc | y ON x; ! regress y on x, call the random slope "sc"
+
+  %BETWEEN% ! Model for Between effects follows
+  !sa sb sc m y; ! estimate Level-2 (residual) variances for sa, sb, sc, m, and y
+  sphqonpss;
+
+  sphqonnoi;
+  sphqonplea;
+  sphqonsafe;
+  sphqoncoh;
+  sphqongreen;
+  sphqonblue;
+
+  spssonnoi;
+  spssonplea;
+  spssonsafe;
+  spssoncoh;
+  spssongreen;
+  spssonblue;
+
+  ! Estimate random slope means
+  ![sa](a); ! estimate the mean of sa, call it "a"
+  ![sb](b); ! estimate the mean of sb, call it "b"
+  [sphqonpss] (isphqonpss);
+
+  [sphqonnoi] (isphqonnoi);
+  [sphqonplea] (isphqonplea);
+  [sphqonsafe] (isphqonsafe);
+  [sphqoncoh] (isphqoncoh);
+  [sphqongreen] (isphqongreen);
+  [sphqonblue] (isphqonblue);
+
+  [spssonnoi] (ispssonnoi);
+  [spssonplea] (ispssonplea);
+  [spssonsafe] (ispssonsafe);
+  [spssoncoh] (ispssoncoh);
+  [spssongreen] (ispssongreen);
+  [spssonblue] (ispssonblue);
+
+  ! Estimate level-2 covariances of random effects
+  !sa WITH sc m y; ! estimate Level-2 covariances of sa with sc, m, and y
+  !sb WITH sc m y; ! estimate Level-2 covariances of sb with sc, m, and y
+  !sc WITH m y; ! estimate Level-2 covariances of sc with m and y
+  !y WITH m; ! estimate Level-2 covariance of y and m
+  !sa WITH sb(cab); ! estimate Level-2 covariance of sa and sb, call it "cab"
+
+
+  MODEL CONSTRAINT: ! section for computing indirect effect
+  NEW(innoi inplea insafe incoh ingreen inblue); ! name the indirect effect
+  !ind=a*b+cab; ! compute the indirect effect
+  innoi=isphqonpss*ispssonnoi;
+  inplea=isphqonpss*ispssonplea;
+  insafe=isphqonpss*ispssonsafe;
+  incoh=isphqonpss*ispssoncoh;
+  ingreen=isphqonpss*ispssongreen;
+  inblue=isphqonpss*ispssonblue;
+
+
+
+  OUTPUT: TECH1 standardized CINTERVAL (HPD); ! request parameter specifications, starting v
+   ! optimization history, and confidence intervals for all effects
+
+
+
+*** WARNING
+  Input line exceeded 90 characters. Some input may be truncated.
+  OUTPUT: TECH1 standardized CINTERVAL (HPD); ! request parameter specifications, starting va
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  COH1
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  COH2
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  COH3
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  COH4
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  COH5
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PSS1
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PSS2
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PSS3
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PSS4
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PSS5
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PSS6
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PSS7
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PSS8
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PSS9
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PSS10
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PHQ1
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PHQ2
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PHQ3
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PHQ4
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PHQ5
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PHQ6
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PHQ7
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PHQ8
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PHQ9
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  ALPHA1
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  ALPHA2
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  ALPHA3
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  ALPHA4
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  ALPHA6
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  ALPHA7
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  ALPHA8
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  ALPHA9
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  ALPHA10
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  ALPHA11
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PARK
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  PLAY
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  SPORT
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  FOREST
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  RIVER
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  LAKE
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  BEACH
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  TRAFFIC
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  NOISE
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  INSIDE
+*** WARNING in MODEL command
+  A y-variable has been declared on the within level but not referred to on
+  the between level.  Please check that this is what is intended.  If this is not intended,
+  specify the variable as a within variable.  Problem with:  OUTSIDE
+*** WARNING
+  One or more individual-level variables have no variation within a
+  cluster for the following clusters.
+
+     Variable   Cluster IDs with no within-cluster variation
+
+      PHQ2        1851 2343
+      PHQ7        1851 1132
+      PHQ8        1689 1851 2343 5961 2011 1132 2135
+      PHQ9        1851 2343 3068 5961 2011 8081 1132 3992 5706 2135 1056 3994
+      ALPHA8      1851
+      PLAY        1689 3992
+      BEACH       5121 8051 7006 4811 3131 1056 1019 2134
+      NOISE       2343
+
+  47 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Your title goes here
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         557
+
+Number of dependent variables                                   45
+Number of independent variables                                  0
+Number of continuous latent variables                           21
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   COH1        COH2        COH3        COH4        COH5        PSS1
+   PSS2        PSS3        PSS4        PSS5        PSS6        PSS7
+   PSS8        PSS9        PSS10       PHQ1        PHQ2        PHQ3
+   PHQ4        PHQ5        PHQ6        PHQ7        PHQ8        PHQ9
+   ALPHA1      ALPHA2      ALPHA3      ALPHA4      ALPHA6      ALPHA7
+   ALPHA8      ALPHA9      ALPHA10     ALPHA11     PARK        PLAY
+   SPORT       FOREST      RIVER       LAKE        BEACH       TRAFFIC
+   NOISE       INSIDE      OUTSIDE
+
+Continuous latent variables
+   COH         PSS         PHQ         PLEA        SAFE        GREEN
+   BLUE        NOI         SPHQONPS    SPHQONNO    SPHQONPL    SPHQONSA
+   SPHQONCO    SPHQONGR    SPHQONBL    SPSSONNO    SPSSONPL    SPSSONSA
+   SPSSONCO    SPSSONGR    SPSSONBL
+
+Variables with special functions
+
+  Cluster variable      CLUS
+
+Estimator                                                    BAYES
+Specifications for Bayesian Estimation
+  Point estimate                                            MEDIAN
+  Number of Markov chain Monte Carlo (MCMC) chains               2
+  Random seed for the first chain                                0
+  Starting value information                           UNPERTURBED
+  Treatment of categorical mediator                         LATENT
+  Algorithm used for Markov chain Monte Carlo           GIBBS(PX1)
+  Convergence criterion                                  0.500D-01
+  Maximum number of iterations                               50000
+  K-th iteration used for thinning                               1
+Link                                                        PROBIT
+
+Input data file(s)
+  try.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of clusters                         42
+
+       Size (s)    Cluster ID with Size s
+
+         12        1073 1098 1689 1705 1785 1851 2343 2512 3068 3772 5121
+                   5151 5481 5961 6651 8051 8862
+         13        5056 1018 1054 2548 2991 1058 7006 7204 2011 8081 4811
+         14        3207 1132 3992 3131 5706 4817
+         15        2135 5038
+         16        6717 1056 3994 1019 6511 2134
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+     Number of missing data patterns            84
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              COH1          COH2          COH3          COH4          COH5
+              ________      ________      ________      ________      ________
+ COH1           0.952
+ COH2           0.952         0.987
+ COH3           0.930         0.948         0.950
+ COH4           0.928         0.950         0.930         0.952
+ COH5           0.899         0.917         0.905         0.910         0.919
+ PSS1           0.944         0.980         0.943         0.944         0.912
+ PSS2           0.939         0.975         0.937         0.939         0.907
+ PSS3           0.944         0.980         0.943         0.944         0.912
+ PSS4           0.930         0.966         0.928         0.932         0.899
+ PSS5           0.935         0.971         0.935         0.939         0.907
+ PSS6           0.937         0.973         0.935         0.939         0.907
+ PSS7           0.935         0.971         0.935         0.937         0.905
+ PSS8           0.934         0.969         0.932         0.934         0.901
+ PSS9           0.941         0.977         0.939         0.941         0.908
+ PSS10          0.935         0.971         0.934         0.935         0.905
+ PHQ1           0.943         0.978         0.943         0.944         0.912
+ PHQ2           0.943         0.978         0.941         0.943         0.912
+ PHQ3           0.944         0.980         0.943         0.944         0.912
+ PHQ4           0.946         0.982         0.944         0.946         0.914
+ PHQ5           0.939         0.975         0.939         0.939         0.910
+ PHQ6           0.944         0.980         0.943         0.944         0.912
+ PHQ7           0.946         0.982         0.944         0.946         0.914
+ PHQ8           0.941         0.977         0.939         0.941         0.910
+ PHQ9           0.939         0.975         0.937         0.939         0.908
+ ALPHA1         0.946         0.978         0.946         0.946         0.914
+ ALPHA2         0.941         0.975         0.941         0.941         0.912
+ ALPHA3         0.952         0.987         0.950         0.952         0.919
+ ALPHA4         0.946         0.980         0.943         0.944         0.912
+ ALPHA6         0.934         0.968         0.934         0.934         0.901
+ ALPHA7         0.941         0.975         0.937         0.941         0.912
+ ALPHA8         0.948         0.982         0.946         0.948         0.916
+ ALPHA9         0.946         0.982         0.944         0.946         0.916
+ ALPHA10        0.941         0.975         0.937         0.943         0.912
+ ALPHA11        0.939         0.973         0.935         0.939         0.910
+ PARK           0.952         0.987         0.950         0.952         0.919
+ PLAY           0.952         0.987         0.950         0.952         0.919
+ SPORT          0.952         0.987         0.950         0.952         0.919
+ FOREST         0.952         0.987         0.950         0.952         0.919
+ RIVER          0.952         0.987         0.950         0.952         0.919
+ LAKE           0.952         0.987         0.950         0.952         0.919
+ BEACH          0.952         0.987         0.950         0.952         0.919
+ TRAFFIC        0.948         0.982         0.946         0.950         0.916
+ NOISE          0.567         0.596         0.573         0.575         0.551
+ INSIDE         0.952         0.987         0.950         0.952         0.919
+ OUTSIDE        0.946         0.982         0.944         0.946         0.914
+
+
+           Covariance Coverage
+              PSS1          PSS2          PSS3          PSS4          PSS5
+              ________      ________      ________      ________      ________
+ PSS1           0.991
+ PSS2           0.982         0.986
+ PSS3           0.987         0.986         0.991
+ PSS4           0.975         0.973         0.975         0.977
+ PSS5           0.980         0.975         0.978         0.971         0.982
+ PSS6           0.980         0.978         0.980         0.973         0.975
+ PSS7           0.978         0.975         0.977         0.971         0.975
+ PSS8           0.975         0.971         0.973         0.968         0.971
+ PSS9           0.986         0.982         0.984         0.975         0.978
+ PSS10          0.980         0.977         0.978         0.971         0.973
+ PHQ1           0.984         0.982         0.984         0.973         0.978
+ PHQ2           0.986         0.980         0.984         0.973         0.978
+ PHQ3           0.987         0.984         0.986         0.977         0.980
+ PHQ4           0.987         0.986         0.987         0.977         0.980
+ PHQ5           0.980         0.978         0.980         0.969         0.973
+ PHQ6           0.987         0.984         0.986         0.977         0.980
+ PHQ7           0.987         0.986         0.987         0.977         0.980
+ PHQ8           0.984         0.980         0.982         0.973         0.977
+ PHQ9           0.980         0.978         0.980         0.969         0.973
+ ALPHA1         0.978         0.973         0.978         0.966         0.971
+ ALPHA2         0.977         0.971         0.977         0.964         0.968
+ ALPHA3         0.989         0.984         0.989         0.975         0.980
+ ALPHA4         0.982         0.977         0.982         0.968         0.973
+ ALPHA6         0.971         0.966         0.969         0.961         0.964
+ ALPHA7         0.977         0.973         0.977         0.966         0.969
+ ALPHA8         0.986         0.980         0.986         0.971         0.977
+ ALPHA9         0.984         0.978         0.984         0.969         0.975
+ ALPHA10        0.977         0.973         0.977         0.966         0.971
+ ALPHA11        0.973         0.969         0.973         0.962         0.966
+ PARK           0.991         0.986         0.991         0.977         0.982
+ PLAY           0.991         0.986         0.991         0.977         0.982
+ SPORT          0.991         0.986         0.991         0.977         0.982
+ FOREST         0.991         0.986         0.991         0.977         0.982
+ RIVER          0.991         0.986         0.991         0.977         0.982
+ LAKE           0.991         0.986         0.991         0.977         0.982
+ BEACH          0.991         0.986         0.991         0.977         0.982
+ TRAFFIC        0.986         0.980         0.986         0.971         0.977
+ NOISE          0.598         0.594         0.598         0.589         0.592
+ INSIDE         0.991         0.986         0.991         0.977         0.982
+ OUTSIDE        0.986         0.980         0.986         0.971         0.977
+
+
+           Covariance Coverage
+              PSS6          PSS7          PSS8          PSS9          PSS10
+              ________      ________      ________      ________      ________
+ PSS6           0.984
+ PSS7           0.975         0.980
+ PSS8           0.971         0.973         0.977
+ PSS9           0.980         0.980         0.975         0.987
+ PSS10          0.978         0.975         0.971         0.980         0.982
+ PHQ1           0.980         0.978         0.973         0.984         0.978
+ PHQ2           0.978         0.977         0.973         0.984         0.980
+ PHQ3           0.982         0.980         0.977         0.987         0.982
+ PHQ4           0.984         0.980         0.977         0.987         0.982
+ PHQ5           0.977         0.973         0.969         0.980         0.977
+ PHQ6           0.982         0.980         0.977         0.987         0.982
+ PHQ7           0.984         0.980         0.977         0.987         0.982
+ PHQ8           0.978         0.977         0.973         0.984         0.978
+ PHQ9           0.977         0.973         0.969         0.980         0.977
+ ALPHA1         0.973         0.969         0.966         0.975         0.969
+ ALPHA2         0.971         0.969         0.966         0.973         0.969
+ ALPHA3         0.982         0.980         0.977         0.986         0.980
+ ALPHA4         0.975         0.973         0.969         0.978         0.973
+ ALPHA6         0.966         0.966         0.962         0.969         0.966
+ ALPHA7         0.973         0.969         0.966         0.973         0.969
+ ALPHA8         0.978         0.975         0.971         0.982         0.977
+ ALPHA9         0.977         0.975         0.971         0.980         0.975
+ ALPHA10        0.973         0.969         0.966         0.975         0.969
+ ALPHA11        0.969         0.968         0.964         0.971         0.968
+ PARK           0.984         0.980         0.977         0.987         0.982
+ PLAY           0.984         0.980         0.977         0.987         0.982
+ SPORT          0.984         0.980         0.977         0.987         0.982
+ FOREST         0.984         0.980         0.977         0.987         0.982
+ RIVER          0.984         0.980         0.977         0.987         0.982
+ LAKE           0.984         0.980         0.977         0.987         0.982
+ BEACH          0.984         0.980         0.977         0.987         0.982
+ TRAFFIC        0.978         0.975         0.971         0.982         0.977
+ NOISE          0.594         0.592         0.591         0.596         0.594
+ INSIDE         0.984         0.980         0.977         0.987         0.982
+ OUTSIDE        0.978         0.975         0.971         0.982         0.977
+
+
+           Covariance Coverage
+              PHQ1          PHQ2          PHQ3          PHQ4          PHQ5
+              ________      ________      ________      ________      ________
+ PHQ1           0.989
+ PHQ2           0.986         0.989
+ PHQ3           0.987         0.987         0.991
+ PHQ4           0.989         0.987         0.991         0.993
+ PHQ5           0.982         0.982         0.984         0.986         0.986
+ PHQ6           0.987         0.987         0.991         0.991         0.984
+ PHQ7           0.989         0.987         0.991         0.993         0.986
+ PHQ8           0.984         0.984         0.987         0.987         0.980
+ PHQ9           0.980         0.980         0.982         0.984         0.978
+ ALPHA1         0.978         0.978         0.978         0.980         0.973
+ ALPHA2         0.975         0.975         0.977         0.978         0.971
+ ALPHA3         0.987         0.987         0.989         0.991         0.984
+ ALPHA4         0.980         0.980         0.982         0.984         0.977
+ ALPHA6         0.969         0.971         0.973         0.973         0.966
+ ALPHA7         0.975         0.975         0.977         0.978         0.971
+ ALPHA8         0.984         0.984         0.986         0.987         0.980
+ ALPHA9         0.982         0.982         0.984         0.986         0.978
+ ALPHA10        0.977         0.977         0.978         0.980         0.973
+ ALPHA11        0.973         0.973         0.975         0.977         0.969
+ PARK           0.989         0.989         0.991         0.993         0.986
+ PLAY           0.989         0.989         0.991         0.993         0.986
+ SPORT          0.989         0.989         0.991         0.993         0.986
+ FOREST         0.989         0.989         0.991         0.993         0.986
+ RIVER          0.989         0.989         0.991         0.993         0.986
+ LAKE           0.989         0.989         0.991         0.993         0.986
+ BEACH          0.989         0.989         0.991         0.993         0.986
+ TRAFFIC        0.984         0.984         0.986         0.987         0.980
+ NOISE          0.596         0.598         0.600         0.600         0.594
+ INSIDE         0.989         0.989         0.991         0.993         0.986
+ OUTSIDE        0.984         0.984         0.986         0.987         0.980
+
+
+           Covariance Coverage
+              PHQ6          PHQ7          PHQ8          PHQ9          ALPHA1
+              ________      ________      ________      ________      ________
+ PHQ6           0.991
+ PHQ7           0.991         0.993
+ PHQ8           0.987         0.987         0.987
+ PHQ9           0.982         0.984         0.980         0.984
+ ALPHA1         0.978         0.980         0.975         0.971         0.986
+ ALPHA2         0.977         0.978         0.973         0.969         0.973
+ ALPHA3         0.989         0.991         0.986         0.982         0.986
+ ALPHA4         0.982         0.984         0.978         0.975         0.978
+ ALPHA6         0.973         0.973         0.969         0.964         0.969
+ ALPHA7         0.977         0.978         0.973         0.969         0.975
+ ALPHA8         0.986         0.987         0.982         0.978         0.982
+ ALPHA9         0.984         0.986         0.980         0.977         0.980
+ ALPHA10        0.978         0.980         0.975         0.971         0.975
+ ALPHA11        0.975         0.977         0.971         0.968         0.971
+ PARK           0.991         0.993         0.987         0.984         0.986
+ PLAY           0.991         0.993         0.987         0.984         0.986
+ SPORT          0.991         0.993         0.987         0.984         0.986
+ FOREST         0.991         0.993         0.987         0.984         0.986
+ RIVER          0.991         0.993         0.987         0.984         0.986
+ LAKE           0.991         0.993         0.987         0.984         0.986
+ BEACH          0.991         0.993         0.987         0.984         0.986
+ TRAFFIC        0.986         0.987         0.982         0.978         0.980
+ NOISE          0.600         0.600         0.598         0.592         0.596
+ INSIDE         0.991         0.993         0.987         0.984         0.986
+ OUTSIDE        0.986         0.987         0.982         0.978         0.980
+
+
+           Covariance Coverage
+              ALPHA2        ALPHA3        ALPHA4        ALPHA6        ALPHA7
+              ________      ________      ________      ________      ________
+ ALPHA2         0.984
+ ALPHA3         0.984         0.996
+ ALPHA4         0.980         0.989         0.989
+ ALPHA6         0.966         0.977         0.969         0.977
+ ALPHA7         0.977         0.984         0.978         0.968         0.984
+ ALPHA8         0.978         0.991         0.984         0.975         0.980
+ ALPHA9         0.978         0.991         0.984         0.975         0.980
+ ALPHA10        0.971         0.984         0.977         0.968         0.975
+ ALPHA11        0.969         0.980         0.973         0.966         0.971
+ PARK           0.984         0.996         0.989         0.977         0.984
+ PLAY           0.984         0.996         0.989         0.977         0.984
+ SPORT          0.984         0.996         0.989         0.977         0.984
+ FOREST         0.984         0.996         0.989         0.977         0.984
+ RIVER          0.984         0.996         0.989         0.977         0.984
+ LAKE           0.984         0.996         0.989         0.977         0.984
+ BEACH          0.984         0.996         0.989         0.977         0.984
+ TRAFFIC        0.978         0.991         0.984         0.971         0.978
+ NOISE          0.596         0.603         0.600         0.591         0.594
+ INSIDE         0.984         0.996         0.989         0.977         0.984
+ OUTSIDE        0.980         0.991         0.986         0.971         0.980
+
+
+           Covariance Coverage
+              ALPHA8        ALPHA9        ALPHA10       ALPHA11       PARK
+              ________      ________      ________      ________      ________
+ ALPHA8         0.993
+ ALPHA9         0.989         0.991
+ ALPHA10        0.980         0.980         0.984
+ ALPHA11        0.977         0.977         0.978         0.980
+ PARK           0.993         0.991         0.984         0.980         1.000
+ PLAY           0.993         0.991         0.984         0.980         1.000
+ SPORT          0.993         0.991         0.984         0.980         1.000
+ FOREST         0.993         0.991         0.984         0.980         1.000
+ RIVER          0.993         0.991         0.984         0.980         1.000
+ LAKE           0.993         0.991         0.984         0.980         1.000
+ BEACH          0.993         0.991         0.984         0.980         1.000
+ TRAFFIC        0.987         0.986         0.978         0.975         0.993
+ NOISE          0.598         0.598         0.594         0.592         0.603
+ INSIDE         0.993         0.991         0.984         0.980         1.000
+ OUTSIDE        0.987         0.986         0.978         0.975         0.993
+
+
+           Covariance Coverage
+              PLAY          SPORT         FOREST        RIVER         LAKE
+              ________      ________      ________      ________      ________
+ PLAY           1.000
+ SPORT          1.000         1.000
+ FOREST         1.000         1.000         1.000
+ RIVER          1.000         1.000         1.000         1.000
+ LAKE           1.000         1.000         1.000         1.000         1.000
+ BEACH          1.000         1.000         1.000         1.000         1.000
+ TRAFFIC        0.993         0.993         0.993         0.993         0.993
+ NOISE          0.603         0.603         0.603         0.603         0.603
+ INSIDE         1.000         1.000         1.000         1.000         1.000
+ OUTSIDE        0.993         0.993         0.993         0.993         0.993
+
+
+           Covariance Coverage
+              BEACH         TRAFFIC       NOISE         INSIDE        OUTSIDE
+              ________      ________      ________      ________      ________
+ BEACH          1.000
+ TRAFFIC        0.993         0.993
+ NOISE          0.603         0.598         0.603
+ INSIDE         1.000         0.993         0.603         1.000
+ OUTSIDE        0.993         0.987         0.603         0.993         0.993
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    COH1
+      Category 1    0.017            9.000
+      Category 2    0.034           18.000
+      Category 3    0.204          108.000
+      Category 4    0.536          284.000
+      Category 5    0.209          111.000
+    COH2
+      Category 1    0.018           10.000
+      Category 2    0.075           41.000
+      Category 3    0.213          117.000
+      Category 4    0.511          281.000
+      Category 5    0.184          101.000
+    COH3
+      Category 1    0.009            5.000
+      Category 2    0.045           24.000
+      Category 3    0.197          104.000
+      Category 4    0.544          288.000
+      Category 5    0.204          108.000
+    COH4
+      Category 1    0.006            3.000
+      Category 2    0.057           30.000
+      Category 3    0.179           95.000
+      Category 4    0.542          287.000
+      Category 5    0.217          115.000
+    COH5
+      Category 1    0.025           13.000
+      Category 2    0.104           53.000
+      Category 3    0.316          162.000
+      Category 4    0.410          210.000
+      Category 5    0.145           74.000
+    PSS1
+      Category 1    0.322          178.000
+      Category 2    0.339          187.000
+      Category 3    0.268          148.000
+      Category 4    0.051           28.000
+      Category 5    0.020           11.000
+    PSS2
+      Category 1    0.346          190.000
+      Category 2    0.348          191.000
+      Category 3    0.199          109.000
+      Category 4    0.084           46.000
+      Category 5    0.024           13.000
+    PSS3
+      Category 1    0.138           76.000
+      Category 2    0.272          150.000
+      Category 3    0.400          221.000
+      Category 4    0.152           84.000
+      Category 5    0.038           21.000
+    PSS4
+      Category 1    0.184          100.000
+      Category 2    0.483          263.000
+      Category 3    0.233          127.000
+      Category 4    0.070           38.000
+      Category 5    0.029           16.000
+    PSS5
+      Category 1    0.088           48.000
+      Category 2    0.512          280.000
+      Category 3    0.322          176.000
+      Category 4    0.066           36.000
+      Category 5    0.013            7.000
+    PSS6
+      Category 1    0.184          101.000
+      Category 2    0.356          195.000
+      Category 3    0.325          178.000
+      Category 4    0.113           62.000
+      Category 5    0.022           12.000
+    PSS7
+      Category 1    0.185          101.000
+      Category 2    0.524          286.000
+      Category 3    0.229          125.000
+      Category 4    0.051           28.000
+      Category 5    0.011            6.000
+    PSS8
+      Category 1    0.138           75.000
+      Category 2    0.559          304.000
+      Category 3    0.252          137.000
+      Category 4    0.039           21.000
+      Category 5    0.013            7.000
+    PSS9
+      Category 1    0.209          115.000
+      Category 2    0.378          208.000
+      Category 3    0.311          171.000
+      Category 4    0.087           48.000
+      Category 5    0.015            8.000
+    PSS10
+      Category 1    0.457          250.000
+      Category 2    0.327          179.000
+      Category 3    0.141           77.000
+      Category 4    0.068           37.000
+      Category 5    0.007            4.000
+    PHQ1
+      Category 1    0.490          270.000
+      Category 2    0.423          233.000
+      Category 3    0.060           33.000
+      Category 4    0.027           15.000
+    PHQ2
+      Category 1    0.646          356.000
+      Category 2    0.290          160.000
+      Category 3    0.047           26.000
+      Category 4    0.016            9.000
+    PHQ3
+      Category 1    0.366          202.000
+      Category 2    0.417          230.000
+      Category 3    0.132           73.000
+      Category 4    0.085           47.000
+    PHQ4
+      Category 1    0.235          130.000
+      Category 2    0.515          285.000
+      Category 3    0.166           92.000
+      Category 4    0.083           46.000
+    PHQ5
+      Category 1    0.588          323.000
+      Category 2    0.288          158.000
+      Category 3    0.080           44.000
+      Category 4    0.044           24.000
+    PHQ6
+      Category 1    0.681          376.000
+      Category 2    0.246          136.000
+      Category 3    0.051           28.000
+      Category 4    0.022           12.000
+    PHQ7
+      Category 1    0.617          341.000
+      Category 2    0.288          159.000
+      Category 3    0.060           33.000
+      Category 4    0.036           20.000
+    PHQ8
+      Category 1    0.862          474.000
+      Category 2    0.096           53.000
+      Category 3    0.033           18.000
+      Category 4    0.009            5.000
+    PHQ9
+      Category 1    0.920          504.000
+      Category 2    0.071           39.000
+      Category 3    0.007            4.000
+      Category 4    0.002            1.000
+    ALPHA1
+      Category 1    0.024           13.000
+      Category 2    0.084           46.000
+      Category 3    0.488          268.000
+      Category 4    0.404          222.000
+    ALPHA2
+      Category 1    0.035           19.000
+      Category 2    0.181           99.000
+      Category 3    0.354          194.000
+      Category 4    0.431          236.000
+    ALPHA3
+      Category 1    0.022           12.000
+      Category 2    0.074           41.000
+      Category 3    0.477          265.000
+      Category 4    0.427          237.000
+    ALPHA4
+      Category 1    0.022           12.000
+      Category 2    0.067           37.000
+      Category 3    0.356          196.000
+      Category 4    0.555          306.000
+    ALPHA6
+      Category 1    0.081           44.000
+      Category 2    0.193          105.000
+      Category 3    0.472          257.000
+      Category 4    0.254          138.000
+    ALPHA7
+      Category 1    0.029           16.000
+      Category 2    0.139           76.000
+      Category 3    0.560          307.000
+      Category 4    0.272          149.000
+    ALPHA8
+      Category 1    0.005            3.000
+      Category 2    0.036           20.000
+      Category 3    0.463          256.000
+      Category 4    0.495          274.000
+    ALPHA9
+      Category 1    0.014            8.000
+      Category 2    0.065           36.000
+      Category 3    0.453          250.000
+      Category 4    0.467          258.000
+    ALPHA10
+      Category 1    0.004            2.000
+      Category 2    0.016            9.000
+      Category 3    0.316          173.000
+      Category 4    0.664          364.000
+    ALPHA11
+      Category 1    0.009            5.000
+      Category 2    0.060           33.000
+      Category 3    0.458          250.000
+      Category 4    0.473          258.000
+    PARK
+      Category 1    0.479          267.000
+      Category 2    0.366          204.000
+      Category 3    0.126           70.000
+      Category 4    0.014            8.000
+      Category 5    0.014            8.000
+    PLAY
+      Category 1    0.661          368.000
+      Category 2    0.228          127.000
+      Category 3    0.045           25.000
+      Category 4    0.004            2.000
+      Category 5    0.063           35.000
+    SPORT
+      Category 1    0.219          122.000
+      Category 2    0.422          235.000
+      Category 3    0.273          152.000
+      Category 4    0.020           11.000
+      Category 5    0.066           37.000
+    FOREST
+      Category 1    0.029           16.000
+      Category 2    0.154           86.000
+      Category 3    0.490          273.000
+      Category 4    0.309          172.000
+      Category 5    0.018           10.000
+    RIVER
+      Category 1    0.135           75.000
+      Category 2    0.206          115.000
+      Category 3    0.336          187.000
+      Category 4    0.273          152.000
+      Category 5    0.050           28.000
+    LAKE
+      Category 1    0.113           63.000
+      Category 2    0.217          121.000
+      Category 3    0.312          174.000
+      Category 4    0.309          172.000
+      Category 5    0.048           27.000
+    BEACH
+      Category 1    0.007            4.000
+      Category 2    0.036           20.000
+      Category 3    0.122           68.000
+      Category 4    0.804          448.000
+      Category 5    0.031           17.000
+    TRAFFIC
+      Category 1    0.213          118.000
+      Category 2    0.396          219.000
+      Category 3    0.342          189.000
+      Category 4    0.049           27.000
+    NOISE
+      Category 1    0.607          204.000
+      Category 2    0.315          106.000
+      Category 3    0.057           19.000
+      Category 4    0.021            7.000
+    INSIDE
+      Category 1    0.503          280.000
+      Category 2    0.400          223.000
+      Category 3    0.068           38.000
+      Category 4    0.022           12.000
+      Category 5    0.007            4.000
+    OUTSIDE
+      Category 1    0.392          217.000
+      Category 2    0.490          271.000
+      Category 3    0.087           48.000
+      Category 4    0.031           17.000
+
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+     USE THE FBITERATIONS OPTION TO INCREASE THE NUMBER OF ITERATIONS BY A FACTOR
+     OF AT LEAST TWO TO CHECK CONVERGENCE AND THAT THE PSR VALUE DOES NOT INCREASE.
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                             289
+
+
+
+MODEL RESULTS
+
+                                Posterior  One-Tailed         95% C.I.
+                    Estimate       S.D.      P-Value   Lower 2.5%  Upper 2.5%  Significance
+
+Within Level
+
+ COH      BY
+    COH1               1.000       0.000      0.000       1.000       1.000
+    COH2               1.077       0.137      0.000       0.851       1.374      *
+    COH3               1.104       0.136      0.000       0.842       1.361      *
+    COH4               0.591       0.077      0.000       0.449       0.744      *
+    COH5               0.505       0.067      0.000       0.385       0.644      *
+
+ PSS      BY
+    PSS1               1.000       0.000      0.000       1.000       1.000
+    PSS2               1.316       0.119      0.000       1.102       1.557      *
+    PSS3               1.030       0.093      0.000       0.864       1.231      *
+    PSS4               0.568       0.068      0.000       0.436       0.704      *
+    PSS5               0.835       0.088      0.000       0.674       1.017      *
+    PSS6               0.911       0.085      0.000       0.748       1.082      *
+    PSS7               0.779       0.084      0.000       0.623       0.952      *
+    PSS8               1.020       0.107      0.000       0.824       1.235      *
+    PSS9               0.889       0.087      0.000       0.731       1.070      *
+    PSS10              1.183       0.115      0.000       0.976       1.422      *
+
+ PHQ      BY
+    PHQ1               1.000       0.000      0.000       1.000       1.000
+    PHQ2               1.966       0.242      0.000       1.561       2.517      *
+    PHQ3               0.742       0.083      0.000       0.581       0.904      *
+    PHQ4               1.039       0.108      0.000       0.831       1.250      *
+    PHQ5               0.892       0.094      0.000       0.721       1.086      *
+    PHQ6               1.236       0.142      0.000       0.974       1.526      *
+    PHQ7               0.886       0.098      0.000       0.706       1.086      *
+    PHQ8               0.978       0.125      0.000       0.747       1.236      *
+    PHQ9               0.991       0.152      0.000       0.709       1.298      *
+
+ PLEA     BY
+    ALPHA1             1.000       0.000      0.000       1.000       1.000
+    ALPHA2             0.993       0.192      0.000       0.664       1.404      *
+    ALPHA3             0.788       0.131      0.000       0.550       1.063      *
+    ALPHA4             1.282       0.263      0.000       0.856       1.850      *
+
+ SAFE     BY
+    ALPHA6             1.000       0.000      0.000       1.000       1.000
+    ALPHA7             1.812       0.222      0.000       1.409       2.258      *
+    ALPHA8             3.616       0.572      0.000       2.581       4.776      *
+    ALPHA9             3.781       0.590      0.000       2.672       5.028      *
+    ALPHA10            2.550       0.339      0.000       1.929       3.238      *
+    ALPHA11            2.001       0.257      0.000       1.504       2.524      *
+
+ GREEN    BY
+    PARK               1.000       0.000      0.000       1.000       1.000
+    PLAY               1.568       0.332      0.000       0.995       2.251      *
+    SPORT              1.632       0.410      0.000       0.989       2.569      *
+    FOREST             0.815       0.180      0.000       0.501       1.203      *
+
+ BLUE     BY
+    RIVER              1.000       0.000      0.000       1.000       1.000
+    LAKE               1.458       0.364      0.000       0.905       2.308      *
+    BEACH              0.669       0.195      0.000       0.312       1.066      *
+
+ NOI      BY
+    TRAFFIC            1.000       0.000      0.000       1.000       1.000
+    NOISE              2.590       0.495      0.000       1.712       3.615      *
+    INSIDE             3.143       0.485      0.000       2.298       4.198      *
+    OUTSIDE            3.766       0.653      0.000       2.682       5.238      *
+
+ PLEA     WITH
+    COH                0.733       0.132      0.000       0.490       1.002      *
+
+ SAFE     WITH
+    COH                0.358       0.075      0.000       0.220       0.505      *
+    PLEA               0.346       0.061      0.000       0.240       0.474      *
+
+ GREEN    WITH
+    COH               -0.118       0.063      0.011      -0.251      -0.005      *
+    PLEA              -0.104       0.041      0.000      -0.189      -0.033      *
+    SAFE              -0.025       0.024      0.135      -0.073       0.021
+
+ BLUE     WITH
+    COH               -0.039       0.060      0.249      -0.164       0.076
+    PLEA              -0.091       0.041      0.004      -0.182      -0.021      *
+    SAFE              -0.045       0.028      0.038      -0.104       0.006
+    GREEN              0.198       0.055      0.000       0.103       0.315      *
+
+ NOI      WITH
+    COH               -0.318       0.062      0.000      -0.443      -0.206      *
+    PLEA              -0.148       0.033      0.000      -0.217      -0.088      *
+    SAFE              -0.109       0.026      0.000      -0.161      -0.063      *
+    GREEN              0.021       0.017      0.088      -0.012       0.056
+    BLUE               0.002       0.019      0.460      -0.036       0.039
+
+ Variances
+    COH                2.291       0.436      0.000       1.470       3.156      *
+    PLEA               0.546       0.129      0.000       0.317       0.800      *
+    SAFE               0.409       0.088      0.000       0.264       0.597      *
+    GREEN              0.319       0.099      0.000       0.160       0.527      *
+    BLUE               0.327       0.101      0.000       0.177       0.545      *
+    NOI                0.183       0.042      0.000       0.110       0.272      *
+
+ Residual Variances
+    PSS                0.835       0.141      0.000       0.577       1.117      *
+    PHQ                0.328       0.077      0.000       0.194       0.496      *
+
+Between Level
+
+ Means
+    SPHQONPSS          0.743       0.089      0.000       0.575       0.923      *
+    SPHQONNOI          0.278       0.153      0.030      -0.009       0.588
+    SPHQONPLEA        -0.016       0.273      0.473      -0.555       0.565
+    SPHQONSAFE         0.059       0.203      0.390      -0.362       0.436
+    SPHQONCOH         -0.028       0.071      0.337      -0.171       0.114
+    SPHQONGREE         0.196       0.193      0.146      -0.159       0.588
+    SPHQONBLUE        -0.148       0.205      0.203      -0.596       0.209
+    SPSSONNOI          0.538       0.209      0.002       0.130       0.943      *
+    SPSSONPLEA        -0.208       0.300      0.254      -0.795       0.348
+    SPSSONSAFE        -0.123       0.233      0.310      -0.580       0.296
+    SPSSONCOH         -0.008       0.084      0.457      -0.163       0.168
+    SPSSONGREE         0.436       0.249      0.016       0.032       0.982      *
+    SPSSONBLUE        -0.465       0.276      0.010      -1.049      -0.018      *
+
+ Thresholds
+    COH1$1            -3.673       0.282      0.000      -4.209      -3.141      *
+    COH1$2            -2.780       0.206      0.000      -3.181      -2.379      *
+    COH1$3            -1.108       0.125      0.000      -1.353      -0.869      *
+    COH1$4             1.545       0.157      0.000       1.274       1.882      *
+    COH2$1            -3.939       0.326      0.000      -4.589      -3.343      *
+    COH2$2            -2.389       0.180      0.000      -2.763      -2.048      *
+    COH2$3            -0.892       0.116      0.000      -1.137      -0.677      *
+    COH2$4             1.746       0.155      0.000       1.475       2.070      *
+    COH3$1            -4.538       0.386      0.000      -5.246      -3.804      *
+    COH3$2            -2.934       0.218      0.000      -3.347      -2.497      *
+    COH3$3            -1.172       0.126      0.000      -1.406      -0.929      *
+    COH3$4             1.645       0.150      0.000       1.348       1.931      *
+    COH4$1            -3.160       0.241      0.000      -3.644      -2.712      *
+    COH4$2            -1.952       0.120      0.000      -2.196      -1.732      *
+    COH4$3            -0.891       0.083      0.000      -1.065      -0.744      *
+    COH4$4             1.105       0.091      0.000       0.945       1.305      *
+    COH5$1            -2.398       0.150      0.000      -2.692      -2.085      *
+    COH5$2            -1.348       0.093      0.000      -1.530      -1.164      *
+    COH5$3            -0.132       0.071      0.039      -0.269       0.014
+    COH5$4             1.394       0.096      0.000       1.219       1.592      *
+    PSS1$1            -0.783       0.090      0.000      -0.948      -0.601      *
+    PSS1$2             0.499       0.086      0.000       0.337       0.676      *
+    PSS1$3             2.160       0.129      0.000       1.909       2.401      *
+    PSS1$4             3.052       0.188      0.000       2.668       3.402      *
+    PSS2$1            -0.842       0.105      0.000      -1.057      -0.650      *
+    PSS2$2             0.780       0.106      0.000       0.576       0.987      *
+    PSS2$3             2.148       0.148      0.000       1.869       2.443      *
+    PSS2$4             3.362       0.225      0.000       2.928       3.810      *
+    PSS3$1            -1.716       0.113      0.000      -1.959      -1.520      *
+    PSS3$2            -0.474       0.090      0.000      -0.642      -0.292      *
+    PSS3$3             1.239       0.103      0.000       1.029       1.432      *
+    PSS3$4             2.708       0.174      0.000       2.379       3.048      *
+    PSS4$1            -1.124       0.084      0.000      -1.299      -0.967      *
+    PSS4$2             0.498       0.080      0.000       0.348       0.654      *
+    PSS4$3             1.510       0.104      0.000       1.326       1.727      *
+    PSS4$4             2.127       0.132      0.000       1.872       2.394      *
+    PSS5$1            -1.895       0.113      0.000      -2.118      -1.673      *
+    PSS5$2             0.292       0.079      0.000       0.137       0.442      *
+    PSS5$3             1.900       0.115      0.000       1.675       2.124      *
+    PSS5$4             2.778       0.172      0.000       2.451       3.118      *
+    PSS6$1            -1.353       0.096      0.000      -1.546      -1.173      *
+    PSS6$2             0.072       0.081      0.190      -0.077       0.238
+    PSS6$3             1.489       0.099      0.000       1.299       1.678      *
+    PSS6$4             2.737       0.169      0.000       2.419       3.074      *
+    PSS7$1            -1.257       0.094      0.000      -1.458      -1.091      *
+    PSS7$2             0.684       0.081      0.000       0.527       0.842      *
+    PSS7$3             1.968       0.116      0.000       1.746       2.197      *
+    PSS7$4             2.798       0.186      0.000       2.435       3.143      *
+    PSS8$1            -1.733       0.120      0.000      -1.960      -1.494      *
+    PSS8$2             0.729       0.094      0.000       0.538       0.906      *
+    PSS8$3             2.393       0.147      0.000       2.131       2.721      *
+    PSS8$4             3.015       0.181      0.000       2.661       3.370      *
+    PSS9$1            -1.204       0.097      0.000      -1.412      -1.028      *
+    PSS9$2             0.209       0.083      0.006       0.040       0.366      *
+    PSS9$3             1.720       0.118      0.000       1.500       1.969      *
+    PSS9$4             3.063       0.229      0.000       2.707       3.607      *
+    PSS10$1           -0.328       0.096      0.000      -0.517      -0.141      *
+    PSS10$2            1.208       0.111      0.000       1.012       1.451      *
+    PSS10$3            2.353       0.149      0.000       2.061       2.649      *
+    PSS10$4            3.789       0.290      0.000       3.297       4.406      *
+    PHQ1$1            -0.115       0.088      0.094      -0.285       0.057
+    PHQ1$2             1.983       0.131      0.000       1.717       2.236      *
+    PHQ1$3             2.817       0.176      0.000       2.473       3.162      *
+    PHQ2$1             0.711       0.156      0.000       0.407       1.027      *
+    PHQ2$2             3.566       0.321      0.000       3.006       4.271      *
+    PHQ2$3             5.151       0.451      0.000       4.284       6.059      *
+    PHQ3$1            -0.513       0.078      0.000      -0.666      -0.366      *
+    PHQ3$2             0.947       0.086      0.000       0.786       1.116      *
+    PHQ3$3             1.741       0.112      0.000       1.520       1.957      *
+    PHQ4$1            -1.186       0.100      0.000      -1.395      -1.001      *
+    PHQ4$2             0.952       0.095      0.000       0.766       1.134      *
+    PHQ4$3             2.039       0.132      0.000       1.783       2.302      *
+    PHQ5$1             0.219       0.083      0.004       0.055       0.380      *
+    PHQ5$2             1.552       0.108      0.000       1.350       1.770      *
+    PHQ5$3             2.363       0.146      0.000       2.057       2.640      *
+    PHQ6$1             0.686       0.112      0.000       0.464       0.904      *
+    PHQ6$2             2.413       0.184      0.000       2.087       2.793      *
+    PHQ6$3             3.451       0.264      0.000       2.977       3.978      *
+    PHQ7$1             0.357       0.089      0.000       0.175       0.526      *
+    PHQ7$2             1.822       0.123      0.000       1.571       2.048      *
+    PHQ7$3             2.528       0.165      0.000       2.195       2.842      *
+    PHQ8$1             1.536       0.131      0.000       1.275       1.780      *
+    PHQ8$2             2.518       0.180      0.000       2.161       2.857      *
+    PHQ8$3             3.490       0.274      0.000       3.003       4.058      *
+    PHQ9$1             2.026       0.188      0.000       1.681       2.413      *
+    PHQ9$2             3.430       0.321      0.000       2.861       4.093      *
+    PHQ9$3             4.418       0.574      0.000       3.491       5.621      *
+    ALPHA1$1          -2.493       0.157      0.000      -2.816      -2.208      *
+    ALPHA1$2          -1.540       0.104      0.000      -1.743      -1.348      *
+    ALPHA1$3           0.353       0.082      0.000       0.198       0.522      *
+    ALPHA2$1          -2.406       0.166      0.000      -2.745      -2.092      *
+    ALPHA2$2          -1.061       0.117      0.000      -1.265      -0.812      *
+    ALPHA2$3           0.271       0.107      0.003       0.069       0.479      *
+    ALPHA3$1          -2.393       0.159      0.000      -2.703      -2.078      *
+    ALPHA3$2          -1.556       0.114      0.000      -1.769      -1.325      *
+    ALPHA3$3           0.249       0.089      0.003       0.076       0.423      *
+    ALPHA4$1          -2.837       0.225      0.000      -3.290      -2.410      *
+    ALPHA4$2          -1.869       0.155      0.000      -2.167      -1.579      *
+    ALPHA4$3          -0.163       0.101      0.046      -0.369       0.029
+    ALPHA6$1          -1.693       0.110      0.000      -1.921      -1.490      *
+    ALPHA6$2          -0.727       0.088      0.000      -0.891      -0.547      *
+    ALPHA6$3           0.855       0.091      0.000       0.678       1.030      *
+    ALPHA7$1          -2.734       0.182      0.000      -3.116      -2.402      *
+    ALPHA7$2          -1.392       0.116      0.000      -1.641      -1.187      *
+    ALPHA7$3           1.003       0.108      0.000       0.795       1.223      *
+    ALPHA8$1          -5.502       0.618      0.000      -6.649      -4.283      *
+    ALPHA8$2          -3.816       0.380      0.000      -4.598      -3.123      *
+    ALPHA8$3           0.062       0.147      0.340      -0.237       0.345
+    ALPHA9$1          -5.027       0.489      0.000      -6.145      -4.208      *
+    ALPHA9$2          -3.336       0.329      0.000      -4.038      -2.729      *
+    ALPHA9$3           0.257       0.161      0.051      -0.044       0.593
+    ALPHA10$1         -5.051       0.497      0.000      -5.963      -4.045      *
+    ALPHA10$2         -3.521       0.274      0.000      -4.067      -2.970      *
+    ALPHA10$3         -0.801       0.126      0.000      -1.043      -0.554      *
+    ALPHA11$1         -3.749       0.354      0.000      -4.522      -3.156      *
+    ALPHA11$2         -2.286       0.185      0.000      -2.662      -1.953      *
+    ALPHA11$3          0.137       0.106      0.108      -0.081       0.330
+    PARK$1            -0.089       0.090      0.149      -0.267       0.083
+    PARK$2             1.213       0.107      0.000       1.013       1.431      *
+    PARK$3             2.291       0.170      0.000       1.949       2.616      *
+    PARK$4             2.677       0.210      0.000       2.306       3.125      *
+    PLAY$1             0.488       0.099      0.000       0.293       0.677      *
+    PLAY$2             1.566       0.136      0.000       1.297       1.835      *
+    PLAY$3             1.950       0.156      0.000       1.634       2.239      *
+    PLAY$4             2.013       0.161      0.000       1.669       2.291      *
+    SPORT$1           -1.110       0.118      0.000      -1.355      -0.897      *
+    SPORT$2            0.457       0.093      0.000       0.268       0.639      *
+    SPORT$3            1.866       0.168      0.000       1.552       2.233      *
+    SPORT$4            2.079       0.187      0.000       1.727       2.479      *
+    FOREST$1          -2.514       0.192      0.000      -2.887      -2.125      *
+    FOREST$2          -1.176       0.138      0.000      -1.462      -0.901      *
+    FOREST$3           0.579       0.129      0.000       0.327       0.828      *
+    FOREST$4           2.678       0.201      0.000       2.271       3.042      *
+    RIVER$1           -1.489       0.131      0.000      -1.730      -1.220      *
+    RIVER$2           -0.585       0.116      0.000      -0.804      -0.347      *
+    RIVER$3            0.578       0.118      0.000       0.353       0.811      *
+    RIVER$4            2.147       0.160      0.000       1.844       2.468      *
+    LAKE$1            -1.740       0.181      0.000      -2.110      -1.404      *
+    LAKE$2            -0.662       0.121      0.000      -0.920      -0.444      *
+    LAKE$3             0.462       0.108      0.000       0.247       0.669      *
+    LAKE$4             2.328       0.201      0.000       1.959       2.719      *
+    BEACH$1           -3.199       0.269      0.000      -3.766      -2.728      *
+    BEACH$2           -2.304       0.199      0.000      -2.744      -1.965      *
+    BEACH$3           -1.279       0.165      0.000      -1.617      -0.975      *
+    BEACH$4            2.371       0.195      0.000       2.021       2.787      *
+    TRAFFIC$1         -0.936       0.082      0.000      -1.091      -0.770      *
+    TRAFFIC$2          0.284       0.077      0.000       0.138       0.438      *
+    TRAFFIC$3          1.877       0.115      0.000       1.661       2.116      *
+    NOISE$1            0.819       0.145      0.000       0.542       1.096      *
+    NOISE$2            2.410       0.252      0.000       1.909       2.913      *
+    NOISE$3            3.289       0.335      0.000       2.607       3.943      *
+    INSIDE$1          -0.069       0.111      0.265      -0.274       0.158
+    INSIDE$2           2.203       0.178      0.000       1.866       2.562      *
+    INSIDE$3           3.319       0.254      0.000       2.862       3.852      *
+    INSIDE$4           4.155       0.351      0.000       3.514       4.846      *
+    OUTSIDE$1         -0.606       0.115      0.000      -0.828      -0.379      *
+    OUTSIDE$2          2.135       0.238      0.000       1.714       2.653      *
+    OUTSIDE$3          3.535       0.369      0.000       2.917       4.347      *
+
+ Variances
+    COH1               0.114       0.074      0.000       0.003       0.262      *
+    COH2               0.044       0.043      0.000       0.001       0.138      *
+    COH3               0.031       0.036      0.000       0.001       0.111      *
+    COH4               0.022       0.025      0.000       0.001       0.077      *
+    COH5               0.017       0.020      0.000       0.001       0.062      *
+    PSS1               0.021       0.024      0.000       0.001       0.074      *
+    PSS2               0.024       0.030      0.000       0.001       0.091      *
+    PSS3               0.035       0.033      0.000       0.001       0.106      *
+    PSS4               0.052       0.039      0.000       0.001       0.131      *
+    PSS5               0.023       0.026      0.000       0.001       0.079      *
+    PSS6               0.016       0.019      0.000       0.001       0.059      *
+    PSS7               0.023       0.026      0.000       0.001       0.081      *
+    PSS8               0.032       0.033      0.000       0.001       0.106      *
+    PSS9               0.033       0.031      0.000       0.001       0.100      *
+    PSS10              0.023       0.029      0.000       0.001       0.086      *
+    PHQ1               0.047       0.043      0.000       0.001       0.139      *
+    PHQ2               0.177       0.131      0.000       0.001       0.450      *
+    PHQ3               0.022       0.024      0.000       0.001       0.076      *
+    PHQ4               0.012       0.016      0.000       0.001       0.048      *
+    PHQ5               0.026       0.030      0.000       0.001       0.092      *
+    PHQ6               0.103       0.082      0.000       0.002       0.276      *
+    PHQ7               0.055       0.053      0.000       0.001       0.169      *
+    PHQ8               0.030       0.047      0.000       0.000       0.135      *
+    PHQ9               0.040       0.066      0.000       0.001       0.198      *
+    ALPHA1             0.079       0.052      0.000       0.006       0.187      *
+    ALPHA2             0.249       0.100      0.000       0.095       0.465      *
+    ALPHA3             0.170       0.075      0.000       0.054       0.332      *
+    ALPHA4             0.152       0.085      0.000       0.027       0.336      *
+    ALPHA6             0.112       0.056      0.000       0.024       0.231      *
+    ALPHA7             0.084       0.059      0.000       0.004       0.207      *
+    ALPHA8             0.149       0.135      0.000       0.001       0.437      *
+    ALPHA9             0.237       0.151      0.000       0.020       0.553      *
+    ALPHA10            0.028       0.037      0.000       0.001       0.116      *
+    ALPHA11            0.120       0.075      0.000       0.009       0.276      *
+    PARK               0.170       0.077      0.000       0.051       0.336      *
+    PLAY               0.092       0.075      0.000       0.001       0.253      *
+    SPORT              0.096       0.063      0.000       0.008       0.231      *
+    FOREST             0.531       0.165      0.000       0.272       0.882      *
+    RIVER              0.437       0.144      0.000       0.216       0.749      *
+    LAKE               0.291       0.117      0.000       0.119       0.549      *
+    BEACH              0.607       0.203      0.000       0.296       1.037      *
+    TRAFFIC            0.099       0.051      0.000       0.020       0.210      *
+    NOISE              0.062       0.069      0.000       0.001       0.210      *
+    INSIDE             0.145       0.091      0.000       0.012       0.331      *
+    OUTSIDE            0.074       0.072      0.000       0.001       0.227      *
+    SPHQONPSS          0.012       0.015      0.000       0.001       0.046      *
+    SPHQONNOI          0.066       0.109      0.000       0.001       0.306      *
+    SPHQONPLEA         0.024       0.039      0.000       0.001       0.109      *
+    SPHQONSAFE         0.053       0.060      0.000       0.001       0.185      *
+    SPHQONCOH          0.010       0.012      0.000       0.001       0.036      *
+    SPHQONGREE         0.091       0.126      0.000       0.001       0.380      *
+    SPHQONBLUE         0.111       0.121      0.000       0.001       0.376      *
+    SPSSONNOI          0.097       0.148      0.000       0.001       0.414      *
+    SPSSONPLEA         0.027       0.041      0.000       0.001       0.123      *
+    SPSSONSAFE         0.051       0.073      0.000       0.000       0.214      *
+    SPSSONCOH          0.016       0.017      0.000       0.001       0.054      *
+    SPSSONGREE         0.123       0.170      0.000       0.001       0.479      *
+    SPSSONBLUE         0.152       0.207      0.000       0.001       0.619      *
+
+New/Additional Parameters
+    INNOI              0.398       0.159      0.002       0.112       0.739      *
+    INPLEA            -0.151       0.222      0.254      -0.526       0.296
+    INSAFE            -0.091       0.176      0.310      -0.441       0.230
+    INCOH             -0.006       0.063      0.457      -0.126       0.120
+    INGREEN            0.322       0.191      0.016      -0.010       0.699
+    INBLUE            -0.343       0.206      0.010      -0.784      -0.015      *
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                Posterior  One-Tailed         95% C.I.
+                    Estimate       S.D.      P-Value   Lower 2.5%  Upper 2.5%  Significance
+
+Within-Level Standardized Estimates Averaged Over Clusters
+
+ COH      BY
+    COH1               0.846       0.024      0.000       0.792       0.885      *
+    COH2               0.853       0.017      0.000       0.814       0.880      *
+    COH3               0.848       0.022      0.000       0.801       0.886      *
+    COH4               0.668       0.035      0.000       0.601       0.735      *
+    COH5               0.606       0.034      0.000       0.541       0.675      *
+
+ PSS      BY
+    PSS1               0.743       0.019      0.000       0.701       0.774      *
+    PSS2               0.824       0.020      0.000       0.787       0.862      *
+    PSS3               0.749       0.027      0.000       0.692       0.796      *
+    PSS4               0.536       0.039      0.000       0.452       0.603      *
+    PSS5               0.680       0.029      0.000       0.623       0.735      *
+    PSS6               0.707       0.026      0.000       0.655       0.754      *
+    PSS7               0.657       0.033      0.000       0.590       0.719      *
+    PSS8               0.751       0.028      0.000       0.690       0.798      *
+    PSS9               0.707       0.029      0.000       0.646       0.759      *
+    PSS10              0.795       0.024      0.000       0.748       0.838      *
+
+ PHQ      BY
+    PHQ1               0.748       0.022      0.000       0.701       0.784      *
+    PHQ2               0.913       0.015      0.000       0.883       0.943      *
+    PHQ3               0.642       0.036      0.000       0.571       0.711      *
+    PHQ4               0.756       0.027      0.000       0.705       0.808      *
+    PHQ5               0.710       0.029      0.000       0.655       0.771      *
+    PHQ6               0.804       0.025      0.000       0.754       0.851      *
+    PHQ7               0.707       0.032      0.000       0.638       0.763      *
+    PHQ8               0.748       0.037      0.000       0.676       0.824      *
+    PHQ9               0.746       0.047      0.000       0.655       0.824      *
+
+ PLEA     BY
+    ALPHA1             0.599       0.042      0.000       0.514       0.677      *
+    ALPHA2             0.582       0.051      0.000       0.476       0.673      *
+    ALPHA3             0.497       0.051      0.000       0.386       0.582      *
+    ALPHA4             0.679       0.045      0.000       0.589       0.767      *
+
+ SAFE     BY
+    ALPHA6             0.521       0.032      0.000       0.463       0.582      *
+    ALPHA7             0.751       0.029      0.000       0.696       0.807      *
+    ALPHA8             0.926       0.016      0.000       0.888       0.950      *
+    ALPHA9             0.921       0.017      0.000       0.882       0.944      *
+    ALPHA10            0.856       0.022      0.000       0.814       0.897      *
+    ALPHA11            0.785       0.027      0.000       0.728       0.833      *
+
+ GREEN    BY
+    PARK               0.493       0.056      0.000       0.381       0.594      *
+    PLAY               0.671       0.055      0.000       0.557       0.766      *
+    SPORT              0.683       0.054      0.000       0.578       0.789      *
+    FOREST             0.425       0.063      0.000       0.304       0.548      *
+
+ BLUE     BY
+    RIVER              0.488       0.052      0.000       0.391       0.587      *
+    LAKE               0.631       0.073      0.000       0.503       0.776      *
+    BEACH              0.371       0.089      0.000       0.200       0.537      *
+
+ NOI      BY
+    TRAFFIC            0.397       0.030      0.000       0.340       0.461      *
+    NOISE              0.732       0.051      0.000       0.619       0.818      *
+    INSIDE             0.798       0.032      0.000       0.735       0.860      *
+    OUTSIDE            0.851       0.029      0.000       0.803       0.920      *
+
+ SPHQONPSS | PHQ ON
+    PSS                0.723       0.037      0.000       0.648       0.793      *
+
+ SPHQONNOI | PHQ ON
+    NOI                0.109       0.055      0.021      -0.004       0.215
+
+ SPHQONPLEA | PHQ ON
+    PLEA              -0.003       0.148      0.495      -0.317       0.213
+
+ SPHQONSAFE | PHQ ON
+    SAFE               0.028       0.104      0.419      -0.164       0.224
+
+ SPHQONCOH | PHQ ON
+    COH               -0.027       0.083      0.400      -0.159       0.146
+
+ SPHQONGREEN | PHQ ON
+    GREEN              0.081       0.085      0.162      -0.058       0.259
+
+ SPHQONBLUE | PHQ ON
+    BLUE              -0.069       0.081      0.165      -0.258       0.067
+
+ SPSSONNOI | PSS ON
+    NOI                0.188       0.076      0.002       0.061       0.355      *
+
+ SPSSONPLEA | PSS ON
+    PLEA              -0.100       0.139      0.255      -0.370       0.156
+
+ SPSSONSAFE | PSS ON
+    SAFE              -0.101       0.120      0.194      -0.330       0.137
+
+ SPSSONCOH | PSS ON
+    COH               -0.019       0.086      0.394      -0.176       0.171
+
+ SPSSONGREEN | PSS ON
+    GREEN              0.223       0.134      0.004       0.027       0.531      *
+
+ SPSSONBLUE | PSS ON
+    BLUE              -0.258       0.128      0.002      -0.548      -0.067      *
+
+ PLEA     WITH
+    COH                0.666       0.048      0.000       0.564       0.752      *
+
+ SAFE     WITH
+    COH                0.370       0.047      0.000       0.275       0.454      *
+    PLEA               0.740       0.035      0.000       0.674       0.814      *
+
+ GREEN    WITH
+    COH               -0.142       0.063      0.012      -0.260      -0.016      *
+    PLEA              -0.248       0.076      0.000      -0.410      -0.116      *
+    SAFE              -0.056       0.062      0.177      -0.177       0.062
+
+ BLUE     WITH
+    COH               -0.042       0.065      0.272      -0.169       0.090
+    PLEA              -0.217       0.078      0.004      -0.384      -0.075      *
+    SAFE              -0.128       0.068      0.022      -0.263      -0.003      *
+    GREEN              0.615       0.082      0.000       0.463       0.769      *
+
+ NOI      WITH
+    COH               -0.492       0.046      0.000      -0.570      -0.394      *
+    PLEA              -0.472       0.057      0.000      -0.585      -0.362      *
+    SAFE              -0.396       0.050      0.000      -0.485      -0.295      *
+    GREEN              0.085       0.064      0.098      -0.033       0.216
+    BLUE               0.001       0.078      0.495      -0.139       0.179
+
+ Variances
+    COH                1.000       0.000      0.000       1.000       1.000
+    PLEA               1.000       0.000      0.000       1.000       1.000
+    SAFE               1.000       0.000      0.000       1.000       1.000
+    GREEN              1.000       0.000      0.000       1.000       1.000
+    BLUE               1.000       0.000      0.000       1.000       1.000
+    NOI                1.000       0.000      0.000       1.000       1.000
+
+ Residual Variances
+    PSS                0.678       0.067      0.000       0.550       0.800      *
+    PHQ                0.270       0.039      0.000       0.191       0.343      *
+
+Between Level
+
+ Means
+    SPHQONPSS          6.814       4.368      0.000       2.491      17.406      *
+    SPHQONNOI          1.062       1.461      0.030      -0.373       4.205
+    SPHQONPLEA        -0.101       2.796      0.473      -5.186       6.365
+    SPHQONSAFE         0.252       1.360      0.390      -2.289       2.815
+    SPHQONCOH         -0.268       0.948      0.337      -2.169       1.656
+    SPHQONGREE         0.606       1.325      0.146      -0.903       3.182
+    SPHQONBLUE        -0.468       1.188      0.203      -2.394       0.908
+    SPSSONNOI          1.716       2.447      0.002       0.094       6.819      *
+    SPSSONPLEA        -1.168       2.917      0.254      -8.205       3.275
+    SPSSONSAFE        -0.537       1.756      0.310      -4.545       2.032
+    SPSSONCOH         -0.067       0.880      0.457      -1.884       1.728
+    SPSSONGREE         1.222       1.523      0.016      -0.221       4.457
+    SPSSONBLUE        -1.230       1.321      0.010      -4.219       0.158
+
+ Variances
+    COH1               1.000       0.000      0.000       1.000       1.000
+    COH2               1.000       0.000      0.000       1.000       1.000
+    COH3               1.000       0.000      0.000       1.000       1.000
+    COH4               1.000       0.000      0.000       1.000       1.000
+    COH5               1.000       0.000      0.000       1.000       1.000
+    PSS1               1.000       0.000      0.000       1.000       1.000
+    PSS2               1.000       0.000      0.000       1.000       1.000
+    PSS3               1.000       0.000      0.000       1.000       1.000
+    PSS4               1.000       0.000      0.000       1.000       1.000
+    PSS5               1.000       0.000      0.000       1.000       1.000
+    PSS6               1.000       0.000      0.000       1.000       1.000
+    PSS7               1.000       0.000      0.000       1.000       1.000
+    PSS8               1.000       0.000      0.000       1.000       1.000
+    PSS9               1.000       0.000      0.000       1.000       1.000
+    PSS10              1.000       0.000      0.000       1.000       1.000
+    PHQ1               1.000       0.000      0.000       1.000       1.000
+    PHQ2               1.000       0.000      0.000       1.000       1.000
+    PHQ3               1.000       0.000      0.000       1.000       1.000
+    PHQ4               1.000       0.000      0.000       1.000       1.000
+    PHQ5               1.000       0.000      0.000       1.000       1.000
+    PHQ6               1.000       0.000      0.000       1.000       1.000
+    PHQ7               1.000       0.000      0.000       1.000       1.000
+    PHQ8               1.000       0.000      0.000       1.000       1.000
+    PHQ9               1.000       0.000      0.000       1.000       1.000
+    ALPHA1             1.000       0.000      0.000       1.000       1.000
+    ALPHA2             1.000       0.000      0.000       1.000       1.000
+    ALPHA3             1.000       0.000      0.000       1.000       1.000
+    ALPHA4             1.000       0.000      0.000       1.000       1.000
+    ALPHA6             1.000       0.000      0.000       1.000       1.000
+    ALPHA7             1.000       0.000      0.000       1.000       1.000
+    ALPHA8             1.000       0.000      0.000       1.000       1.000
+    ALPHA9             1.000       0.000      0.000       1.000       1.000
+    ALPHA10            1.000       0.000      0.000       1.000       1.000
+    ALPHA11            1.000       0.000      0.000       1.000       1.000
+    PARK               1.000       0.000      0.000       1.000       1.000
+    PLAY               1.000       0.000      0.000       1.000       1.000
+    SPORT              1.000       0.000      0.000       1.000       1.000
+    FOREST             1.000       0.000      0.000       1.000       1.000
+    RIVER              1.000       0.000      0.000       1.000       1.000
+    LAKE               1.000       0.000      0.000       1.000       1.000
+    BEACH              1.000       0.000      0.000       1.000       1.000
+    TRAFFIC            1.000       0.000      0.000       1.000       1.000
+    NOISE              1.000       0.000      0.000       1.000       1.000
+    INSIDE             1.000       0.000      0.000       1.000       1.000
+    OUTSIDE            1.000       0.000      0.000       1.000       1.000
+    SPHQONPSS          1.000       0.000      0.000       1.000       1.000
+    SPHQONNOI          1.000       0.000      0.000       1.000       1.000
+    SPHQONPLEA         1.000       0.000      0.000       1.000       1.000
+    SPHQONSAFE         1.000       0.000      0.000       1.000       1.000
+    SPHQONCOH          1.000       0.000      0.000       1.000       1.000
+    SPHQONGREE         1.000       0.000      0.000       1.000       1.000
+    SPHQONBLUE         1.000       0.000      0.000       1.000       1.000
+    SPSSONNOI          1.000       0.000      0.000       1.000       1.000
+    SPSSONPLEA         1.000       0.000      0.000       1.000       1.000
+    SPSSONSAFE         1.000       0.000      0.000       1.000       1.000
+    SPSSONCOH          1.000       0.000      0.000       1.000       1.000
+    SPSSONGREE         1.000       0.000      0.000       1.000       1.000
+    SPSSONBLUE         1.000       0.000      0.000       1.000       1.000
+
+
+STDY Standardization
+
+                                Posterior  One-Tailed         95% C.I.
+                    Estimate       S.D.      P-Value   Lower 2.5%  Upper 2.5%  Significance
+
+Within-Level Standardized Estimates Averaged Over Clusters
+
+ COH      BY
+    COH1               0.846       0.024      0.000       0.792       0.885      *
+    COH2               0.853       0.017      0.000       0.814       0.880      *
+    COH3               0.848       0.022      0.000       0.801       0.886      *
+    COH4               0.668       0.035      0.000       0.601       0.735      *
+    COH5               0.606       0.034      0.000       0.541       0.675      *
+
+ PSS      BY
+    PSS1               0.743       0.019      0.000       0.701       0.774      *
+    PSS2               0.824       0.020      0.000       0.787       0.862      *
+    PSS3               0.749       0.027      0.000       0.692       0.796      *
+    PSS4               0.536       0.039      0.000       0.452       0.603      *
+    PSS5               0.680       0.029      0.000       0.623       0.735      *
+    PSS6               0.707       0.026      0.000       0.655       0.754      *
+    PSS7               0.657       0.033      0.000       0.590       0.719      *
+    PSS8               0.751       0.028      0.000       0.690       0.798      *
+    PSS9               0.707       0.029      0.000       0.646       0.759      *
+    PSS10              0.795       0.024      0.000       0.748       0.838      *
+
+ PHQ      BY
+    PHQ1               0.748       0.022      0.000       0.701       0.784      *
+    PHQ2               0.913       0.015      0.000       0.883       0.943      *
+    PHQ3               0.642       0.036      0.000       0.571       0.711      *
+    PHQ4               0.756       0.027      0.000       0.705       0.808      *
+    PHQ5               0.710       0.029      0.000       0.655       0.771      *
+    PHQ6               0.804       0.025      0.000       0.754       0.851      *
+    PHQ7               0.707       0.032      0.000       0.638       0.763      *
+    PHQ8               0.748       0.037      0.000       0.676       0.824      *
+    PHQ9               0.746       0.047      0.000       0.655       0.824      *
+
+ PLEA     BY
+    ALPHA1             0.599       0.042      0.000       0.514       0.677      *
+    ALPHA2             0.582       0.051      0.000       0.476       0.673      *
+    ALPHA3             0.497       0.051      0.000       0.386       0.582      *
+    ALPHA4             0.679       0.045      0.000       0.589       0.767      *
+
+ SAFE     BY
+    ALPHA6             0.521       0.032      0.000       0.463       0.582      *
+    ALPHA7             0.751       0.029      0.000       0.696       0.807      *
+    ALPHA8             0.926       0.016      0.000       0.888       0.950      *
+    ALPHA9             0.921       0.017      0.000       0.882       0.944      *
+    ALPHA10            0.856       0.022      0.000       0.814       0.897      *
+    ALPHA11            0.785       0.027      0.000       0.728       0.833      *
+
+ GREEN    BY
+    PARK               0.493       0.056      0.000       0.381       0.594      *
+    PLAY               0.671       0.055      0.000       0.557       0.766      *
+    SPORT              0.683       0.054      0.000       0.578       0.789      *
+    FOREST             0.425       0.063      0.000       0.304       0.548      *
+
+ BLUE     BY
+    RIVER              0.488       0.052      0.000       0.391       0.587      *
+    LAKE               0.631       0.073      0.000       0.503       0.776      *
+    BEACH              0.371       0.089      0.000       0.200       0.537      *
+
+ NOI      BY
+    TRAFFIC            0.397       0.030      0.000       0.340       0.461      *
+    NOISE              0.732       0.051      0.000       0.619       0.818      *
+    INSIDE             0.798       0.032      0.000       0.735       0.860      *
+    OUTSIDE            0.851       0.029      0.000       0.803       0.920      *
+
+ SPHQONPSS | PHQ ON
+    PSS                0.723       0.037      0.000       0.648       0.793      *
+
+ SPHQONNOI | PHQ ON
+    NOI                0.109       0.055      0.021      -0.004       0.215
+
+ SPHQONPLEA | PHQ ON
+    PLEA              -0.003       0.148      0.495      -0.317       0.213
+
+ SPHQONSAFE | PHQ ON
+    SAFE               0.028       0.104      0.419      -0.164       0.224
+
+ SPHQONCOH | PHQ ON
+    COH               -0.027       0.083      0.400      -0.159       0.146
+
+ SPHQONGREEN | PHQ ON
+    GREEN              0.081       0.085      0.162      -0.058       0.259
+
+ SPHQONBLUE | PHQ ON
+    BLUE              -0.069       0.081      0.165      -0.258       0.067
+
+ SPSSONNOI | PSS ON
+    NOI                0.188       0.076      0.002       0.061       0.355      *
+
+ SPSSONPLEA | PSS ON
+    PLEA              -0.100       0.139      0.255      -0.370       0.156
+
+ SPSSONSAFE | PSS ON
+    SAFE              -0.101       0.120      0.194      -0.330       0.137
+
+ SPSSONCOH | PSS ON
+    COH               -0.019       0.086      0.394      -0.176       0.171
+
+ SPSSONGREEN | PSS ON
+    GREEN              0.223       0.134      0.004       0.027       0.531      *
+
+ SPSSONBLUE | PSS ON
+    BLUE              -0.258       0.128      0.002      -0.548      -0.067      *
+
+ PLEA     WITH
+    COH                0.666       0.048      0.000       0.564       0.752      *
+
+ SAFE     WITH
+    COH                0.370       0.047      0.000       0.275       0.454      *
+    PLEA               0.740       0.035      0.000       0.674       0.814      *
+
+ GREEN    WITH
+    COH               -0.142       0.063      0.012      -0.260      -0.016      *
+    PLEA              -0.248       0.076      0.000      -0.410      -0.116      *
+    SAFE              -0.056       0.062      0.177      -0.177       0.062
+
+ BLUE     WITH
+    COH               -0.042       0.065      0.272      -0.169       0.090
+    PLEA              -0.217       0.078      0.004      -0.384      -0.075      *
+    SAFE              -0.128       0.068      0.022      -0.263      -0.003      *
+    GREEN              0.615       0.082      0.000       0.463       0.769      *
+
+ NOI      WITH
+    COH               -0.492       0.046      0.000      -0.570      -0.394      *
+    PLEA              -0.472       0.057      0.000      -0.585      -0.362      *
+    SAFE              -0.396       0.050      0.000      -0.485      -0.295      *
+    GREEN              0.085       0.064      0.098      -0.033       0.216
+    BLUE               0.001       0.078      0.495      -0.139       0.179
+
+ Variances
+    COH                1.000       0.000      0.000       1.000       1.000
+    PLEA               1.000       0.000      0.000       1.000       1.000
+    SAFE               1.000       0.000      0.000       1.000       1.000
+    GREEN              1.000       0.000      0.000       1.000       1.000
+    BLUE               1.000       0.000      0.000       1.000       1.000
+    NOI                1.000       0.000      0.000       1.000       1.000
+
+ Residual Variances
+    PSS                0.678       0.067      0.000       0.550       0.800      *
+    PHQ                0.270       0.039      0.000       0.191       0.343      *
+
+Between Level
+
+ Means
+    SPHQONPSS          6.814       4.368      0.000       2.491      17.406      *
+    SPHQONNOI          1.062       1.461      0.030      -0.373       4.205
+    SPHQONPLEA        -0.101       2.796      0.473      -5.186       6.365
+    SPHQONSAFE         0.252       1.360      0.390      -2.289       2.815
+    SPHQONCOH         -0.268       0.948      0.337      -2.169       1.656
+    SPHQONGREE         0.606       1.325      0.146      -0.903       3.182
+    SPHQONBLUE        -0.468       1.188      0.203      -2.394       0.908
+    SPSSONNOI          1.716       2.447      0.002       0.094       6.819      *
+    SPSSONPLEA        -1.168       2.917      0.254      -8.205       3.275
+    SPSSONSAFE        -0.537       1.756      0.310      -4.545       2.032
+    SPSSONCOH         -0.067       0.880      0.457      -1.884       1.728
+    SPSSONGREE         1.222       1.523      0.016      -0.221       4.457
+    SPSSONBLUE        -1.230       1.321      0.010      -4.219       0.158
+
+ Variances
+    COH1               1.000       0.000      0.000       1.000       1.000
+    COH2               1.000       0.000      0.000       1.000       1.000
+    COH3               1.000       0.000      0.000       1.000       1.000
+    COH4               1.000       0.000      0.000       1.000       1.000
+    COH5               1.000       0.000      0.000       1.000       1.000
+    PSS1               1.000       0.000      0.000       1.000       1.000
+    PSS2               1.000       0.000      0.000       1.000       1.000
+    PSS3               1.000       0.000      0.000       1.000       1.000
+    PSS4               1.000       0.000      0.000       1.000       1.000
+    PSS5               1.000       0.000      0.000       1.000       1.000
+    PSS6               1.000       0.000      0.000       1.000       1.000
+    PSS7               1.000       0.000      0.000       1.000       1.000
+    PSS8               1.000       0.000      0.000       1.000       1.000
+    PSS9               1.000       0.000      0.000       1.000       1.000
+    PSS10              1.000       0.000      0.000       1.000       1.000
+    PHQ1               1.000       0.000      0.000       1.000       1.000
+    PHQ2               1.000       0.000      0.000       1.000       1.000
+    PHQ3               1.000       0.000      0.000       1.000       1.000
+    PHQ4               1.000       0.000      0.000       1.000       1.000
+    PHQ5               1.000       0.000      0.000       1.000       1.000
+    PHQ6               1.000       0.000      0.000       1.000       1.000
+    PHQ7               1.000       0.000      0.000       1.000       1.000
+    PHQ8               1.000       0.000      0.000       1.000       1.000
+    PHQ9               1.000       0.000      0.000       1.000       1.000
+    ALPHA1             1.000       0.000      0.000       1.000       1.000
+    ALPHA2             1.000       0.000      0.000       1.000       1.000
+    ALPHA3             1.000       0.000      0.000       1.000       1.000
+    ALPHA4             1.000       0.000      0.000       1.000       1.000
+    ALPHA6             1.000       0.000      0.000       1.000       1.000
+    ALPHA7             1.000       0.000      0.000       1.000       1.000
+    ALPHA8             1.000       0.000      0.000       1.000       1.000
+    ALPHA9             1.000       0.000      0.000       1.000       1.000
+    ALPHA10            1.000       0.000      0.000       1.000       1.000
+    ALPHA11            1.000       0.000      0.000       1.000       1.000
+    PARK               1.000       0.000      0.000       1.000       1.000
+    PLAY               1.000       0.000      0.000       1.000       1.000
+    SPORT              1.000       0.000      0.000       1.000       1.000
+    FOREST             1.000       0.000      0.000       1.000       1.000
+    RIVER              1.000       0.000      0.000       1.000       1.000
+    LAKE               1.000       0.000      0.000       1.000       1.000
+    BEACH              1.000       0.000      0.000       1.000       1.000
+    TRAFFIC            1.000       0.000      0.000       1.000       1.000
+    NOISE              1.000       0.000      0.000       1.000       1.000
+    INSIDE             1.000       0.000      0.000       1.000       1.000
+    OUTSIDE            1.000       0.000      0.000       1.000       1.000
+    SPHQONPSS          1.000       0.000      0.000       1.000       1.000
+    SPHQONNOI          1.000       0.000      0.000       1.000       1.000
+    SPHQONPLEA         1.000       0.000      0.000       1.000       1.000
+    SPHQONSAFE         1.000       0.000      0.000       1.000       1.000
+    SPHQONCOH          1.000       0.000      0.000       1.000       1.000
+    SPHQONGREE         1.000       0.000      0.000       1.000       1.000
+    SPHQONBLUE         1.000       0.000      0.000       1.000       1.000
+    SPSSONNOI          1.000       0.000      0.000       1.000       1.000
+    SPSSONPLEA         1.000       0.000      0.000       1.000       1.000
+    SPSSONSAFE         1.000       0.000      0.000       1.000       1.000
+    SPSSONCOH          1.000       0.000      0.000       1.000       1.000
+    SPSSONGREE         1.000       0.000      0.000       1.000       1.000
+    SPSSONBLUE         1.000       0.000      0.000       1.000       1.000
+
+
+STD Standardization
+
+                                Posterior  One-Tailed         95% C.I.
+                    Estimate       S.D.      P-Value   Lower 2.5%  Upper 2.5%  Significance
+
+Within-Level Standardized Estimates Averaged Over Clusters
+
+ COH      BY
+    COH1               1.583       0.153      0.000       1.276       1.853      *
+    COH2               1.634       0.119      0.000       1.395       1.849      *
+    COH3               1.601       0.150      0.000       1.318       1.885      *
+    COH4               0.898       0.084      0.000       0.743       1.069      *
+    COH5               0.762       0.068      0.000       0.633       0.902      *
+
+ PSS      BY
+    PSS1               1.117       0.064      0.000       0.993       1.237      *
+    PSS2               1.470       0.111      0.000       1.273       1.701      *
+    PSS3               1.141       0.093      0.000       0.958       1.321      *
+    PSS4               0.637       0.065      0.000       0.509       0.760      *
+    PSS5               0.934       0.076      0.000       0.802       1.098      *
+    PSS6               1.008       0.074      0.000       0.875       1.159      *
+    PSS7               0.877       0.077      0.000       0.717       1.019      *
+    PSS8               1.146       0.096      0.000       0.954       1.327      *
+    PSS9               1.007       0.083      0.000       0.841       1.165      *
+    PSS10              1.322       0.107      0.000       1.132       1.546      *
+
+ PHQ      BY
+    PHQ1               1.144       0.078      0.000       0.996       1.288      *
+    PHQ2               2.286       0.239      0.000       1.882       2.816      *
+    PHQ3               0.847       0.083      0.000       0.696       1.019      *
+    PHQ4               1.173       0.098      0.000       0.983       1.362      *
+    PHQ5               1.022       0.088      0.000       0.846       1.192      *
+    PHQ6               1.377       0.124      0.000       1.155       1.641      *
+    PHQ7               1.014       0.094      0.000       0.832       1.192      *
+    PHQ8               1.145       0.135      0.000       0.909       1.445      *
+    PHQ9               1.138       0.157      0.000       0.849       1.437      *
+
+ PLEA     BY
+    ALPHA1             0.748       0.080      0.000       0.590       0.908      *
+    ALPHA2             0.715       0.095      0.000       0.538       0.903      *
+    ALPHA3             0.573       0.078      0.000       0.419       0.716      *
+    ALPHA4             0.925       0.117      0.000       0.701       1.160      *
+
+ SAFE     BY
+    ALPHA6             0.611       0.051      0.000       0.514       0.706      *
+    ALPHA7             1.137       0.100      0.000       0.946       1.337      *
+    ALPHA8             2.453       0.272      0.000       1.872       2.959      *
+    ALPHA9             2.364       0.245      0.000       1.846       2.830      *
+    ALPHA10            1.654       0.159      0.000       1.364       1.967      *
+    ALPHA11            1.268       0.115      0.000       1.056       1.500      *
+
+ GREEN    BY
+    PARK               0.566       0.085      0.000       0.404       0.729      *
+    PLAY               0.906       0.134      0.000       0.660       1.180      *
+    SPORT              0.935       0.145      0.000       0.683       1.232      *
+    FOREST             0.470       0.087      0.000       0.319       0.656      *
+
+ BLUE     BY
+    RIVER              0.559       0.081      0.000       0.417       0.715      *
+    LAKE               0.814       0.168      0.000       0.550       1.177      *
+    BEACH              0.400       0.113      0.000       0.204       0.637      *
+
+ NOI      BY
+    TRAFFIC            0.432       0.040      0.000       0.362       0.520      *
+    NOISE              1.074       0.160      0.000       0.773       1.393      *
+    INSIDE             1.322       0.146      0.000       1.055       1.624      *
+    OUTSIDE            1.621       0.227      0.000       1.298       2.245      *
+
+ SPHQONPSS | PHQ ON
+    PSS                0.723       0.037      0.000       0.648       0.793      *
+
+ SPHQONNOI | PHQ ON
+    NOI                0.109       0.055      0.021      -0.004       0.215
+
+ SPHQONPLEA | PHQ ON
+    PLEA              -0.003       0.148      0.495      -0.317       0.213
+
+ SPHQONSAFE | PHQ ON
+    SAFE               0.028       0.104      0.419      -0.164       0.224
+
+ SPHQONCOH | PHQ ON
+    COH               -0.027       0.083      0.400      -0.159       0.146
+
+ SPHQONGREEN | PHQ ON
+    GREEN              0.081       0.085      0.162      -0.058       0.259
+
+ SPHQONBLUE | PHQ ON
+    BLUE              -0.069       0.081      0.165      -0.258       0.067
+
+ SPSSONNOI | PSS ON
+    NOI                0.188       0.076      0.002       0.061       0.355      *
+
+ SPSSONPLEA | PSS ON
+    PLEA              -0.100       0.139      0.255      -0.370       0.156
+
+ SPSSONSAFE | PSS ON
+    SAFE              -0.101       0.120      0.194      -0.330       0.137
+
+ SPSSONCOH | PSS ON
+    COH               -0.019       0.086      0.394      -0.176       0.171
+
+ SPSSONGREEN | PSS ON
+    GREEN              0.223       0.134      0.004       0.027       0.531      *
+
+ SPSSONBLUE | PSS ON
+    BLUE              -0.258       0.128      0.002      -0.548      -0.067      *
+
+ PLEA     WITH
+    COH                0.666       0.048      0.000       0.564       0.752      *
+
+ SAFE     WITH
+    COH                0.370       0.047      0.000       0.275       0.454      *
+    PLEA               0.740       0.035      0.000       0.674       0.814      *
+
+ GREEN    WITH
+    COH               -0.142       0.063      0.012      -0.260      -0.016      *
+    PLEA              -0.248       0.076      0.000      -0.410      -0.116      *
+    SAFE              -0.056       0.062      0.177      -0.177       0.062
+
+ BLUE     WITH
+    COH               -0.042       0.065      0.272      -0.169       0.090
+    PLEA              -0.217       0.078      0.004      -0.384      -0.075      *
+    SAFE              -0.128       0.068      0.022      -0.263      -0.003      *
+    GREEN              0.615       0.082      0.000       0.463       0.769      *
+
+ NOI      WITH
+    COH               -0.492       0.046      0.000      -0.570      -0.394      *
+    PLEA              -0.472       0.057      0.000      -0.585      -0.362      *
+    SAFE              -0.396       0.050      0.000      -0.485      -0.295      *
+    GREEN              0.085       0.064      0.098      -0.033       0.216
+    BLUE               0.001       0.078      0.495      -0.139       0.179
+
+ Variances
+    COH                1.000       0.000      0.000       1.000       1.000
+    PLEA               1.000       0.000      0.000       1.000       1.000
+    SAFE               1.000       0.000      0.000       1.000       1.000
+    GREEN              1.000       0.000      0.000       1.000       1.000
+    BLUE               1.000       0.000      0.000       1.000       1.000
+    NOI                1.000       0.000      0.000       1.000       1.000
+
+ Residual Variances
+    PSS                0.678       0.067      0.000       0.550       0.800      *
+    PHQ                0.270       0.039      0.000       0.191       0.343      *
+
+Between Level
+
+ Means
+    SPHQONPSS          6.814       4.368      0.000       2.491      17.406      *
+    SPHQONNOI          1.062       1.461      0.030      -0.373       4.205
+    SPHQONPLEA        -0.101       2.796      0.473      -5.186       6.365
+    SPHQONSAFE         0.252       1.360      0.390      -2.289       2.815
+    SPHQONCOH         -0.268       0.948      0.337      -2.169       1.656
+    SPHQONGREE         0.606       1.325      0.146      -0.903       3.182
+    SPHQONBLUE        -0.468       1.188      0.203      -2.394       0.908
+    SPSSONNOI          1.716       2.447      0.002       0.094       6.819      *
+    SPSSONPLEA        -1.168       2.917      0.254      -8.205       3.275
+    SPSSONSAFE        -0.537       1.756      0.310      -4.545       2.032
+    SPSSONCOH         -0.067       0.880      0.457      -1.884       1.728
+    SPSSONGREE         1.222       1.523      0.016      -0.221       4.457
+    SPSSONBLUE        -1.230       1.321      0.010      -4.219       0.158
+
+ Variances
+    COH1               0.114       0.074      0.000       0.003       0.262      *
+    COH2               0.044       0.043      0.000       0.001       0.138      *
+    COH3               0.031       0.036      0.000       0.001       0.111      *
+    COH4               0.022       0.025      0.000       0.001       0.077      *
+    COH5               0.017       0.020      0.000       0.001       0.062      *
+    PSS1               0.021       0.024      0.000       0.001       0.074      *
+    PSS2               0.024       0.030      0.000       0.001       0.091      *
+    PSS3               0.035       0.033      0.000       0.001       0.106      *
+    PSS4               0.052       0.039      0.000       0.001       0.131      *
+    PSS5               0.023       0.026      0.000       0.001       0.079      *
+    PSS6               0.016       0.019      0.000       0.001       0.059      *
+    PSS7               0.023       0.026      0.000       0.001       0.081      *
+    PSS8               0.032       0.033      0.000       0.001       0.106      *
+    PSS9               0.033       0.031      0.000       0.001       0.100      *
+    PSS10              0.023       0.029      0.000       0.001       0.086      *
+    PHQ1               0.047       0.043      0.000       0.001       0.139      *
+    PHQ2               0.177       0.131      0.000       0.001       0.450      *
+    PHQ3               0.022       0.024      0.000       0.001       0.076      *
+    PHQ4               0.012       0.016      0.000       0.001       0.048      *
+    PHQ5               0.026       0.030      0.000       0.001       0.092      *
+    PHQ6               0.103       0.082      0.000       0.002       0.276      *
+    PHQ7               0.055       0.053      0.000       0.001       0.169      *
+    PHQ8               0.030       0.047      0.000       0.000       0.135      *
+    PHQ9               0.040       0.066      0.000       0.001       0.198      *
+    ALPHA1             0.079       0.052      0.000       0.006       0.187      *
+    ALPHA2             0.249       0.100      0.000       0.095       0.465      *
+    ALPHA3             0.170       0.075      0.000       0.054       0.332      *
+    ALPHA4             0.152       0.085      0.000       0.027       0.336      *
+    ALPHA6             0.112       0.056      0.000       0.024       0.231      *
+    ALPHA7             0.084       0.059      0.000       0.004       0.207      *
+    ALPHA8             0.149       0.135      0.000       0.001       0.437      *
+    ALPHA9             0.237       0.151      0.000       0.020       0.553      *
+    ALPHA10            0.028       0.037      0.000       0.001       0.116      *
+    ALPHA11            0.120       0.075      0.000       0.009       0.276      *
+    PARK               0.170       0.077      0.000       0.051       0.336      *
+    PLAY               0.092       0.075      0.000       0.001       0.253      *
+    SPORT              0.096       0.063      0.000       0.008       0.231      *
+    FOREST             0.531       0.165      0.000       0.272       0.882      *
+    RIVER              0.437       0.144      0.000       0.216       0.749      *
+    LAKE               0.291       0.117      0.000       0.119       0.549      *
+    BEACH              0.607       0.203      0.000       0.296       1.037      *
+    TRAFFIC            0.099       0.051      0.000       0.020       0.210      *
+    NOISE              0.062       0.069      0.000       0.001       0.210      *
+    INSIDE             0.145       0.091      0.000       0.012       0.331      *
+    OUTSIDE            0.074       0.072      0.000       0.001       0.227      *
+    SPHQONPSS          1.000       0.000      0.000       1.000       1.000
+    SPHQONNOI          1.000       0.000      0.000       1.000       1.000
+    SPHQONPLEA         1.000       0.000      0.000       1.000       1.000
+    SPHQONSAFE         1.000       0.000      0.000       1.000       1.000
+    SPHQONCOH          1.000       0.000      0.000       1.000       1.000
+    SPHQONGREE         1.000       0.000      0.000       1.000       1.000
+    SPHQONBLUE         1.000       0.000      0.000       1.000       1.000
+    SPSSONNOI          1.000       0.000      0.000       1.000       1.000
+    SPSSONPLEA         1.000       0.000      0.000       1.000       1.000
+    SPSSONSAFE         1.000       0.000      0.000       1.000       1.000
+    SPSSONCOH          1.000       0.000      0.000       1.000       1.000
+    SPSSONGREE         1.000       0.000      0.000       1.000       1.000
+    SPSSONBLUE         1.000       0.000      0.000       1.000       1.000
+
+
+R-SQUARE
+
+Within-Level R-Square Averaged Across Clusters
+
+                                Posterior  One-Tailed         95% C.I.
+    Variable        Estimate       S.D.      P-Value   Lower 2.5%  Upper 2.5%
+
+    COH1               0.715       0.041      0.000       0.620       0.774
+    COH2               0.727       0.029      0.000       0.663       0.775
+    COH3               0.719       0.038      0.000       0.641       0.785
+    COH4               0.447       0.046      0.000       0.356       0.533
+    COH5               0.367       0.041      0.000       0.286       0.449
+    PSS1               0.553       0.028      0.000       0.494       0.601
+    PSS2               0.680       0.032      0.000       0.620       0.743
+    PSS3               0.562       0.039      0.000       0.481       0.635
+    PSS4               0.288       0.041      0.000       0.206       0.364
+    PSS5               0.464       0.040      0.000       0.389       0.541
+    PSS6               0.502       0.036      0.000       0.430       0.569
+    PSS7               0.433       0.042      0.000       0.342       0.509
+    PSS8               0.564       0.041      0.000       0.475       0.636
+    PSS9               0.501       0.041      0.000       0.418       0.576
+    PSS10              0.633       0.037      0.000       0.560       0.703
+    PHQ1               0.561       0.033      0.000       0.492       0.616
+    PHQ2               0.833       0.028      0.000       0.781       0.889
+    PHQ3               0.415       0.046      0.000       0.328       0.507
+    PHQ4               0.573       0.040      0.000       0.491       0.646
+    PHQ5               0.506       0.042      0.000       0.426       0.590
+    PHQ6               0.648       0.040      0.000       0.565       0.722
+    PHQ7               0.502       0.045      0.000       0.410       0.584
+    PHQ8               0.561       0.055      0.000       0.457       0.676
+    PHQ9               0.558       0.067      0.000       0.422       0.671
+    ALPHA1             0.359       0.049      0.000       0.258       0.452
+    ALPHA2             0.338       0.058      0.000       0.225       0.449
+    ALPHA3             0.247       0.050      0.000       0.149       0.339
+    ALPHA4             0.461       0.061      0.000       0.342       0.584
+    ALPHA6             0.272       0.033      0.000       0.209       0.333
+    ALPHA7             0.564       0.043      0.000       0.485       0.651
+    ALPHA8             0.858       0.029      0.000       0.789       0.903
+    ALPHA9             0.848       0.030      0.000       0.777       0.891
+    ALPHA10            0.732       0.037      0.000       0.663       0.805
+    ALPHA11            0.617       0.042      0.000       0.530       0.694
+    PARK               0.243       0.054      0.000       0.138       0.345
+    PLAY               0.451       0.073      0.000       0.310       0.587
+    SPORT              0.466       0.074      0.000       0.321       0.605
+    FOREST             0.181       0.054      0.000       0.089       0.296
+    RIVER              0.238       0.052      0.000       0.148       0.338
+    LAKE               0.398       0.093      0.000       0.240       0.587
+    BEACH              0.138       0.065      0.000       0.023       0.265
+    TRAFFIC            0.157       0.024      0.000       0.112       0.208
+    NOISE              0.536       0.074      0.000       0.384       0.669
+    INSIDE             0.636       0.051      0.000       0.531       0.728
+    OUTSIDE            0.724       0.050      0.000       0.640       0.842
+
+                                Posterior  One-Tailed         95% C.I.
+    Variable        Estimate       S.D.      P-Value   Lower 2.5%  Upper 2.5%
+
+    PSS                0.322       0.067      0.000       0.200       0.450
+    PHQ                0.730       0.039      0.000       0.657       0.809
+
+Between Level
+
+
+CREDIBILITY INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ COH      BY
+    COH1             1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    COH2             0.791       0.851       0.873       1.077       1.305       1.374       1.503
+    COH3             0.766       0.842       0.889       1.104       1.331       1.361       1.453
+    COH4             0.419       0.449       0.462       0.591       0.715       0.744       0.803
+    COH5             0.359       0.385       0.397       0.505       0.614       0.644       0.702
+
+ PSS      BY
+    PSS1             1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    PSS2             1.049       1.102       1.127       1.316       1.511       1.557       1.662
+    PSS3             0.812       0.864       0.884       1.030       1.192       1.231       1.287
+    PSS4             0.405       0.436       0.457       0.568       0.679       0.704       0.757
+    PSS5             0.613       0.674       0.694       0.835       0.977       1.017       1.082
+    PSS6             0.708       0.748       0.772       0.911       1.048       1.082       1.149
+    PSS7             0.573       0.623       0.649       0.779       0.921       0.952       1.014
+    PSS8             0.779       0.824       0.855       1.020       1.204       1.235       1.309
+    PSS9             0.697       0.731       0.759       0.889       1.045       1.070       1.139
+    PSS10            0.932       0.976       0.998       1.183       1.371       1.422       1.518
+
+ PHQ      BY
+    PHQ1             1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    PHQ2             1.426       1.561       1.615       1.966       2.403       2.517       2.688
+    PHQ3             0.516       0.581       0.612       0.742       0.879       0.904       0.965
+    PHQ4             0.762       0.831       0.879       1.039       1.229       1.250       1.339
+    PHQ5             0.672       0.721       0.742       0.892       1.048       1.086       1.162
+    PHQ6             0.919       0.974       1.018       1.236       1.476       1.526       1.660
+    PHQ7             0.653       0.706       0.730       0.886       1.049       1.086       1.158
+    PHQ8             0.687       0.747       0.782       0.978       1.188       1.236       1.351
+    PHQ9             0.645       0.709       0.757       0.991       1.255       1.298       1.422
+
+ PLEA     BY
+    ALPHA1           1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    ALPHA2           0.599       0.664       0.705       0.993       1.317       1.404       1.592
+    ALPHA3           0.482       0.550       0.586       0.788       1.014       1.063       1.154
+    ALPHA4           0.792       0.856       0.899       1.282       1.725       1.850       2.136
+
+ SAFE     BY
+    ALPHA6           1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    ALPHA7           1.298       1.409       1.467       1.812       2.183       2.258       2.403
+    ALPHA8           2.478       2.581       2.658       3.616       4.525       4.776       5.282
+    ALPHA9           2.507       2.672       2.865       3.781       4.726       5.028       5.724
+    ALPHA10          1.754       1.929       1.994       2.550       3.118       3.238       3.428
+    ALPHA11          1.420       1.504       1.595       2.001       2.436       2.524       2.728
+
+ GREEN    BY
+    PARK             1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    PLAY             0.924       0.995       1.064       1.568       2.118       2.251       2.575
+    SPORT            0.882       0.989       1.052       1.632       2.354       2.569       2.912
+    FOREST           0.392       0.501       0.542       0.815       1.126       1.203       1.338
+
+ BLUE     BY
+    RIVER            1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    LAKE             0.787       0.905       0.938       1.458       2.096       2.308       2.544
+    BEACH            0.246       0.312       0.354       0.669       0.982       1.066       1.243
+
+ NOI      BY
+    TRAFFIC          1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    NOISE            1.500       1.712       1.866       2.590       3.434       3.615       4.032
+    INSIDE           2.101       2.298       2.409       3.143       4.019       4.198       4.522
+    OUTSIDE          2.321       2.682       2.830       3.766       4.933       5.238       5.716
+
+ PLEA     WITH
+    COH              0.431       0.490       0.528       0.733       0.955       1.002       1.101
+
+ SAFE     WITH
+    COH              0.196       0.220       0.237       0.358       0.477       0.505       0.579
+    PLEA             0.218       0.240       0.251       0.346       0.448       0.474       0.520
+
+ GREEN    WITH
+    COH             -0.302      -0.251      -0.219      -0.118      -0.015      -0.005       0.020
+    PLEA            -0.225      -0.189      -0.173      -0.104      -0.043      -0.033      -0.019
+    SAFE            -0.094      -0.073      -0.065      -0.025       0.014       0.021       0.036
+
+ BLUE     WITH
+    COH             -0.203      -0.164      -0.142      -0.039       0.054       0.076       0.116
+    PLEA            -0.215      -0.182      -0.161      -0.091      -0.028      -0.021      -0.003
+    SAFE            -0.127      -0.104      -0.092      -0.045       0.000       0.006       0.022
+    GREEN            0.084       0.103       0.119       0.198       0.297       0.315       0.357
+
+ NOI      WITH
+    COH             -0.503      -0.443      -0.416      -0.318      -0.215      -0.206      -0.192
+    PLEA            -0.242      -0.217      -0.202      -0.148      -0.094      -0.088      -0.073
+    SAFE            -0.179      -0.161      -0.152      -0.109      -0.069      -0.063      -0.051
+    GREEN           -0.020      -0.012      -0.006       0.021       0.049       0.056       0.069
+    BLUE            -0.050      -0.036      -0.029       0.002       0.033       0.039       0.056
+
+ Thresholds
+    COH1$1          -4.387      -4.209      -4.142      -3.673      -3.203      -3.141      -2.997
+    COH1$2          -3.303      -3.181      -3.141      -2.780      -2.450      -2.379      -2.273
+    COH1$3          -1.436      -1.353      -1.334      -1.108      -0.923      -0.869      -0.811
+    COH1$4           1.193       1.274       1.308       1.545       1.813       1.882       1.961
+    COH2$1          -4.939      -4.589      -4.496      -3.939      -3.459      -3.343      -3.200
+    COH2$2          -2.892      -2.763      -2.707      -2.389      -2.109      -2.048      -1.956
+    COH2$3          -1.218      -1.137      -1.083      -0.892      -0.703      -0.677      -0.604
+    COH2$4           1.403       1.475       1.499       1.746       1.990       2.070       2.257
+    COH3$1          -5.434      -5.246      -5.137      -4.538      -3.891      -3.804      -3.665
+    COH3$2          -3.460      -3.347      -3.295      -2.934      -2.579      -2.497      -2.417
+    COH3$3          -1.470      -1.406      -1.372      -1.172      -0.962      -0.929      -0.862
+    COH3$4           1.331       1.348       1.396       1.645       1.881       1.931       2.124
+    COH4$1          -3.840      -3.644      -3.568      -3.160      -2.799      -2.712      -2.601
+    COH4$2          -2.300      -2.196      -2.154      -1.952      -1.766      -1.732      -1.667
+    COH4$3          -1.113      -1.065      -1.023      -0.891      -0.751      -0.744      -0.685
+    COH4$4           0.887       0.945       0.956       1.105       1.258       1.305       1.336
+    COH5$1          -2.765      -2.692      -2.659      -2.398      -2.164      -2.085      -1.990
+    COH5$2          -1.568      -1.530      -1.501      -1.348      -1.197      -1.164      -1.068
+    COH5$3          -0.307      -0.269      -0.247      -0.132      -0.012       0.014       0.062
+    COH5$4           1.130       1.219       1.244       1.394       1.554       1.592       1.637
+    PSS1$1          -1.021      -0.948      -0.930      -0.783      -0.634      -0.601      -0.569
+    PSS1$2           0.282       0.337       0.350       0.499       0.632       0.676       0.730
+    PSS1$3           1.854       1.909       1.946       2.160       2.364       2.401       2.499
+    PSS1$4           2.588       2.668       2.714       3.052       3.345       3.402       3.521
+    PSS2$1          -1.114      -1.057      -1.016      -0.842      -0.674      -0.650      -0.600
+    PSS2$2           0.516       0.576       0.613       0.780       0.959       0.987       1.038
+    PSS2$3           1.794       1.869       1.920       2.148       2.405       2.443       2.533
+    PSS2$4           2.747       2.928       3.017       3.362       3.760       3.810       3.898
+    PSS3$1          -2.000      -1.959      -1.923      -1.716      -1.546      -1.520      -1.435
+    PSS3$2          -0.705      -0.642      -0.607      -0.474      -0.311      -0.292      -0.255
+    PSS3$3           0.980       1.029       1.073       1.239       1.409       1.432       1.516
+    PSS3$4           2.291       2.379       2.407       2.708       2.981       3.048       3.133
+    PSS4$1          -1.337      -1.299      -1.261      -1.124      -0.986      -0.967      -0.902
+    PSS4$2           0.310       0.348       0.361       0.498       0.624       0.654       0.710
+    PSS4$3           1.247       1.326       1.350       1.510       1.686       1.727       1.778
+    PSS4$4           1.785       1.872       1.938       2.127       2.373       2.394       2.468
+    PSS5$1          -2.175      -2.118      -2.087      -1.895      -1.712      -1.673      -1.615
+    PSS5$2           0.092       0.137       0.166       0.292       0.424       0.442       0.482
+    PSS5$3           1.605       1.675       1.709       1.900       2.088       2.124       2.191
+    PSS5$4           2.332       2.451       2.495       2.778       3.053       3.118       3.189
+    PSS6$1          -1.580      -1.546      -1.507      -1.353      -1.193      -1.173      -1.104
+    PSS6$2          -0.132      -0.077      -0.059       0.072       0.202       0.238       0.272
+    PSS6$3           1.262       1.299       1.329       1.489       1.657       1.678       1.741
+    PSS6$4           2.320       2.419       2.473       2.737       3.029       3.074       3.182
+    PSS7$1          -1.500      -1.458      -1.414      -1.257      -1.108      -1.091      -1.022
+    PSS7$2           0.471       0.527       0.556       0.684       0.819       0.842       0.907
+    PSS7$3           1.706       1.746       1.788       1.968       2.163       2.197       2.273
+    PSS7$4           2.377       2.435       2.477       2.798       3.091       3.143       3.307
+    PSS8$1          -2.061      -1.960      -1.922      -1.733      -1.531      -1.494      -1.419
+    PSS8$2           0.475       0.538       0.587       0.729       0.888       0.906       0.988
+    PSS8$3           2.041       2.131       2.153       2.393       2.635       2.721       2.818
+    PSS8$4           2.600       2.661       2.708       3.015       3.306       3.370       3.526
+    PSS9$1          -1.473      -1.412      -1.371      -1.204      -1.051      -1.028      -0.965
+    PSS9$2          -0.010       0.040       0.071       0.209       0.340       0.366       0.430
+    PSS9$3           1.437       1.500       1.530       1.720       1.919       1.969       2.039
+    PSS9$4           2.623       2.707       2.732       3.063       3.474       3.607       3.784
+    PSS10$1         -0.586      -0.517      -0.485      -0.328      -0.170      -0.141      -0.090
+    PSS10$2          0.917       1.012       1.026       1.208       1.390       1.451       1.489
+    PSS10$3          2.006       2.061       2.113       2.353       2.607       2.649       2.733
+    PSS10$4          3.152       3.297       3.347       3.789       4.302       4.406       4.589
+    PHQ1$1          -0.348      -0.285      -0.266      -0.115       0.022       0.057       0.107
+    PHQ1$2           1.674       1.717       1.786       1.983       2.218       2.236       2.328
+    PHQ1$3           2.360       2.473       2.531       2.817       3.104       3.162       3.254
+    PHQ2$1           0.338       0.407       0.467       0.711       0.984       1.027       1.148
+    PHQ2$2           2.860       3.006       3.072       3.566       4.139       4.271       4.490
+    PHQ2$3           4.077       4.284       4.464       5.151       5.920       6.059       6.441
+    PHQ3$1          -0.707      -0.666      -0.639      -0.513      -0.388      -0.366      -0.317
+    PHQ3$2           0.730       0.786       0.812       0.947       1.090       1.116       1.157
+    PHQ3$3           1.478       1.520       1.561       1.741       1.921       1.957       2.031
+    PHQ4$1          -1.451      -1.395      -1.362      -1.186      -1.032      -1.001      -0.933
+    PHQ4$2           0.715       0.766       0.786       0.952       1.096       1.134       1.192
+    PHQ4$3           1.696       1.783       1.823       2.039       2.260       2.302       2.373
+    PHQ5$1           0.002       0.055       0.079       0.219       0.350       0.380       0.432
+    PHQ5$2           1.281       1.350       1.363       1.552       1.714       1.770       1.855
+    PHQ5$3           1.981       2.057       2.118       2.363       2.592       2.640       2.789
+    PHQ6$1           0.409       0.464       0.502       0.686       0.868       0.904       0.996
+    PHQ6$2           1.995       2.087       2.116       2.413       2.706       2.793       2.941
+    PHQ6$3           2.867       2.977       3.022       3.451       3.872       3.978       4.182
+    PHQ7$1           0.117       0.175       0.221       0.357       0.517       0.526       0.582
+    PHQ7$2           1.470       1.571       1.615       1.822       2.017       2.048       2.118
+    PHQ7$3           2.146       2.195       2.266       2.528       2.805       2.842       2.972
+    PHQ8$1           1.247       1.275       1.339       1.536       1.754       1.780       1.977
+    PHQ8$2           2.051       2.161       2.251       2.518       2.820       2.857       3.028
+    PHQ8$3           2.809       3.003       3.058       3.490       3.934       4.058       4.304
+    PHQ9$1           1.576       1.681       1.739       2.026       2.345       2.413       2.550
+    PHQ9$2           2.745       2.861       2.938       3.430       3.973       4.093       4.351
+    PHQ9$3           3.273       3.491       3.580       4.418       5.385       5.621       6.247
+    ALPHA1$1        -2.898      -2.816      -2.743      -2.493      -2.231      -2.208      -2.126
+    ALPHA1$2        -1.784      -1.743      -1.711      -1.540      -1.374      -1.348      -1.280
+    ALPHA1$3         0.163       0.198       0.218       0.353       0.487       0.522       0.590
+    ALPHA2$1        -2.864      -2.745      -2.666      -2.406      -2.123      -2.092      -1.962
+    ALPHA2$2        -1.376      -1.265      -1.231      -1.061      -0.847      -0.812      -0.763
+    ALPHA2$3         0.001       0.069       0.099       0.271       0.451       0.479       0.545
+    ALPHA3$1        -2.804      -2.703      -2.663      -2.393      -2.142      -2.078      -1.990
+    ALPHA3$2        -1.848      -1.769      -1.745      -1.556      -1.372      -1.325      -1.263
+    ALPHA3$3         0.016       0.076       0.105       0.249       0.396       0.423       0.478
+    ALPHA4$1        -3.384      -3.290      -3.213      -2.837      -2.478      -2.410      -2.259
+    ALPHA4$2        -2.261      -2.167      -2.113      -1.869      -1.612      -1.579      -1.498
+    ALPHA4$3        -0.436      -0.369      -0.320      -0.163       0.001       0.029       0.113
+    ALPHA6$1        -1.993      -1.921      -1.868      -1.693      -1.513      -1.490      -1.409
+    ALPHA6$2        -0.982      -0.891      -0.884      -0.727      -0.597      -0.547      -0.503
+    ALPHA6$3         0.643       0.678       0.721       0.855       1.014       1.030       1.107
+    ALPHA7$1        -3.200      -3.116      -3.035      -2.734      -2.431      -2.402      -2.315
+    ALPHA7$2        -1.694      -1.641      -1.586      -1.392      -1.205      -1.187      -1.096
+    ALPHA7$3         0.731       0.795       0.825       1.003       1.182       1.223       1.291
+    ALPHA8$1        -7.196      -6.649      -6.607      -5.502      -4.612      -4.283      -4.195
+    ALPHA8$2        -4.761      -4.598      -4.484      -3.816      -3.231      -3.123      -2.976
+    ALPHA8$3        -0.304      -0.237      -0.168       0.062       0.322       0.345       0.448
+    ALPHA9$1        -6.409      -6.145      -5.951      -5.027      -4.344      -4.208      -3.820
+    ALPHA9$2        -4.319      -4.038      -3.906      -3.336      -2.845      -2.729      -2.552
+    ALPHA9$3        -0.153      -0.044      -0.008       0.257       0.524       0.593       0.695
+    ALPHA10$1       -6.240      -5.963      -5.787      -5.051      -4.151      -4.045      -3.807
+    ALPHA10$2       -4.292      -4.067      -3.988      -3.521      -3.083      -2.970      -2.859
+    ALPHA10$3       -1.125      -1.043      -1.011      -0.801      -0.603      -0.554      -0.492
+    ALPHA11$1       -4.780      -4.522      -4.333      -3.749      -3.198      -3.156      -3.057
+    ALPHA11$2       -2.873      -2.662      -2.600      -2.286      -2.014      -1.953      -1.919
+    ALPHA11$3       -0.145      -0.081      -0.040       0.137       0.302       0.330       0.406
+    PARK$1          -0.334      -0.267      -0.249      -0.089       0.042       0.083       0.136
+    PARK$2           0.952       1.013       1.043       1.213       1.398       1.431       1.486
+    PARK$3           1.920       1.949       2.040       2.291       2.596       2.616       2.777
+    PARK$4           2.202       2.306       2.369       2.677       3.044       3.125       3.250
+    PLAY$1           0.138       0.293       0.335       0.488       0.643       0.677       0.705
+    PLAY$2           1.169       1.297       1.349       1.566       1.788       1.835       1.875
+    PLAY$3           1.489       1.634       1.694       1.950       2.202       2.239       2.317
+    PLAY$4           1.539       1.669       1.750       2.013       2.269       2.291       2.383
+    SPORT$1         -1.465      -1.355      -1.299      -1.110      -0.917      -0.897      -0.848
+    SPORT$2          0.239       0.268       0.309       0.457       0.613       0.639       0.732
+    SPORT$3          1.517       1.552       1.601       1.866       2.141       2.233       2.357
+    SPORT$4          1.709       1.727       1.773       2.079       2.373       2.479       2.672
+    FOREST$1        -3.031      -2.887      -2.821      -2.514      -2.196      -2.125      -2.039
+    FOREST$2        -1.543      -1.462      -1.408      -1.176      -0.942      -0.901      -0.822
+    FOREST$3         0.256       0.327       0.349       0.579       0.776       0.828       0.906
+    FOREST$4         2.162       2.271       2.341       2.678       2.997       3.042       3.169
+    RIVER$1         -1.817      -1.730      -1.713      -1.489      -1.279      -1.220      -1.165
+    RIVER$2         -0.874      -0.804      -0.792      -0.585      -0.403      -0.347      -0.297
+    RIVER$3          0.300       0.353       0.378       0.578       0.765       0.811       0.869
+    RIVER$4          1.755       1.844       1.891       2.147       2.419       2.468       2.560
+    LAKE$1          -2.237      -2.110      -2.058      -1.740      -1.467      -1.404      -1.321
+    LAKE$2          -0.995      -0.920      -0.881      -0.662      -0.480      -0.444      -0.396
+    LAKE$3           0.183       0.247       0.285       0.462       0.640       0.669       0.739
+    LAKE$4           1.873       1.959       1.996       2.328       2.639       2.719       2.921
+    BEACH$1         -3.915      -3.766      -3.670      -3.199      -2.790      -2.728      -2.608
+    BEACH$2         -2.942      -2.744      -2.625      -2.304      -1.985      -1.965      -1.869
+    BEACH$3         -1.776      -1.617      -1.556      -1.279      -1.028      -0.975      -0.883
+    BEACH$4          1.862       2.021       2.045       2.371       2.686       2.787       2.854
+    TRAFFIC$1       -1.164      -1.091      -1.065      -0.936      -0.804      -0.770      -0.727
+    TRAFFIC$2        0.073       0.138       0.162       0.284       0.412       0.438       0.478
+    TRAFFIC$3        1.597       1.661       1.676       1.877       2.056       2.116       2.173
+    NOISE$1          0.454       0.542       0.582       0.819       1.045       1.096       1.237
+    NOISE$2          1.844       1.909       2.023       2.410       2.832       2.913       3.185
+    NOISE$3          2.544       2.607       2.708       3.289       3.805       3.943       4.284
+    INSIDE$1        -0.379      -0.274      -0.233      -0.069       0.125       0.158       0.211
+    INSIDE$2         1.790       1.866       1.916       2.203       2.503       2.562       2.687
+    INSIDE$3         2.692       2.862       2.893       3.319       3.732       3.852       3.922
+    INSIDE$4         3.332       3.514       3.663       4.155       4.790       4.846       5.213
+    OUTSIDE$1       -0.930      -0.828      -0.802      -0.606      -0.429      -0.379      -0.338
+    OUTSIDE$2        1.670       1.714       1.780       2.135       2.530       2.653       2.894
+    OUTSIDE$3        2.884       2.917       2.970       3.535       4.125       4.347       4.664
+
+ Variances
+    COH              1.373       1.470       1.547       2.291       2.995       3.156       3.478
+    PLEA             0.272       0.317       0.338       0.546       0.755       0.800       0.887
+    SAFE             0.248       0.264       0.273       0.409       0.547       0.597       0.692
+    GREEN            0.129       0.160       0.174       0.319       0.483       0.527       0.628
+    BLUE             0.147       0.177       0.189       0.327       0.499       0.545       0.659
+    NOI              0.092       0.110       0.116       0.183       0.252       0.272       0.302
+
+ Residual Variances
+    PSS              0.516       0.577       0.610       0.835       1.065       1.117       1.235
+    PHQ              0.151       0.194       0.212       0.328       0.461       0.496       0.548
+
+Between Level
+
+ Means
+    SPHQONPSS        0.540       0.575       0.602       0.743       0.901       0.923       0.985
+    SPHQONNOI       -0.144      -0.009       0.032       0.278       0.535       0.588       0.675
+    SPHQONPLEA      -0.770      -0.555      -0.485      -0.016       0.400       0.565       0.703
+    SPHQONSAFE      -0.454      -0.362      -0.278       0.059       0.394       0.436       0.572
+    SPHQONCOH       -0.211      -0.171      -0.151      -0.028       0.086       0.114       0.166
+    SPHQONGREE      -0.269      -0.159      -0.105       0.196       0.531       0.588       0.667
+    SPHQONBLUE      -0.753      -0.596      -0.506      -0.148       0.162       0.209       0.325
+    SPSSONNOI        0.030       0.130       0.214       0.538       0.894       0.943       1.117
+    SPSSONPLEA      -1.032      -0.795      -0.673      -0.208       0.300       0.348       0.445
+    SPSSONSAFE      -0.668      -0.580      -0.518      -0.123       0.242       0.296       0.437
+    SPSSONCOH       -0.218      -0.163      -0.142      -0.008       0.134       0.168       0.208
+    SPSSONGREE      -0.082       0.032       0.067       0.436       0.865       0.982       1.137
+    SPSSONBLUE      -1.377      -1.049      -0.954      -0.465      -0.086      -0.018       0.068
+
+ Thresholds
+    COH1$1          -4.387      -4.209      -4.142      -3.673      -3.203      -3.141      -2.997
+    COH1$2          -3.303      -3.181      -3.141      -2.780      -2.450      -2.379      -2.273
+    COH1$3          -1.436      -1.353      -1.334      -1.108      -0.923      -0.869      -0.811
+    COH1$4           1.193       1.274       1.308       1.545       1.813       1.882       1.961
+    COH2$1          -4.939      -4.589      -4.496      -3.939      -3.459      -3.343      -3.200
+    COH2$2          -2.892      -2.763      -2.707      -2.389      -2.109      -2.048      -1.956
+    COH2$3          -1.218      -1.137      -1.083      -0.892      -0.703      -0.677      -0.604
+    COH2$4           1.403       1.475       1.499       1.746       1.990       2.070       2.257
+    COH3$1          -5.434      -5.246      -5.137      -4.538      -3.891      -3.804      -3.665
+    COH3$2          -3.460      -3.347      -3.295      -2.934      -2.579      -2.497      -2.417
+    COH3$3          -1.470      -1.406      -1.372      -1.172      -0.962      -0.929      -0.862
+    COH3$4           1.331       1.348       1.396       1.645       1.881       1.931       2.124
+    COH4$1          -3.840      -3.644      -3.568      -3.160      -2.799      -2.712      -2.601
+    COH4$2          -2.300      -2.196      -2.154      -1.952      -1.766      -1.732      -1.667
+    COH4$3          -1.113      -1.065      -1.023      -0.891      -0.751      -0.744      -0.685
+    COH4$4           0.887       0.945       0.956       1.105       1.258       1.305       1.336
+    COH5$1          -2.765      -2.692      -2.659      -2.398      -2.164      -2.085      -1.990
+    COH5$2          -1.568      -1.530      -1.501      -1.348      -1.197      -1.164      -1.068
+    COH5$3          -0.307      -0.269      -0.247      -0.132      -0.012       0.014       0.062
+    COH5$4           1.130       1.219       1.244       1.394       1.554       1.592       1.637
+    PSS1$1          -1.021      -0.948      -0.930      -0.783      -0.634      -0.601      -0.569
+    PSS1$2           0.282       0.337       0.350       0.499       0.632       0.676       0.730
+    PSS1$3           1.854       1.909       1.946       2.160       2.364       2.401       2.499
+    PSS1$4           2.588       2.668       2.714       3.052       3.345       3.402       3.521
+    PSS2$1          -1.114      -1.057      -1.016      -0.842      -0.674      -0.650      -0.600
+    PSS2$2           0.516       0.576       0.613       0.780       0.959       0.987       1.038
+    PSS2$3           1.794       1.869       1.920       2.148       2.405       2.443       2.533
+    PSS2$4           2.747       2.928       3.017       3.362       3.760       3.810       3.898
+    PSS3$1          -2.000      -1.959      -1.923      -1.716      -1.546      -1.520      -1.435
+    PSS3$2          -0.705      -0.642      -0.607      -0.474      -0.311      -0.292      -0.255
+    PSS3$3           0.980       1.029       1.073       1.239       1.409       1.432       1.516
+    PSS3$4           2.291       2.379       2.407       2.708       2.981       3.048       3.133
+    PSS4$1          -1.337      -1.299      -1.261      -1.124      -0.986      -0.967      -0.902
+    PSS4$2           0.310       0.348       0.361       0.498       0.624       0.654       0.710
+    PSS4$3           1.247       1.326       1.350       1.510       1.686       1.727       1.778
+    PSS4$4           1.785       1.872       1.938       2.127       2.373       2.394       2.468
+    PSS5$1          -2.175      -2.118      -2.087      -1.895      -1.712      -1.673      -1.615
+    PSS5$2           0.092       0.137       0.166       0.292       0.424       0.442       0.482
+    PSS5$3           1.605       1.675       1.709       1.900       2.088       2.124       2.191
+    PSS5$4           2.332       2.451       2.495       2.778       3.053       3.118       3.189
+    PSS6$1          -1.580      -1.546      -1.507      -1.353      -1.193      -1.173      -1.104
+    PSS6$2          -0.132      -0.077      -0.059       0.072       0.202       0.238       0.272
+    PSS6$3           1.262       1.299       1.329       1.489       1.657       1.678       1.741
+    PSS6$4           2.320       2.419       2.473       2.737       3.029       3.074       3.182
+    PSS7$1          -1.500      -1.458      -1.414      -1.257      -1.108      -1.091      -1.022
+    PSS7$2           0.471       0.527       0.556       0.684       0.819       0.842       0.907
+    PSS7$3           1.706       1.746       1.788       1.968       2.163       2.197       2.273
+    PSS7$4           2.377       2.435       2.477       2.798       3.091       3.143       3.307
+    PSS8$1          -2.061      -1.960      -1.922      -1.733      -1.531      -1.494      -1.419
+    PSS8$2           0.475       0.538       0.587       0.729       0.888       0.906       0.988
+    PSS8$3           2.041       2.131       2.153       2.393       2.635       2.721       2.818
+    PSS8$4           2.600       2.661       2.708       3.015       3.306       3.370       3.526
+    PSS9$1          -1.473      -1.412      -1.371      -1.204      -1.051      -1.028      -0.965
+    PSS9$2          -0.010       0.040       0.071       0.209       0.340       0.366       0.430
+    PSS9$3           1.437       1.500       1.530       1.720       1.919       1.969       2.039
+    PSS9$4           2.623       2.707       2.732       3.063       3.474       3.607       3.784
+    PSS10$1         -0.586      -0.517      -0.485      -0.328      -0.170      -0.141      -0.090
+    PSS10$2          0.917       1.012       1.026       1.208       1.390       1.451       1.489
+    PSS10$3          2.006       2.061       2.113       2.353       2.607       2.649       2.733
+    PSS10$4          3.152       3.297       3.347       3.789       4.302       4.406       4.589
+    PHQ1$1          -0.348      -0.285      -0.266      -0.115       0.022       0.057       0.107
+    PHQ1$2           1.674       1.717       1.786       1.983       2.218       2.236       2.328
+    PHQ1$3           2.360       2.473       2.531       2.817       3.104       3.162       3.254
+    PHQ2$1           0.338       0.407       0.467       0.711       0.984       1.027       1.148
+    PHQ2$2           2.860       3.006       3.072       3.566       4.139       4.271       4.490
+    PHQ2$3           4.077       4.284       4.464       5.151       5.920       6.059       6.441
+    PHQ3$1          -0.707      -0.666      -0.639      -0.513      -0.388      -0.366      -0.317
+    PHQ3$2           0.730       0.786       0.812       0.947       1.090       1.116       1.157
+    PHQ3$3           1.478       1.520       1.561       1.741       1.921       1.957       2.031
+    PHQ4$1          -1.451      -1.395      -1.362      -1.186      -1.032      -1.001      -0.933
+    PHQ4$2           0.715       0.766       0.786       0.952       1.096       1.134       1.192
+    PHQ4$3           1.696       1.783       1.823       2.039       2.260       2.302       2.373
+    PHQ5$1           0.002       0.055       0.079       0.219       0.350       0.380       0.432
+    PHQ5$2           1.281       1.350       1.363       1.552       1.714       1.770       1.855
+    PHQ5$3           1.981       2.057       2.118       2.363       2.592       2.640       2.789
+    PHQ6$1           0.409       0.464       0.502       0.686       0.868       0.904       0.996
+    PHQ6$2           1.995       2.087       2.116       2.413       2.706       2.793       2.941
+    PHQ6$3           2.867       2.977       3.022       3.451       3.872       3.978       4.182
+    PHQ7$1           0.117       0.175       0.221       0.357       0.517       0.526       0.582
+    PHQ7$2           1.470       1.571       1.615       1.822       2.017       2.048       2.118
+    PHQ7$3           2.146       2.195       2.266       2.528       2.805       2.842       2.972
+    PHQ8$1           1.247       1.275       1.339       1.536       1.754       1.780       1.977
+    PHQ8$2           2.051       2.161       2.251       2.518       2.820       2.857       3.028
+    PHQ8$3           2.809       3.003       3.058       3.490       3.934       4.058       4.304
+    PHQ9$1           1.576       1.681       1.739       2.026       2.345       2.413       2.550
+    PHQ9$2           2.745       2.861       2.938       3.430       3.973       4.093       4.351
+    PHQ9$3           3.273       3.491       3.580       4.418       5.385       5.621       6.247
+    ALPHA1$1        -2.898      -2.816      -2.743      -2.493      -2.231      -2.208      -2.126
+    ALPHA1$2        -1.784      -1.743      -1.711      -1.540      -1.374      -1.348      -1.280
+    ALPHA1$3         0.163       0.198       0.218       0.353       0.487       0.522       0.590
+    ALPHA2$1        -2.864      -2.745      -2.666      -2.406      -2.123      -2.092      -1.962
+    ALPHA2$2        -1.376      -1.265      -1.231      -1.061      -0.847      -0.812      -0.763
+    ALPHA2$3         0.001       0.069       0.099       0.271       0.451       0.479       0.545
+    ALPHA3$1        -2.804      -2.703      -2.663      -2.393      -2.142      -2.078      -1.990
+    ALPHA3$2        -1.848      -1.769      -1.745      -1.556      -1.372      -1.325      -1.263
+    ALPHA3$3         0.016       0.076       0.105       0.249       0.396       0.423       0.478
+    ALPHA4$1        -3.384      -3.290      -3.213      -2.837      -2.478      -2.410      -2.259
+    ALPHA4$2        -2.261      -2.167      -2.113      -1.869      -1.612      -1.579      -1.498
+    ALPHA4$3        -0.436      -0.369      -0.320      -0.163       0.001       0.029       0.113
+    ALPHA6$1        -1.993      -1.921      -1.868      -1.693      -1.513      -1.490      -1.409
+    ALPHA6$2        -0.982      -0.891      -0.884      -0.727      -0.597      -0.547      -0.503
+    ALPHA6$3         0.643       0.678       0.721       0.855       1.014       1.030       1.107
+    ALPHA7$1        -3.200      -3.116      -3.035      -2.734      -2.431      -2.402      -2.315
+    ALPHA7$2        -1.694      -1.641      -1.586      -1.392      -1.205      -1.187      -1.096
+    ALPHA7$3         0.731       0.795       0.825       1.003       1.182       1.223       1.291
+    ALPHA8$1        -7.196      -6.649      -6.607      -5.502      -4.612      -4.283      -4.195
+    ALPHA8$2        -4.761      -4.598      -4.484      -3.816      -3.231      -3.123      -2.976
+    ALPHA8$3        -0.304      -0.237      -0.168       0.062       0.322       0.345       0.448
+    ALPHA9$1        -6.409      -6.145      -5.951      -5.027      -4.344      -4.208      -3.820
+    ALPHA9$2        -4.319      -4.038      -3.906      -3.336      -2.845      -2.729      -2.552
+    ALPHA9$3        -0.153      -0.044      -0.008       0.257       0.524       0.593       0.695
+    ALPHA10$1       -6.240      -5.963      -5.787      -5.051      -4.151      -4.045      -3.807
+    ALPHA10$2       -4.292      -4.067      -3.988      -3.521      -3.083      -2.970      -2.859
+    ALPHA10$3       -1.125      -1.043      -1.011      -0.801      -0.603      -0.554      -0.492
+    ALPHA11$1       -4.780      -4.522      -4.333      -3.749      -3.198      -3.156      -3.057
+    ALPHA11$2       -2.873      -2.662      -2.600      -2.286      -2.014      -1.953      -1.919
+    ALPHA11$3       -0.145      -0.081      -0.040       0.137       0.302       0.330       0.406
+    PARK$1          -0.334      -0.267      -0.249      -0.089       0.042       0.083       0.136
+    PARK$2           0.952       1.013       1.043       1.213       1.398       1.431       1.486
+    PARK$3           1.920       1.949       2.040       2.291       2.596       2.616       2.777
+    PARK$4           2.202       2.306       2.369       2.677       3.044       3.125       3.250
+    PLAY$1           0.138       0.293       0.335       0.488       0.643       0.677       0.705
+    PLAY$2           1.169       1.297       1.349       1.566       1.788       1.835       1.875
+    PLAY$3           1.489       1.634       1.694       1.950       2.202       2.239       2.317
+    PLAY$4           1.539       1.669       1.750       2.013       2.269       2.291       2.383
+    SPORT$1         -1.465      -1.355      -1.299      -1.110      -0.917      -0.897      -0.848
+    SPORT$2          0.239       0.268       0.309       0.457       0.613       0.639       0.732
+    SPORT$3          1.517       1.552       1.601       1.866       2.141       2.233       2.357
+    SPORT$4          1.709       1.727       1.773       2.079       2.373       2.479       2.672
+    FOREST$1        -3.031      -2.887      -2.821      -2.514      -2.196      -2.125      -2.039
+    FOREST$2        -1.543      -1.462      -1.408      -1.176      -0.942      -0.901      -0.822
+    FOREST$3         0.256       0.327       0.349       0.579       0.776       0.828       0.906
+    FOREST$4         2.162       2.271       2.341       2.678       2.997       3.042       3.169
+    RIVER$1         -1.817      -1.730      -1.713      -1.489      -1.279      -1.220      -1.165
+    RIVER$2         -0.874      -0.804      -0.792      -0.585      -0.403      -0.347      -0.297
+    RIVER$3          0.300       0.353       0.378       0.578       0.765       0.811       0.869
+    RIVER$4          1.755       1.844       1.891       2.147       2.419       2.468       2.560
+    LAKE$1          -2.237      -2.110      -2.058      -1.740      -1.467      -1.404      -1.321
+    LAKE$2          -0.995      -0.920      -0.881      -0.662      -0.480      -0.444      -0.396
+    LAKE$3           0.183       0.247       0.285       0.462       0.640       0.669       0.739
+    LAKE$4           1.873       1.959       1.996       2.328       2.639       2.719       2.921
+    BEACH$1         -3.915      -3.766      -3.670      -3.199      -2.790      -2.728      -2.608
+    BEACH$2         -2.942      -2.744      -2.625      -2.304      -1.985      -1.965      -1.869
+    BEACH$3         -1.776      -1.617      -1.556      -1.279      -1.028      -0.975      -0.883
+    BEACH$4          1.862       2.021       2.045       2.371       2.686       2.787       2.854
+    TRAFFIC$1       -1.164      -1.091      -1.065      -0.936      -0.804      -0.770      -0.727
+    TRAFFIC$2        0.073       0.138       0.162       0.284       0.412       0.438       0.478
+    TRAFFIC$3        1.597       1.661       1.676       1.877       2.056       2.116       2.173
+    NOISE$1          0.454       0.542       0.582       0.819       1.045       1.096       1.237
+    NOISE$2          1.844       1.909       2.023       2.410       2.832       2.913       3.185
+    NOISE$3          2.544       2.607       2.708       3.289       3.805       3.943       4.284
+    INSIDE$1        -0.379      -0.274      -0.233      -0.069       0.125       0.158       0.211
+    INSIDE$2         1.790       1.866       1.916       2.203       2.503       2.562       2.687
+    INSIDE$3         2.692       2.862       2.893       3.319       3.732       3.852       3.922
+    INSIDE$4         3.332       3.514       3.663       4.155       4.790       4.846       5.213
+    OUTSIDE$1       -0.930      -0.828      -0.802      -0.606      -0.429      -0.379      -0.338
+    OUTSIDE$2        1.670       1.714       1.780       2.135       2.530       2.653       2.894
+    OUTSIDE$3        2.884       2.917       2.970       3.535       4.125       4.347       4.664
+
+ Variances
+    COH1             0.003       0.003       0.011       0.114       0.228       0.262       0.352
+    COH2             0.001       0.001       0.001       0.044       0.110       0.138       0.198
+    COH3             0.000       0.001       0.001       0.031       0.087       0.111       0.164
+    COH4             0.001       0.001       0.001       0.022       0.062       0.077       0.112
+    COH5             0.000       0.001       0.001       0.017       0.049       0.062       0.092
+    PSS1             0.001       0.001       0.001       0.021       0.059       0.074       0.111
+    PSS2             0.000       0.001       0.001       0.024       0.071       0.091       0.135
+    PSS3             0.001       0.001       0.001       0.035       0.085       0.106       0.152
+    PSS4             0.001       0.001       0.002       0.052       0.110       0.131       0.182
+    PSS5             0.001       0.001       0.001       0.023       0.064       0.079       0.117
+    PSS6             0.001       0.001       0.001       0.016       0.047       0.059       0.085
+    PSS7             0.001       0.001       0.001       0.023       0.065       0.081       0.117
+    PSS8             0.000       0.001       0.001       0.032       0.085       0.106       0.146
+    PSS9             0.001       0.001       0.001       0.033       0.081       0.100       0.147
+    PSS10            0.001       0.001       0.001       0.023       0.068       0.086       0.135
+    PHQ1             0.001       0.001       0.001       0.047       0.114       0.139       0.199
+    PHQ2             0.001       0.001       0.012       0.177       0.384       0.450       0.624
+    PHQ3             0.000       0.001       0.001       0.022       0.061       0.076       0.108
+    PHQ4             0.000       0.001       0.001       0.012       0.038       0.048       0.072
+    PHQ5             0.000       0.001       0.001       0.026       0.074       0.092       0.134
+    PHQ6             0.001       0.002       0.005       0.103       0.229       0.276       0.392
+    PHQ7             0.001       0.001       0.001       0.055       0.136       0.169       0.245
+    PHQ8             0.000       0.000       0.001       0.030       0.101       0.135       0.227
+    PHQ9             0.001       0.001       0.001       0.040       0.143       0.198       0.309
+    ALPHA1           0.002       0.006       0.011       0.079       0.162       0.187       0.247
+    ALPHA2           0.074       0.095       0.109       0.249       0.415       0.465       0.581
+    ALPHA3           0.028       0.054       0.070       0.170       0.296       0.332       0.423
+    ALPHA4           0.009       0.027       0.040       0.152       0.293       0.336       0.438
+    ALPHA6           0.009       0.024       0.033       0.112       0.204       0.231       0.294
+    ALPHA7           0.003       0.004       0.007       0.084       0.176       0.207       0.272
+    ALPHA8           0.001       0.001       0.005       0.149       0.355       0.437       0.612
+    ALPHA9           0.007       0.020       0.042       0.237       0.477       0.553       0.737
+    ALPHA10          0.001       0.001       0.001       0.028       0.089       0.116       0.168
+    ALPHA11          0.002       0.009       0.018       0.120       0.240       0.276       0.370
+    PARK             0.033       0.051       0.063       0.170       0.298       0.336       0.429
+    PLAY             0.001       0.001       0.001       0.092       0.207       0.253       0.355
+    SPORT            0.001       0.008       0.014       0.096       0.197       0.231       0.306
+    FOREST           0.229       0.272       0.299       0.531       0.806       0.882       1.064
+    RIVER            0.169       0.216       0.232       0.437       0.668       0.749       0.904
+    LAKE             0.088       0.119       0.132       0.291       0.484       0.549       0.678
+    BEACH            0.252       0.296       0.318       0.607       0.930       1.037       1.287
+    TRAFFIC          0.004       0.020       0.030       0.099       0.183       0.210       0.264
+    NOISE            0.000       0.001       0.000       0.062       0.168       0.210       0.323
+    INSIDE           0.010       0.012       0.022       0.145       0.287       0.331       0.449
+    OUTSIDE          0.001       0.001       0.001       0.074       0.182       0.227       0.339
+    SPHQONPSS        0.001       0.001       0.001       0.012       0.036       0.046       0.069
+    SPHQONNOI        0.001       0.001       0.001       0.066       0.223       0.306       0.515
+    SPHQONPLEA       0.000       0.001       0.001       0.024       0.083       0.109       0.185
+    SPHQONSAFE       0.000       0.001       0.001       0.053       0.147       0.185       0.278
+    SPHQONCOH        0.000       0.001       0.001       0.010       0.028       0.036       0.054
+    SPHQONGREE       0.001       0.001       0.001       0.091       0.291       0.380       0.589
+    SPHQONBLUE       0.000       0.001       0.001       0.111       0.297       0.376       0.562
+    SPSSONNOI        0.001       0.001       0.001       0.097       0.311       0.414       0.701
+    SPSSONPLEA       0.001       0.001       0.001       0.027       0.092       0.123       0.198
+    SPSSONSAFE       0.001       0.000       0.001       0.051       0.163       0.214       0.330
+    SPSSONCOH        0.001       0.001       0.001       0.016       0.042       0.054       0.079
+    SPSSONGREE       0.001       0.001       0.001       0.123       0.380       0.479       0.771
+    SPSSONBLUE       0.001       0.001       0.001       0.152       0.482       0.619       0.951
+
+New/Additional Parameters
+    INNOI            0.005       0.112       0.152       0.398       0.675       0.739       0.846
+    INPLEA          -0.820      -0.526      -0.479      -0.151       0.224       0.296       0.319
+    INSAFE          -0.554      -0.441      -0.389      -0.091       0.188       0.230       0.295
+    INCOH           -0.172      -0.126      -0.104      -0.006       0.103       0.120       0.150
+    INGREEN         -0.110      -0.010       0.048       0.322       0.645       0.699       0.871
+    INBLUE          -0.989      -0.784      -0.709      -0.343      -0.067      -0.015       0.055
+
+
+CREDIBILITY INTERVALS OF STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ COH      BY
+    COH1             0.000       0.792       0.000       0.846       0.000       0.885       0.000
+    COH2             0.000       0.814       0.000       0.853       0.000       0.880       0.000
+    COH3             0.000       0.801       0.000       0.848       0.000       0.886       0.000
+    COH4             0.000       0.601       0.000       0.668       0.000       0.735       0.000
+    COH5             0.000       0.541       0.000       0.606       0.000       0.675       0.000
+
+ PSS      BY
+    PSS1             0.000       0.701       0.000       0.743       0.000       0.774       0.000
+    PSS2             0.000       0.787       0.000       0.824       0.000       0.862       0.000
+    PSS3             0.000       0.692       0.000       0.749       0.000       0.796       0.000
+    PSS4             0.000       0.452       0.000       0.536       0.000       0.603       0.000
+    PSS5             0.000       0.623       0.000       0.680       0.000       0.735       0.000
+    PSS6             0.000       0.655       0.000       0.707       0.000       0.754       0.000
+    PSS7             0.000       0.590       0.000       0.657       0.000       0.719       0.000
+    PSS8             0.000       0.690       0.000       0.751       0.000       0.798       0.000
+    PSS9             0.000       0.646       0.000       0.707       0.000       0.759       0.000
+    PSS10            0.000       0.748       0.000       0.795       0.000       0.838       0.000
+
+ PHQ      BY
+    PHQ1             0.000       0.701       0.000       0.748       0.000       0.784       0.000
+    PHQ2             0.000       0.883       0.000       0.913       0.000       0.943       0.000
+    PHQ3             0.000       0.571       0.000       0.642       0.000       0.711       0.000
+    PHQ4             0.000       0.705       0.000       0.756       0.000       0.808       0.000
+    PHQ5             0.000       0.655       0.000       0.710       0.000       0.771       0.000
+    PHQ6             0.000       0.754       0.000       0.804       0.000       0.851       0.000
+    PHQ7             0.000       0.638       0.000       0.707       0.000       0.763       0.000
+    PHQ8             0.000       0.676       0.000       0.748       0.000       0.824       0.000
+    PHQ9             0.000       0.655       0.000       0.746       0.000       0.824       0.000
+
+ PLEA     BY
+    ALPHA1           0.000       0.514       0.000       0.599       0.000       0.677       0.000
+    ALPHA2           0.000       0.476       0.000       0.582       0.000       0.673       0.000
+    ALPHA3           0.000       0.386       0.000       0.497       0.000       0.582       0.000
+    ALPHA4           0.000       0.589       0.000       0.679       0.000       0.767       0.000
+
+ SAFE     BY
+    ALPHA6           0.000       0.463       0.000       0.521       0.000       0.582       0.000
+    ALPHA7           0.000       0.696       0.000       0.751       0.000       0.807       0.000
+    ALPHA8           0.000       0.888       0.000       0.926       0.000       0.950       0.000
+    ALPHA9           0.000       0.882       0.000       0.921       0.000       0.944       0.000
+    ALPHA10          0.000       0.814       0.000       0.856       0.000       0.897       0.000
+    ALPHA11          0.000       0.728       0.000       0.785       0.000       0.833       0.000
+
+ GREEN    BY
+    PARK             0.000       0.381       0.000       0.493       0.000       0.594       0.000
+    PLAY             0.000       0.557       0.000       0.671       0.000       0.766       0.000
+    SPORT            0.000       0.578       0.000       0.683       0.000       0.789       0.000
+    FOREST           0.000       0.304       0.000       0.425       0.000       0.548       0.000
+
+ BLUE     BY
+    RIVER            0.000       0.391       0.000       0.488       0.000       0.587       0.000
+    LAKE             0.000       0.503       0.000       0.631       0.000       0.776       0.000
+    BEACH            0.000       0.200       0.000       0.371       0.000       0.537       0.000
+
+ NOI      BY
+    TRAFFIC          0.000       0.340       0.000       0.397       0.000       0.461       0.000
+    NOISE            0.000       0.619       0.000       0.732       0.000       0.818       0.000
+    INSIDE           0.000       0.735       0.000       0.798       0.000       0.860       0.000
+    OUTSIDE          0.000       0.803       0.000       0.851       0.000       0.920       0.000
+
+ PLEA     WITH
+    COH              0.000       0.564       0.000       0.666       0.000       0.752       0.000
+
+ SAFE     WITH
+    COH              0.000       0.275       0.000       0.370       0.000       0.454       0.000
+    PLEA             0.000       0.674       0.000       0.740       0.000       0.814       0.000
+
+ GREEN    WITH
+    COH              0.000      -0.260       0.000      -0.142       0.000      -0.016       0.000
+    PLEA             0.000      -0.410       0.000      -0.248       0.000      -0.116       0.000
+    SAFE             0.000      -0.177       0.000      -0.056       0.000       0.062       0.000
+
+ BLUE     WITH
+    COH              0.000      -0.169       0.000      -0.042       0.000       0.090       0.000
+    PLEA             0.000      -0.384       0.000      -0.217       0.000      -0.075       0.000
+    SAFE             0.000      -0.263       0.000      -0.128       0.000      -0.003       0.000
+    GREEN            0.000       0.463       0.000       0.615       0.000       0.769       0.000
+
+ NOI      WITH
+    COH              0.000      -0.570       0.000      -0.492       0.000      -0.394       0.000
+    PLEA             0.000      -0.585       0.000      -0.472       0.000      -0.362       0.000
+    SAFE             0.000      -0.485       0.000      -0.396       0.000      -0.295       0.000
+    GREEN            0.000      -0.033       0.000       0.085       0.000       0.216       0.000
+    BLUE             0.000      -0.139       0.000       0.001       0.000       0.179       0.000
+
+ Thresholds
